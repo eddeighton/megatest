@@ -9,3 +9,13 @@ action Bar
 }
 
 Bar();
+
+action PythonAction
+{
+	std::cout << "PythonAction!" << std::endl;
+}
+
+function Huh : void
+{
+    std::cout << "Why????" << std::endl;
+}

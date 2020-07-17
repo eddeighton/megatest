@@ -7,4 +7,6 @@ action AddCodeOrItWontWork
     //DoTest();
     
     LOG( "test" );
+    
+    Bar();
 }

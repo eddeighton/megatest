@@ -14,6 +14,10 @@ include( ${MEGA_CMAKE}/mega_include.cmake )
 
 
 get_filename_component( CurrentFolderProjectName ${CMAKE_CURRENT_LIST_DIR} NAME )
+if(NOT ${MEGA_PROJECT} STREQUAL ${CurrentFolderProjectName} )
+    message( FATAL_ERROR "Mega Project not current directory: ${MEGA_PROJECT} : ${CurrentFolderProjectName}" )
+endif()
+    
 set( MEGA_PROGRAM ${MEGA_COORDINATOR}_${MEGA_HOST}_${CurrentFolderProjectName} )
 
 #cannot use macro argument directly - capture into variable
@@ -23,27 +27,22 @@ set( HasPython "${arg_HasPython}" )
 
 foreach( inputname IN LISTS EGSourceFiles )
 
+    if(NOT EXISTS ${MEGA_SRC}/${inputname}.eg )
+        message( FATAL_ERROR "Unable to locate file: ${inputname}.eg" )
+    endif()
+    
     string( REPLACE "/" "_" flatname ${inputname} )
     
-    message( ${inputname} " : " ${flatname} )
-    
     list(APPEND EG_FLAT_NAMES           ${flatname} )
-
     list(APPEND EG_SOURCES              ${MEGA_SRC}/${inputname}.eg )
     list(APPEND EG_OPERATIONS_HEADERS   ${MEGA_INTERFACE}/${MEGA_PROJECT}/${flatname}_operations.hpp )
     list(APPEND EG_OPERATIONS_IMPL      ${MEGA_IMPL}/${MEGA_COORDINATOR}/${MEGA_HOST}/${MEGA_PROJECT}/${flatname}_operations.cpp )
     list(APPEND EG_OPERATIONS_OBJECTS   ${flatname}_object.obj )
-
-    #list(APPEND EG_SOURCES              ${inputname}.eg )
-    #list(APPEND EG_OPERATIONS_HEADERS   ${MEGA_INTERFACE}/${MEGA_PROJECT}/${MEGA_PROGRAM}_${inputname}_eg_operations.hpp )
-    #list(APPEND EG_OPERATIONS_IMPL      ${MEGA_IMPL}/${MEGA_COORDINATOR}/${MEGA_HOST}/${MEGA_PROJECT}/${MEGA_PROGRAM}_${inputname}_eg_operations.cpp )
-    #list(APPEND EG_OPERATIONS_OBJECTS   ${MEGA_PROGRAM}_${inputname}_eg_object.obj )
 endforeach()
 
 if( ${HasPython} STREQUAL "true" )
     list(APPEND EG_OPERATIONS_IMPL      ${MEGA_IMPL}/${MEGA_COORDINATOR}/${MEGA_HOST}/${MEGA_PROJECT}/python.cpp )
-    list(APPEND EG_OPERATIONS_OBJECTS   ${MEGA_PROGRAM}_python_bindings_object.obj )
-    
+    list(APPEND EG_OPERATIONS_OBJECTS   python_object.obj )
 endif()
 
 message( "--------------------------------------------------------------------------" )
@@ -116,8 +115,8 @@ add_custom_target( ${MEGA_PROGRAM}_eg
 	
 
 set( EG_OBJECT_FILES 	${EG_OPERATIONS_OBJECTS}
-						${MEGA_PROGRAM}_runtime_object.obj
-						${MEGA_PROGRAM}_component_object.obj )
+						runtime_object.obj
+						component_object.obj )
 set_source_files_properties(
   ${EG_OBJECT_FILES}
   PROPERTIES
