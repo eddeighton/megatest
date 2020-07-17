@@ -1,0 +1,10 @@
+
+
+dim int m_testInt;
+
+action AddCodeOrItWontWork
+{
+    //DoTest();
+    
+    LOG( "test" );
+}

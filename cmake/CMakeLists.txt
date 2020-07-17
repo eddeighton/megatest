@@ -1,0 +1,48 @@
+
+cmake_minimum_required( VERSION 3.1...3.16 )
+
+project( megatest )
+
+set( CMAKE_CXX_STANDARD 17 )
+
+set( MEGA_PROJECT "" CACHE STRING "The mega structure project to build" )
+set( MEGA_ROOT ${CMAKE_CURRENT_LIST_DIR}/../../ )
+set( MEGA_CMAKE ${CMAKE_CURRENT_LIST_DIR} )
+set( MEGA_BUILD ${MEGA_ROOT}/build )
+set( MEGA_INSTALL ${MEGA_ROOT}/install )
+set( MEGA_INTERFACE ${MEGA_ROOT}/interface )
+set( MEGA_IMPL ${MEGA_ROOT}/impl )
+set( MEGA_LOGS ${MEGA_ROOT}/logs )
+set( MEGA_SRC ${MEGA_ROOT}/src )
+
+set( CMAKE_INSTALL_PREFIX ${MEGA_INSTALL}/${MEGA_PROJECT} CACHE PATH INTERNAL FORCE)
+
+find_path( MEGA_THIRD_PARTY_DIR boost PATHS W:/root/thirdparty )
+
+set(CMAKE_CONFIGURATION_TYPES Debug Release CACHE STRING INTERNAL FORCE)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+find_path( MEGASTRUCTURE_INSTALL bin/megad.exe PATHS W:/root/megastructure/install )
+set( MEGASTRUCTURE ${MEGASTRUCTURE_INSTALL}/bin/megad.exe )
+
+set( CLANG_CXX_DEFINES "-D_DEBUG -D_ITERATOR_DEBUG_LEVEL=2 -DWIN32_LEAN_AND_MEAN -D_DLL -DNOMINMAX -DBOOST_ALL_NO_LIB -D_CRT_SECURE_NO_WARNINGS -DBOOST_USE_WINDOWS_H -D_WIN32_WINNT=0x0601 -DWIN32 -D_WINDOWS" )
+#set( CLANG_CXX_OPTIONS  "-GR -Gd -MDd -std:c++17 -EHa -RTC1" )
+set( CLANG_CXX_OPTIONS  "-g -fexceptions" )
+set( CLANG_COMPILER_OPTIONS "-Xclang -std=c++17 -Xclang -fcoroutines-ts -Xclang -flto-visibility-public-std -Xclang -Wno-deprecated -Xclang -fexceptions -Xclang -Wno-inconsistent-missing-override" )
+
+#Microsoft args: -GR -Gd -MDd -std:c++17 
+
+set( CLANG_CXX_FLAGS "${CLANG_CXX_DEFINES} ${CLANG_CXX_OPTIONS} ${CLANG_COMPILER_OPTIONS}" )
+
+message( "Clang flags: " ${CLANG_CXX_FLAGS} )
+
+add_custom_target( Interface 
+	${MEGASTRUCTURE} --build ${CMAKE_CFG_INTDIR} --dir ${MEGA_ROOT} --project ${MEGA_PROJECT} --flags ${CLANG_CXX_FLAGS}
+	
+	#MAIN_DEPENDENCY ${MEGA_SCHEMA_FILE}
+	#DEPENDS ${MEGA_SCHEMA_FILE}
+	BYPRODUCTS ${MEGA_INTERFACE}/${MEGA_PROJECT}/interface.db
+	COMMENT "Generating interface database" )
+
+add_subdirectory( ../reddwarf ${CMAKE_CURRENT_BINARY_DIR}/reddwarf )
+add_subdirectory( ../deepthought ${CMAKE_CURRENT_BINARY_DIR}/deepthought )

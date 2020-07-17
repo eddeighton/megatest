@@ -1,0 +1,10 @@
+
+include( <iostream> );
+
+
+action Foo2
+{
+	std::cout << "Ed was here!" << std::endl;
+}
+
+Foo();
