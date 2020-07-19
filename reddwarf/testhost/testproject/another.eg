@@ -1,6 +1,0 @@
-
-
-function ExtraThing : int
-{
-    return 5;
-}

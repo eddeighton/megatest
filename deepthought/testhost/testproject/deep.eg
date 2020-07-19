@@ -1,0 +1,19 @@
+
+include( <iostream> );
+
+dim int m_deepInt;
+
+action DeepTest
+{
+    for( int i = 0; i < 100; ++i )
+    {
+        std::cout << "DeepTest: " << i << std::endl;
+        co_yield eg::sleep();
+    }
+}
+
+function DeepFunction( int i ) : int
+{
+    m_deepInt( m_deepInt() + i );
+    return m_deepInt();
+}

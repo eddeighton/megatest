@@ -50,6 +50,7 @@ message( "Project: ${MEGA_PROJECT} Current: ${CMAKE_CURRENT_LIST_DIR}" )
 message( ${MEGA_PROGRAM} " EG Source:  " "${EGSourceFiles}" )
 message( ${MEGA_PROGRAM} " CPP Source: " "${CPPSourceFiles}" )
 message( ${MEGA_PROGRAM} " Has Python: " "${HasPython}" )
+
 #message( ${MEGA_PROGRAM} " EG_SOURCES:              " ${EG_SOURCES} )
 #message( ${MEGA_PROGRAM} " EG_OPERATIONS_HEADERS:   " ${EG_OPERATIONS_HEADERS} )
 #message( ${MEGA_PROGRAM} " EG_OPERATIONS_IMPL:      " ${EG_OPERATIONS_IMPL} )
@@ -143,6 +144,8 @@ source_group("impl" FILES ${EG_PROGRAM_SRC})
 source_group("objects" FILES ${EG_OBJECT_FILES})
 	
 add_dependencies( ${MEGA_PROGRAM} ${MEGA_PROGRAM}_eg )
+
+target_compile_options( ${MEGA_PROGRAM} PUBLIC /await )
 
 target_compile_definitions( ${MEGA_PROGRAM} PUBLIC -DMEGASTRUCTURE_EG_COMPONENT )
 

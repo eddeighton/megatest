@@ -1,0 +1,19 @@
+
+include( <iostream> );
+
+dim int m_pythonInt;
+
+action PythonTest
+{
+    for( int i = 0; i < 100; ++i )
+    {
+        std::cout << "PythonTest: " << i << std::endl;
+        co_yield eg::sleep();
+    }
+}
+
+function PythonFunction( int i ) : int
+{
+    m_pythonInt( m_pythonInt() + i );
+    return m_pythonInt();
+}

@@ -25,11 +25,11 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 find_path( MEGASTRUCTURE_INSTALL bin/megad.exe PATHS W:/root/megastructure/install )
 set( MEGASTRUCTURE ${MEGASTRUCTURE_INSTALL}/bin/megad.exe )
 
-set( CLANG_CXX_DEFINES "-D_DEBUG -D_ITERATOR_DEBUG_LEVEL=2 -DWIN32_LEAN_AND_MEAN -D_DLL -DNOMINMAX -DBOOST_ALL_NO_LIB -D_CRT_SECURE_NO_WARNINGS -DBOOST_USE_WINDOWS_H -D_WIN32_WINNT=0x0601 -DWIN32 -D_WINDOWS" )
+set( CLANG_CXX_DEFINES "-D_DEBUG -D_ITERATOR_DEBUG_LEVEL=2 -DWIN32_LEAN_AND_MEAN -D_DLL -DNOMINMAX -DBOOST_ALL_NO_LIB -D_CRT_SECURE_NO_WARNINGS -DBOOST_USE_WINDOWS_H -D_WIN32_WINNT=0x0601 -DWIN32 -D_WINDOWS " )
 #set( CLANG_CXX_OPTIONS  "-GR -Gd -MDd -std:c++17 -EHa -RTC1" )
 set( CLANG_CXX_OPTIONS  "-g -fexceptions" )
 set( CLANG_COMPILER_OPTIONS "-Xclang -std=c++17 -Xclang -fcoroutines-ts -Xclang -flto-visibility-public-std -Xclang -Wno-deprecated -Xclang -fexceptions -Xclang -Wno-inconsistent-missing-override" )
-
+#
 #Microsoft args: -GR -Gd -MDd -std:c++17 
 
 set( CLANG_CXX_FLAGS "${CLANG_CXX_DEFINES} ${CLANG_CXX_OPTIONS} ${CLANG_COMPILER_OPTIONS}" )
