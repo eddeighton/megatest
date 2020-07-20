@@ -68,6 +68,13 @@ set( EG_LIBRARY_SRC ${EG_INSTALL_PATH}/include/eg/clock.cpp
                     ${EG_INSTALL_PATH}/include/eg/frame.cpp
                     ${EG_INSTALL_PATH}/include/eg/basic_scheduler.cpp )
 
+set_source_files_properties( ${EG_LIBRARY_SRC} PROPERTIES HEADER_FILE_ONLY TRUE )
+set_source_files_properties(
+  ${EG_LIBRARY_SRC}
+  PROPERTIES
+  EXTERNAL_OBJECT true
+  GENERATED true
+)
 set_source_files_properties( ${EG_SOURCES} PROPERTIES HEADER_FILE_ONLY TRUE )
 
 set( EG_INTERFACE_SRC
@@ -117,7 +124,10 @@ add_custom_target( ${MEGA_PROGRAM}_eg
 
 set( EG_OBJECT_FILES 	${EG_OPERATIONS_OBJECTS}
 						runtime_object.obj
-						component_object.obj )
+						component_object.obj
+						clock_object.obj
+						frame_object.obj
+						basic_scheduler_object.obj )
 set_source_files_properties(
   ${EG_OBJECT_FILES}
   PROPERTIES
@@ -145,7 +155,7 @@ source_group("objects" FILES ${EG_OBJECT_FILES})
 	
 add_dependencies( ${MEGA_PROGRAM} ${MEGA_PROGRAM}_eg )
 
-target_compile_options( ${MEGA_PROGRAM} PUBLIC /await )
+#target_compile_options( ${MEGA_PROGRAM} PUBLIC /await )
 
 target_compile_definitions( ${MEGA_PROGRAM} PUBLIC -DMEGASTRUCTURE_EG_COMPONENT )
 
