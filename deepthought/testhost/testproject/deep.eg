@@ -3,7 +3,7 @@ include( <iostream> );
 
 dim int m_deepInt;
 
-action DeepTest
+action DeepTest[ 64 ]
 {
     for( int i = 0; i < 100; ++i )
     {

@@ -3,7 +3,7 @@ include( <iostream> );
 
 dim int m_redInt;
 
-action RedTest
+action RedTest[ 4 ]
 {
     for( int i = 0; i < 100; ++i )
     {
