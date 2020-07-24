@@ -7,6 +7,7 @@ set( EG_SOURCE_CODE
     deepthought/testhost/testproject/deep 
     reddwarf/python/testproject/python 
     reddwarf/testhost/testproject/red
+    reddwarf/unreal/testproject/unreal
     )
     
 Make_Mega_Program( "${EG_SOURCE_CODE}" "" true )

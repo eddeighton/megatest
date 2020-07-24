@@ -5,3 +5,4 @@ set( MEGA_COORDINATOR reddwarf )
 
 add_subdirectory( testhost )
 add_subdirectory( python )
+add_subdirectory( unreal )

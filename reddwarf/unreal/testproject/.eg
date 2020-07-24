@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EG xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///W:/root/eg/src/src/schema/eg_schema.xsd">
+	<Project>
+		<Host>${MEGA}/include/host</Host>
+	</Project>
+</EG>
