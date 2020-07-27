@@ -163,13 +163,13 @@ target_include_directories( ${MEGA_PROGRAM} PRIVATE ${MEGA_INTERFACE}/${MEGA_PRO
 target_include_directories( ${MEGA_PROGRAM} PRIVATE ${MEGASTRUCTURE_INSTALL}/include )
 
 link_boost( ${MEGA_PROGRAM} system )
-link_pybind11( ${MEGA_PROGRAM} )
 link_clang( ${MEGA_PROGRAM} )
 link_protobuf( ${MEGA_PROGRAM} )
 link_common( ${MEGA_PROGRAM} )
 link_eg( ${MEGA_PROGRAM} )
 
 if( ${HasPython} STREQUAL "true" )
+link_pybind11( ${MEGA_PROGRAM} )
 link_mega_python_lib( ${MEGA_PROGRAM} )
 endif()
 

@@ -15,15 +15,15 @@ set(Boost_USE_STATIC_RUNTIME OFF)
 set(Boost_ARCHITECTURE "-x64")
 set(Boost_COMPILER "-vc166")
 #set(Boost_DEBUG ON)
-#find_package( Boost 1.73.0 REQUIRED QUIET COMPONENTS 
-#    program_options
-#    date_time
-#    random
-#    filesystem
-#    system
-#    iostreams
-#    serialization
-#	timer )
+find_package( Boost 1.73.0 REQUIRED QUIET COMPONENTS 
+    program_options
+    date_time
+    random
+    filesystem
+    system
+    iostreams
+    serialization
+	timer )
     
 #if(Boost_FOUND)
 #    message(STATUS "Found boost ok" )

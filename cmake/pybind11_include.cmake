@@ -15,8 +15,8 @@ find_package( pybind11 REQUIRED)
 
 function( link_pybind11 targetname )
 
-	#target_include_directories( ${targetname} PRIVATE ${INDICATORS_INCLUDEDIR} )
+    target_include_directories( ${targetname} PRIVATE ${INDICATORS_INCLUDEDIR} )
 	
-    target_link_libraries( ${targetname} pybind11::embed) 
+    #target_link_libraries( ${targetname} pybind11::embed) 
 	
 endfunction( link_pybind11 )
