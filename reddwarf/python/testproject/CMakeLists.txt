@@ -10,5 +10,5 @@ set( EG_SOURCE_CODE
     reddwarf/unreal/testproject/unreal
     )
     
-Make_Mega_Program( "${EG_SOURCE_CODE}" "" true )
+Make_Mega_Program( "${EG_SOURCE_CODE}" "" true false )
 

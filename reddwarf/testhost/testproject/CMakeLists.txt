@@ -6,4 +6,4 @@ include( ${MEGA_CMAKE}/program_include.cmake )
 set( EG_SOURCE_CODE 
     ${MEGA_COORDINATOR}/${MEGA_HOST}/${MEGA_PROJECT}/red )
 
-Make_Mega_Program( "${EG_SOURCE_CODE}" extra.cpp false )
+Make_Mega_Program( "${EG_SOURCE_CODE}" extra.cpp false false )

@@ -1,13 +1,20 @@
 
-include( <iostream> );
+include( <sstream> );
+include( <codecvt> );
+include( <locale> );
 
 dim int m_unrealInt;
 
 action UnrealTest[ 4 ]
 {
+    using convert_t = std::codecvt_utf8< wchar_t >;
+    std::wstring_convert< convert_t, wchar_t > strConverter;
+    
     for( int i = 0; i < 100; ++i )
     {
-        std::cout << "UnrealTest: " << i << std::endl;
+        std::ostringstream os;
+        os << "UnrealTest " << i;
+        Unreal::log( strConverter.from_bytes( os.str() ).c_str() );
         co_yield eg::sleep();
     }
 }

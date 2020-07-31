@@ -2,7 +2,7 @@
 
 cmake_minimum_required( VERSION 3.1...3.16 )
 
-macro( Make_Mega_Program arg_EGSourceFiles arg_CPPSourceFiles HasPython )
+macro( Make_Mega_Program arg_EGSourceFiles arg_CPPSourceFiles HasPython HasUnreal )
 
 include( ${MEGA_CMAKE}/boost_include.cmake )
 include( ${MEGA_CMAKE}/pybind11_include.cmake )
@@ -24,6 +24,7 @@ set( MEGA_PROGRAM ${MEGA_COORDINATOR}_${MEGA_HOST}_${CurrentFolderProjectName} )
 set( EGSourceFiles "${arg_EGSourceFiles}" )
 set( CPPSourceFiles "${arg_CPPSourceFiles}" )
 set( HasPython "${arg_HasPython}" )
+set( HasUnreal "${arg_HasUnreal}" )
 
 foreach( inputname IN LISTS EGSourceFiles )
 
@@ -45,11 +46,17 @@ if( ${HasPython} STREQUAL "true" )
     list(APPEND EG_OPERATIONS_OBJECTS   python_object.obj )
 endif()
 
+if( ${HasUnreal} STREQUAL "true" )
+    list(APPEND EG_OPERATIONS_IMPL      ${MEGA_IMPL}/${MEGA_COORDINATOR}/${MEGA_HOST}/${MEGA_PROJECT}/unreal.cpp )
+    list(APPEND EG_OPERATIONS_OBJECTS   unreal_object.obj )
+endif()
+
 message( "--------------------------------------------------------------------------" )
 message( "Project: ${MEGA_PROJECT} Current: ${CMAKE_CURRENT_LIST_DIR}" )
 message( ${MEGA_PROGRAM} " EG Source:  " "${EGSourceFiles}" )
 message( ${MEGA_PROGRAM} " CPP Source: " "${CPPSourceFiles}" )
 message( ${MEGA_PROGRAM} " Has Python: " "${HasPython}" )
+message( ${MEGA_PROGRAM} " Has Unreal: " "${HasUnreal}" )
 
 #message( ${MEGA_PROGRAM} " EG_SOURCES:              " ${EG_SOURCES} )
 #message( ${MEGA_PROGRAM} " EG_OPERATIONS_HEADERS:   " ${EG_OPERATIONS_HEADERS} )
@@ -172,6 +179,10 @@ if( ${HasPython} STREQUAL "true" )
 link_pybind11( ${MEGA_PROGRAM} )
 link_mega_python_lib( ${MEGA_PROGRAM} )
 endif()
+
+#if( ${HasUnreal} STREQUAL "true" )
+#link_mega_link_unreal_lib( ${MEGA_PROGRAM} )
+#endif()
 
 #source_group( TREE ${MEGA_ROOT} FILES ${CPPSourceFiles} )
 
