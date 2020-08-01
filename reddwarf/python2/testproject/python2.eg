@@ -1,0 +1,19 @@
+
+include( <iostream> );
+
+dim int m_python2Int;
+
+action Python2Test
+{
+    for( int i = 0; i < 100; ++i )
+    {
+        std::cout << "Python2Test: " << i << std::endl;
+        co_yield eg::sleep();
+    }
+}
+
+function Python2Function( int i ) : int
+{
+    m_python2Int( m_python2Int() + i );
+    return m_python2Int();
+}

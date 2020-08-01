@@ -24,4 +24,33 @@ function testUnreal : const char*
     return "Hello from Unreal";
 }
 
+object Tank[ 16 ]
+{
+    dim float x;
+    dim float y;
+    dim float angle;
+    
+    function reset : void
+    {
+        x( 0.0f );
+        y( 0.0f );
+        angle( 0.0f );
+    }
+    
+}
+
+object Missle[ 16 ]
+{
+    dim float x;
+    dim float y;
+    dim float angle;
+    
+    function reset : void
+    {
+        x( 0.0f );
+        y( 0.0f );
+        angle( 0.0f );
+    }
+}
+
 LOG( "Unreal root created" );
