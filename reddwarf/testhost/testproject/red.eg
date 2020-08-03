@@ -1,19 +1,22 @@
 
-include( <iostream> );
 
-dim int m_redInt;
-
-action RedTest[ 4 ]
+object RedObject
 {
-    for( int i = 0; i < 100; ++i )
+    dim int m_redInt;
+
+    action RedTest
     {
-        std::cout << "RedTest: " << i << std::endl;
-        co_yield eg::sleep();
+        for( int i = 0; i < 100; ++i )
+        {
+            LOG( "RedTest: " << i );
+            co_yield eg::sleep();
+        }
     }
-}
+    
+    function RedFunction( int i ) : int
+    {
+        m_redInt( m_redInt() + i );
+        return m_redInt();
+    }
 
-function RedFunction( int i ) : int
-{
-    m_redInt( m_redInt() + i );
-    return m_redInt();
 }

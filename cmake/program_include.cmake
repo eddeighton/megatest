@@ -71,8 +71,7 @@ set( EGCOMPONENT_HEADER ${MEGASTRUCTURE_INSTALL}/include/egcomponent/egcomponent
 #                ${MEGASTRUCTURE_INSTALL}/include/python_lib/python_reference.hpp
 #                ${MEGASTRUCTURE_INSTALL}/include/python_lib/python_reference_factory.hpp )
 
-set( EG_LIBRARY_SRC ${EG_INSTALL_PATH}/include/eg/clock.cpp
-                    ${EG_INSTALL_PATH}/include/eg/frame.cpp
+set( EG_LIBRARY_SRC ${EG_INSTALL_PATH}/include/eg/frame.cpp
                     ${EG_INSTALL_PATH}/include/eg/basic_scheduler.cpp )
 
 set_source_files_properties( ${EG_LIBRARY_SRC} PROPERTIES HEADER_FILE_ONLY TRUE )
@@ -132,7 +131,6 @@ add_custom_target( ${MEGA_PROGRAM}_eg
 set( EG_OBJECT_FILES 	${EG_OPERATIONS_OBJECTS}
 						runtime_object.obj
 						component_object.obj
-						clock_object.obj
 						frame_object.obj
 						basic_scheduler_object.obj )
 set_source_files_properties(

@@ -24,33 +24,58 @@ function testUnreal : const char*
     return "Hello from Unreal";
 }
 
+object VehiclePart[ 16 ]
+{
+    
+}
+
+object Torso[ 16 ] : VehiclePart
+{
+    dim int type;
+}
+
+object MegaTorso[ 16 ] : Torso
+{
+    dim int extra;
+}
+
+
 object Tank[ 16 ]
 {
     dim float x;
     dim float y;
     dim float angle;
     
-    function reset : void
+    action Move
     {
-        x( 0.0f );
-        y( 0.0f );
-        angle( 0.0f );
+        dim float amt;
+        dim float rate;
+        dim float start;
+        
+        start( x() );
+        
+        while( x() < start() + amt() )
+        {
+            x( x() + clock::dt() * rate() );
+            co_yield eg::sleep();
+        }
     }
     
+    function unlinkTorso : void
+    {
+        if( eg::Running == TorsoLink.Get() )
+            TorsoLink.Stop();
+    }
+    
+    function linkTorso( Torso torso ) : void
+    {
+        if( eg::Running != TorsoLink.Get() )
+            TorsoLink();
+        TorsoLink.base( torso );
+    }
+    
+    link TorsoLink : Torso;
 }
 
-object Missle[ 16 ]
-{
-    dim float x;
-    dim float y;
-    dim float angle;
-    
-    function reset : void
-    {
-        x( 0.0f );
-        y( 0.0f );
-        angle( 0.0f );
-    }
-}
 
 LOG( "Unreal root created" );

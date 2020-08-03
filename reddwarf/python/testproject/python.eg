@@ -1,27 +1,31 @@
 
-include( <iostream> );
 
-dim int m_pythonInt;
 
-action PythonTest
+object PythonObject
 {
-    for( int i = 0; i < 100; ++i )
+    dim int m_pythonInt;
+    
+    action PythonTest
     {
-        std::cout << "PythonTest: " << i << std::endl;
-        co_yield eg::sleep();
+        for( int i = 0; i < 100; ++i )
+        {
+            LOG( "PythonTest: " << i );
+            co_yield eg::sleep();
+        }
+    }
+    
+    function PythonFunction( int i ) : int
+    {
+        m_pythonInt( m_pythonInt() + i );
+        return m_pythonInt();
     }
 }
 
-function PythonFunction( int i ) : int
-{
-    m_pythonInt( m_pythonInt() + i );
-    return m_pythonInt();
-}
 
 function PrintTanks() : void
 {
     for( auto t : root.reddwarf.unreal.testproject.Get().Tank.Range() )
     {
-        std::cout << "Tank x:" << t.x() << " y:" << t.y() << "\n";
+        LOG( "Tank x:" << t.x() << " y:" << t.y() );
     }
 }
