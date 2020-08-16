@@ -13,10 +13,19 @@ object RedObject
         }
     }
     
+private:
+    
     function RedFunction( int i ) : int
     {
         m_redInt( m_redInt() + i );
         return m_redInt();
     }
 
+public:
+    action RedTestPrivate
+    {
+        dim int m_param;
+        dim int m_result;
+        m_result( RedFunction( m_param() ) );
+    }
 }
