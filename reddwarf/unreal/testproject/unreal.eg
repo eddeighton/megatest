@@ -75,7 +75,15 @@ object Tank[ 16 ]
     }
     
     link TorsoLink : Torso;
+    
+    link OtherPart : VehiclePart;
 }
 
+object Spider[ 16 ]
+{
+    link TorsoLink : Torso;
+    
+    link OtherPart : VehiclePart;
+}
 
 LOG( "Unreal root created" );
