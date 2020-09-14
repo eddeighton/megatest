@@ -2,7 +2,7 @@
 
 cmake_minimum_required( VERSION 3.1...3.16 )
 
-macro( Make_Mega_Program arg_EGSourceFiles arg_CPPSourceFiles HasPython HasUnreal )
+macro( Make_Mega_Program arg_EGSourceFiles arg_CPPSourceFiles arg_HostType )
 
 include( ${MEGA_CMAKE}/boost_include.cmake )
 include( ${MEGA_CMAKE}/pybind11_include.cmake )
@@ -20,11 +20,41 @@ endif()
     
 set( MEGA_PROGRAM ${MEGA_COORDINATOR}_${MEGA_HOST}_${CurrentFolderProjectName} )
 
+set( MegaHostType "${arg_HostType}" )
+
+message( "--------------------------------------------------------------------------" )
+if( ${MegaHostType} STREQUAL "basic" )
+message( ${MEGA_PROGRAM} " Basic Host Specified" )
+set( IsBasicHost true )
+set( IsUnrealHost false )
+set( IsPythonHost false )
+set( IsGeometryHost false )
+elseif( ${MegaHostType} STREQUAL "unreal" )
+message( ${MEGA_PROGRAM} " Unreal Host Specified" )
+set( IsBasicHost false )
+set( IsUnrealHost true )
+set( IsPythonHost false )
+set( IsGeometryHost false )
+elseif( ${MegaHostType} STREQUAL "python" )
+message( ${MEGA_PROGRAM} " Python Host Specified" )
+set( IsBasicHost false )
+set( IsUnrealHost false )
+set( IsPythonHost true )
+set( IsGeometryHost false )
+elseif( ${MegaHostType} STREQUAL "geometry" )
+message( ${MEGA_PROGRAM} " Geometry Host Specified" )
+set( IsBasicHost false )
+set( IsUnrealHost false )
+set( IsPythonHost false )
+set( IsGeometryHost true )
+else()
+#error unknown host type
+message( FATAL_ERROR ${MEGA_PROGRAM} " Unknown host type specified: " ${MegaHostType} )
+endif()
+
 #cannot use macro argument directly - capture into variable
 set( EGSourceFiles "${arg_EGSourceFiles}" )
 set( CPPSourceFiles "${arg_CPPSourceFiles}" )
-set( HasPython "${arg_HasPython}" )
-set( HasUnreal "${arg_HasUnreal}" )
 
 foreach( inputname IN LISTS EGSourceFiles )
 
@@ -41,22 +71,19 @@ foreach( inputname IN LISTS EGSourceFiles )
     list(APPEND EG_OPERATIONS_OBJECTS   ${flatname}_object.obj )
 endforeach()
 
-if( ${HasPython} STREQUAL "true" )
+if( ${IsPythonHost} )
     list(APPEND EG_OPERATIONS_IMPL      ${MEGA_IMPL}/${MEGA_COORDINATOR}/${MEGA_HOST}/${MEGA_PROJECT}/python.cpp )
     list(APPEND EG_OPERATIONS_OBJECTS   python_object.obj )
 endif()
 
-if( ${HasUnreal} STREQUAL "true" )
+if( ${IsUnrealHost} )
     list(APPEND EG_OPERATIONS_IMPL      ${MEGA_IMPL}/${MEGA_COORDINATOR}/${MEGA_HOST}/${MEGA_PROJECT}/unreal.cpp )
     list(APPEND EG_OPERATIONS_OBJECTS   unreal_object.obj )
 endif()
 
-message( "--------------------------------------------------------------------------" )
 message( "Project: ${MEGA_PROJECT} Current: ${CMAKE_CURRENT_LIST_DIR}" )
 message( ${MEGA_PROGRAM} " EG Source:  " "${EGSourceFiles}" )
 message( ${MEGA_PROGRAM} " CPP Source: " "${CPPSourceFiles}" )
-message( ${MEGA_PROGRAM} " Has Python: " "${HasPython}" )
-message( ${MEGA_PROGRAM} " Has Unreal: " "${HasUnreal}" )
 
 #message( ${MEGA_PROGRAM} " EG_SOURCES:              " ${EG_SOURCES} )
 #message( ${MEGA_PROGRAM} " EG_OPERATIONS_HEADERS:   " ${EG_OPERATIONS_HEADERS} )
@@ -173,12 +200,12 @@ link_protobuf( ${MEGA_PROGRAM} )
 link_common( ${MEGA_PROGRAM} )
 link_eg( ${MEGA_PROGRAM} )
 
-if( ${HasPython} STREQUAL "true" )
+if( ${IsPythonHost} )
 link_pybind11( ${MEGA_PROGRAM} )
 link_mega_python_lib( ${MEGA_PROGRAM} )
 endif()
 
-#if( ${HasUnreal} STREQUAL "true" )
+#if( ${IsUnrealHost} )
 #link_mega_link_unreal_lib( ${MEGA_PROGRAM} )
 #endif()
 
