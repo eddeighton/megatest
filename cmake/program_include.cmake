@@ -6,9 +6,9 @@ macro( Make_Mega_Program arg_EGSourceFiles arg_CPPSourceFiles arg_HostType )
 
 include( ${MEGA_CMAKE}/boost_include.cmake )
 include( ${MEGA_CMAKE}/pybind11_include.cmake )
-include( ${MEGA_CMAKE}/clang_include.cmake )
 include( ${MEGA_CMAKE}/protobuf_include.cmake )
 include( ${MEGA_CMAKE}/common_include.cmake )
+include( ${MEGA_CMAKE}/ed_include.cmake )
 include( ${MEGA_CMAKE}/eg_include.cmake )
 include( ${MEGA_CMAKE}/mega_include.cmake )
 
@@ -195,7 +195,6 @@ target_include_directories( ${MEGA_PROGRAM} PRIVATE ${MEGA_INTERFACE}/${MEGA_PRO
 target_include_directories( ${MEGA_PROGRAM} PRIVATE ${MEGASTRUCTURE_INSTALL}/include )
 
 link_boost( ${MEGA_PROGRAM} system )
-link_clang( ${MEGA_PROGRAM} )
 link_protobuf( ${MEGA_PROGRAM} )
 link_common( ${MEGA_PROGRAM} )
 link_eg( ${MEGA_PROGRAM} )
@@ -203,6 +202,8 @@ link_eg( ${MEGA_PROGRAM} )
 if( ${IsPythonHost} )
 link_pybind11( ${MEGA_PROGRAM} )
 link_mega_python_lib( ${MEGA_PROGRAM} )
+elseif( ${IsGeometryHost} )
+link_ed( ${MEGA_PROGRAM} )
 endif()
 
 #if( ${IsUnrealHost} )
