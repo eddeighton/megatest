@@ -7,7 +7,6 @@ set( EG_SOURCE_CODE
     deepthought/testhost/testproject/deep 
     reddwarf/python/testproject/python 
     reddwarf/python2/testproject/python2 
-    reddwarf/testhost/testproject/red
     reddwarf/unreal/testproject/unreal
     )
     

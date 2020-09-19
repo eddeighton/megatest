@@ -148,12 +148,18 @@ add_custom_target( ${MEGA_PROGRAM}_eg
         --bin ${CMAKE_CURRENT_BINARY_DIR} 
         --flags ${CLANG_CXX_FLAGS}
         --names "${EG_FLAT_NAMES}"
+        #--wait
 	
 	#MAIN_DEPENDENCY ${MEGA_SCHEMA_FILE}
 	#DEPENDS ${MEGA_SCHEMA_FILE}
 	BYPRODUCTS ${MEGA_PROGRAM}_runtime_object.obj
-	COMMENT "Generating eg source code" )
-	
+    
+    #COMMENT "${MEGA_PROGRAM}_eg ${MEGASTRUCTURE} --build ${CMAKE_CFG_INTDIR} --dir ${MEGA_ROOT} --project ${MEGA_PROJECT} --coordinator ${MEGA_COORDINATOR} --host ${MEGA_HOST} --bin ${CMAKE_CURRENT_BINARY_DIR} --flags ${CLANG_CXX_FLAGS} --names ${EG_FLAT_NAMES} --wait"
+
+	 )
+	#COMMENT "Generating eg source code"
+    
+add_dependencies( ${MEGA_PROGRAM}_eg Interface  )
 
 set( EG_OBJECT_FILES 	${EG_OPERATIONS_OBJECTS}
 						runtime_object.obj

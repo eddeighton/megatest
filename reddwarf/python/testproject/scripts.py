@@ -20,3 +20,8 @@ root = prog.getRoot()
 tnk = root.Tank()
 
 torso = root.Torso()
+
+
+root.RedTest()
+root.DeepTest()
+root.DumpEdFile().m_filePath( "w:/root/editor/src/data/testMeta.blu" )

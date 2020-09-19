@@ -3,6 +3,8 @@ cmake_minimum_required( VERSION 3.1...3.16 )
 
 project( megatest )
 
+MARK_AS_ADVANCED(MULTITHREADED_BUILD)
+
 set( CMAKE_CXX_STANDARD 17 )
 
 set( MEGA_PROJECT "" CACHE STRING "The mega structure project to build" )
@@ -32,12 +34,17 @@ set( CLANG_CXX_DEFINES "-D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH -DWIN32_LEAN_
 #set( CLANG_CXX_OPTIONS  "-GR -Gd -MDd -std:c++17 -EHa -RTC1 -fexceptions" )
 
 
-set( CLANG_CXX_OPTIONS  "-Zi -O2 -Ob1 -DNDEBUG" )
+set( CLANG_CXX_OPTIONS  " " )
+#set( CLANG_CXX_OPTIONS  "-MP" )
+#set( CLANG_CXX_OPTIONS  "-O3 -mllvm -polly -MD -DNDEBUG" )
 
 #-Xclang -target=x86_64 
-set( CLANG_CXX_OPTIONS  "-g -fexceptions" )
+#set( CLANG_CXX_OPTIONS  "-g -fexceptions" )
+
 #set( CLANG_CXX_OPTIONS  "-fexceptions" )
 set( CLANG_COMPILER_OPTIONS "-Xclang -std=c++17 -Xclang -fcoroutines-ts -Xclang -flto-visibility-public-std -Xclang -Wno-deprecated -Xclang -fexceptions -Xclang -Wno-inconsistent-missing-override" )
+
+
 #
 #Microsoft args: -GR -Gd -MDd -std:c++17 
 
@@ -47,11 +54,12 @@ message( "Clang flags: " ${CLANG_CXX_FLAGS} )
 
 add_custom_target( Interface 
 	${MEGASTRUCTURE} --build ${CMAKE_CFG_INTDIR} --dir ${MEGA_ROOT} --project ${MEGA_PROJECT} --flags ${CLANG_CXX_FLAGS}
-	
-	#MAIN_DEPENDENCY ${MEGA_SCHEMA_FILE}
-	#DEPENDS ${MEGA_SCHEMA_FILE}
 	BYPRODUCTS ${MEGA_INTERFACE}/${MEGA_PROJECT}/interface.db
-	COMMENT "Generating interface database" )
+	COMMENT "Generating interface: ${MEGA_PROJECT}" )
+    
+add_custom_target( Clean 
+	${MEGASTRUCTURE} --clean --dir ${MEGA_ROOT} --project ${MEGA_PROJECT}
+	COMMENT "Cleaning project: ${MEGA_PROJECT}" )
 
 add_subdirectory( ../reddwarf ${CMAKE_CURRENT_BINARY_DIR}/reddwarf )
 add_subdirectory( ../deepthought ${CMAKE_CURRENT_BINARY_DIR}/deepthought )

@@ -4,6 +4,12 @@ include( <codecvt> );
 include( <locale> );
 
 dim int m_unrealInt;
+dim int m_unrealInt2;
+
+action newAction
+{
+    LOG( "ed was here" );
+}
 
 action UnrealTest[ 4 ]
 {

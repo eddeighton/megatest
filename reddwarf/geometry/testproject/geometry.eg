@@ -1,8 +1,5 @@
 
 
-LOG( "Geometry root created" );
-
-
 action DumpEdFile
 {
     dim std::string m_filePath;
@@ -10,10 +7,12 @@ action DumpEdFile
     const std::string& strFilePath = m_filePath();
     if( strFilePath.empty() )
     {
-        LOG( "Got empty file path in DumpEdFile" );
+        LOG( "Got empty ed file path in DumpEdFile" );
     }
     else
     {
+        LOG( "Dumping file" << strFilePath );
+        
         dumpEdFile( strFilePath );
     }
 }
