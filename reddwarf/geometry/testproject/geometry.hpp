@@ -5,5 +5,6 @@
 #include <string>
 
 void dumpEdFile( const std::string& strFilePath );
+void dumpBlueprint( const std::string& strFilePath );
 
 #endif //GEO_14_SEPT_2020

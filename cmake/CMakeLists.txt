@@ -27,14 +27,14 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 find_path( MEGASTRUCTURE_INSTALL bin/mega.exe PATHS W:/root/megastructure/install )
 set( MEGASTRUCTURE ${MEGASTRUCTURE_INSTALL}/bin/mega.exe )
 
-#set( CLANG_CXX_DEFINES "-D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH -D_DEBUG -D_ITERATOR_DEBUG_LEVEL=2 -DWIN32_LEAN_AND_MEAN -D_DLL -DNOMINMAX -DBOOST_ALL_NO_LIB -D_CRT_SECURE_NO_WARNINGS -DBOOST_USE_WINDOWS_H -D_WIN32_WINNT=0x0601 -DWIN32 -D_WINDOWS " )
+#set( CLANG_CXX_DEFINES "-D_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH -D_DEBUG -D_ITERATOR_DEBUG_LEVEL=2 -DWIN32_LEAN_AND_MEAN -D_DLL -DNOMINMAX -DBOOST_ALL_NO_LIB -D_CRT_SECURE_NO_WARNINGS -DBOOST_USE_WINDOWS_H -D_WIN32_WINNT=0x0601 -DWIN32 -D_WINDOWS " )
 
 
-set( CLANG_CXX_DEFINES "-D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH -DWIN32_LEAN_AND_MEAN -D_DLL -DNOMINMAX -DBOOST_ALL_NO_LIB -D_CRT_SECURE_NO_WARNINGS -DBOOST_USE_WINDOWS_H -D_WIN32_WINNT=0x0601 -DWIN32 -D_WINDOWS " )
+set( CLANG_CXX_DEFINES "-DEG_CLANG_COMPILATION -DUNICODE -D_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH -DWIN32_LEAN_AND_MEAN -D_DLL -DNOMINMAX -DBOOST_ALL_NO_LIB -D_CRT_SECURE_NO_WARNINGS -DBOOST_USE_WINDOWS_H -D_WIN32_WINNT=0x0601 -DWIN32 -D_WINDOWS " )
 #set( CLANG_CXX_OPTIONS  "-GR -Gd -MDd -std:c++17 -EHa -RTC1 -fexceptions" )
+#set( UNREAL_CXX_DEFINES "-DUE_BUILD_DEVELOPMENT=1 -DWITH_ENGINE=0 -DWITH_EDITOR=0 -DWITH_UNREAL_DEVELOPER_TOOLS=0 -DWITH_PLUGIN_SUPPORT=0 -DIS_MONOLITHIC=0 -DIS_PROGRAM=0 -DUBT_COMPILED_PLATFORM=Windows -DPLATFORM_WINDOWS=0x0601" )
 
-
-set( CLANG_CXX_OPTIONS  " " )
+#set( CLANG_CXX_OPTIONS  "-source-charset:utf-8 -execution-charset:utf-8 -EHsc -bigobj -MD -DUNICODE" )
 #set( CLANG_CXX_OPTIONS  "-MP" )
 #set( CLANG_CXX_OPTIONS  "-O3 -mllvm -polly -MD -DNDEBUG" )
 
@@ -42,13 +42,15 @@ set( CLANG_CXX_OPTIONS  " " )
 #set( CLANG_CXX_OPTIONS  "-g -fexceptions" )
 
 #set( CLANG_CXX_OPTIONS  "-fexceptions" )
-set( CLANG_COMPILER_OPTIONS "-Xclang -std=c++17 -Xclang -fcoroutines-ts -Xclang -flto-visibility-public-std -Xclang -Wno-deprecated -Xclang -fexceptions -Xclang -Wno-inconsistent-missing-override" )
-
+set( CLANG_COMPILER_OPTIONS "-Xclang -std=c++17 -Xclang -fcoroutines-ts -Xclang -flto-visibility-public-std -Xclang -fexceptions" )
+set( CLANG_COMPILER_WARNINGS "-Wno-inconsistent-missing-override -Wno-deprecated-declarations -Wno-deprecated -Wno-nonportable-include-path -Wno-ignored-attributes -Wno-microsoft-unqualified-friend -Wno-gnu-string-literal-operator-template" )
+#-Wall -Wextra -Wconversion -Wcast-qual -Wdeprecated
+#-Xclang -Wno-inconsistent-missing-override  -Xclang -Wno-deprecated-declarations -Xclang -Wno-deprecated -Xclang -Wno-nonportable-include-path
 
 #
 #Microsoft args: -GR -Gd -MDd -std:c++17 
 
-set( CLANG_CXX_FLAGS "${CLANG_CXX_DEFINES} ${CLANG_CXX_OPTIONS} ${CLANG_COMPILER_OPTIONS}" )
+set( CLANG_CXX_FLAGS "${CLANG_CXX_DEFINES} ${CLANG_CXX_OPTIONS} ${CLANG_COMPILER_OPTIONS} ${CLANG_COMPILER_WARNINGS}" )
 
 message( "Clang flags: " ${CLANG_CXX_FLAGS} )
 

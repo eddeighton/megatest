@@ -8,6 +8,10 @@ Created on Sun Aug  2 12:52:36 2020
 
 
 #code is in W:\WinPython\WPy64-3771\python-3.7.7.amd64\Lib\site-packages\ipykernel\eventloops.py
+#including path modifications for:
+import sys
+sys.path.append( "w:/root/megastructure/install/bin" )
+sys.path.append( "x:/UE_4.25/Engine/Binaries/Win64" )
 
 
 #C:\Users\eddeighton\AppData\Roaming\jupyter\runtime

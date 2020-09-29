@@ -16,3 +16,19 @@ action DumpEdFile
         dumpEdFile( strFilePath );
     }
 }
+
+action DumpBlueprint
+{
+    dim std::string m_filePath;
+    
+    const std::string& strFilePath = m_filePath();
+    if( strFilePath.empty() )
+    {
+        LOG( "Got empty blueprint file path in DumpBlueprint" );
+    }
+    else
+    {
+        LOG( "Dumping blueprint file" << strFilePath );
+        dumpBlueprint( strFilePath );
+    }
+}

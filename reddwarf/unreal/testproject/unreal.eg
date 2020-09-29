@@ -1,95 +1,27 @@
 
-include( <sstream> );
-include( <codecvt> );
-include( <locale> );
-
-dim int m_unrealInt;
-dim int m_unrealInt2;
-
-action newAction
+object UnrealObject
 {
-    LOG( "ed was here" );
-}
+    dim FVector2D   m_FVector2D;
+    dim FVector     m_FVector;
+    dim FVector4    m_FVector4;
+    dim FQuat       m_FQuat;
+    dim FMatrix     m_FMatrix;
+    dim FTransform  m_FTransform;
 
-action UnrealTest[ 4 ]
-{
-    using convert_t = std::codecvt_utf8< wchar_t >;
-    std::wstring_convert< convert_t, wchar_t > strConverter;
-    
-    for( int i = 0; i < 100; ++i )
+    function testUnrealMath() : void
     {
-        std::ostringstream os;
-        os << "UnrealTest " << i;
-        Unreal::log( strConverter.from_bytes( os.str() ).c_str() );
-        co_yield eg::sleep();
-    }
-}
-
-function testUnreal : const char*
-{
-    return "Hello from Unreal";
-}
-
-object VehiclePart[ 16 ]
-{
-    
-}
-
-object Torso[ 16 ] : VehiclePart
-{
-    dim int type;
-}
-
-object MegaTorso[ 16 ] : Torso
-{
-    dim int extra;
-}
-
-
-object Tank[ 16 ]
-{
-    dim float x;
-    dim float y;
-    dim float angle;
-    
-    action Move
-    {
-        dim float amt;
-        dim float rate;
-        dim float start;
+        //testUnrealDim( FVector( 0, 0, 1 ) );
+        FVector axis( 0, 0, 1 );
         
-        start( x() );
+        FQuat quat( axis, 1.0f );
         
-        while( x() < start() + amt() )
-        {
-            x( x() + clock::dt() * rate() );
-            co_yield eg::sleep();
-        }
+        FRotator rotator( quat );
+        
+        const FQuat result = rotator.Quaternion();
+        
+        LOG( "Unreal vector: " << result.X << " " << result.Y << " " << result.Z << " " << result.W );
+        
     }
-    
-    function unlinkTorso : void
-    {
-        if( eg::Running == TorsoLink.Get() )
-            TorsoLink.Stop();
-    }
-    
-    function linkTorso( Torso torso ) : void
-    {
-        if( eg::Running != TorsoLink.Get() )
-            TorsoLink();
-        TorsoLink.base( torso );
-    }
-    
-    link TorsoLink : Torso;
-    
-    link OtherPart : VehiclePart;
-}
 
-object Spider[ 16 ]
-{
-    link TorsoLink : Torso;
-    
-    link OtherPart : VehiclePart;
-}
 
-LOG( "Unreal root created" );
+}

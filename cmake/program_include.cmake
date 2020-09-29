@@ -11,6 +11,8 @@ include( ${MEGA_CMAKE}/common_include.cmake )
 include( ${MEGA_CMAKE}/ed_include.cmake )
 include( ${MEGA_CMAKE}/eg_include.cmake )
 include( ${MEGA_CMAKE}/mega_include.cmake )
+include( ${MEGA_CMAKE}/unreal_include.cmake )
+include( ${MEGA_CMAKE}/blueprint_include.cmake )
 
 
 get_filename_component( CurrentFolderProjectName ${CMAKE_CURRENT_LIST_DIR} NAME )
@@ -193,6 +195,7 @@ source_group("objects" FILES ${EG_OBJECT_FILES})
 	
 add_dependencies( ${MEGA_PROGRAM} ${MEGA_PROGRAM}_eg )
 
+
 #target_compile_options( ${MEGA_PROGRAM} PUBLIC /await )
 
 target_compile_definitions( ${MEGA_PROGRAM} PUBLIC -DMEGASTRUCTURE_EG_COMPONENT )
@@ -210,7 +213,10 @@ link_pybind11( ${MEGA_PROGRAM} )
 link_mega_python_lib( ${MEGA_PROGRAM} )
 elseif( ${IsGeometryHost} )
 link_ed( ${MEGA_PROGRAM} )
+link_blueprint( ${MEGA_PROGRAM} )
 endif()
+
+link_unreal_core( ${MEGA_PROGRAM} )
 
 #if( ${IsUnrealHost} )
 #link_mega_link_unreal_lib( ${MEGA_PROGRAM} )

@@ -20,19 +20,3 @@ object PythonObject
         return m_pythonInt();
     }
 }
-
-
-function PrintTanks() : void
-{
-    for( auto t : root.reddwarf.unreal.testproject.Get().Tank.Range() )
-    {
-        LOG( "Tank x:" << t.x() << " y:" << t.y() );
-    }
-}
-
-private:
-
-function testPrivateFromPython( int iValue ) : void
-{
-    RedTestPrivate();
-}
