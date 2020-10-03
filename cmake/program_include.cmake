@@ -13,6 +13,7 @@ include( ${MEGA_CMAKE}/eg_include.cmake )
 include( ${MEGA_CMAKE}/mega_include.cmake )
 include( ${MEGA_CMAKE}/unreal_include.cmake )
 include( ${MEGA_CMAKE}/blueprint_include.cmake )
+#include( ${MEGA_CMAKE}/houdini_include.cmake )
 
 
 get_filename_component( CurrentFolderProjectName ${CMAKE_CURRENT_LIST_DIR} NAME )
@@ -214,6 +215,7 @@ link_mega_python_lib( ${MEGA_PROGRAM} )
 elseif( ${IsGeometryHost} )
 link_ed( ${MEGA_PROGRAM} )
 link_blueprint( ${MEGA_PROGRAM} )
+#link_houdini( ${MEGA_PROGRAM} )
 endif()
 
 link_unreal_core( ${MEGA_PROGRAM} )
@@ -225,9 +227,12 @@ link_unreal_core( ${MEGA_PROGRAM} )
 #source_group( TREE ${MEGA_ROOT} FILES ${CPPSourceFiles} )
 
 set_target_properties( ${MEGA_PROGRAM} PROPERTIES DEBUG_POSTFIX d )
-target_compile_definitions( ${MEGA_PROGRAM} PRIVATE -DNOMINMAX -DWIN32_LEAN_AND_MEAN -D_MT -D_DLL -DBOOST_ALL_NO_LIB -D_CRT_SECURE_NO_WARNINGS -DBOOST_USE_WINDOWS_H )
 
-target_link_options( ${MEGA_PROGRAM} PUBLIC /SAFESEH:NO )
+#set( WIN_CXX_DEFINES "-DNOMINMAX -DWIN32_LEAN_AND_MEAN -D_MT -D_DLL -DBOOST_ALL_NO_LIB -D_CRT_SECURE_NO_WARNINGS -DBOOST_USE_WINDOWS_H" )
+
+target_compile_definitions( ${MEGA_PROGRAM} PRIVATE ${CLANG_CXX_DEFINES} ${CLANG_CXX_OPTIONS} )
+
+target_link_options( ${MEGA_PROGRAM} PUBLIC /SAFESEH:NO ${LINK_CXX_OPTIONS} )
 
 install( TARGETS ${MEGA_PROGRAM} DESTINATION bin )
 

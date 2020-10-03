@@ -51,3 +51,24 @@ void dumpBlueprint( const std::string& strFilePath )
         LOG( "Exception while loading ed file: " << ex.what() );
     }
 }
+/*
+static float densityFunction( const UT_Vector3 &P )
+{
+    return 1 - P.length(); // Return signed distance to unit sphere
+}
+
+void testHoudini( const std::string& strFilePath )
+{
+    GU_Detail            gdp;
+    UT_BoundingBox       bounds;
+    
+    bounds.setBounds( -1, -1, -1, 1, 1, 1 );
+    gdp.polyIsoSurface( HDK_Sample::densityFunction, bounds, 20, 20, 20 );
+    gdp.save( strFilePath.c_str(), true, NULL );
+    
+    LOG( "Saved geo file to: " << strFilePath );
+}*/
+void testHoudini( const std::string& strFilePath )
+{
+    LOG( "testHoudini: " << strFilePath );
+}

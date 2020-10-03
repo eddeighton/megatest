@@ -32,3 +32,19 @@ action DumpBlueprint
         dumpBlueprint( strFilePath );
     }
 }
+
+action TestHoudini
+{
+    dim std::string m_filePath;
+    
+    const std::string& strFilePath = m_filePath();
+    if( strFilePath.empty() )
+    {
+        LOG( "Got empty file path in TestHoudini" );
+    }
+    else
+    {
+        LOG( "Generating: " << strFilePath );
+        testHoudini( strFilePath );
+    }
+}
