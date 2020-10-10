@@ -39,8 +39,8 @@ set( CLANG_CXX_DEFINES "-DUNICODE -D_USE_MATH_DEFINES -DSIZEOF_VOID_P=64 -D_SILE
 #set( CLANG_CXX_OPTIONS  "-O3 -mllvm -polly -MD -DNDEBUG" )
 
 #-Xclang -target=x86_64 
-#set( CLANG_CXX_OPTIONS  "-g -fexceptions" )
-set( LINK_CXX_OPTIONS "-GR -Gd -MT -EHa -RTC1" )
+set( CLANG_CXX_OPTIONS  "-g -fexceptions" )
+#set( LINK_CXX_OPTIONS "-GR -Gd -MT -EHa -RTC1" )
 
 #set( CLANG_CXX_OPTIONS  "-fexceptions" )
 set( CLANG_COMPILER_OPTIONS "-Xclang -std=c++17 -Xclang -fcoroutines-ts -Xclang -flto-visibility-public-std -Xclang -fexceptions" )

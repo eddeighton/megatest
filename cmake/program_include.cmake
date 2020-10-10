@@ -84,6 +84,11 @@ if( ${IsUnrealHost} )
     list(APPEND EG_OPERATIONS_OBJECTS   unreal_object.obj )
 endif()
 
+if( ${IsGeometryHost} )
+    list(APPEND EG_OPERATIONS_IMPL      ${MEGA_IMPL}/${MEGA_COORDINATOR}/${MEGA_HOST}/${MEGA_PROJECT}/geometry_interface.cpp )
+    list(APPEND EG_OPERATIONS_OBJECTS   geometry_interface_object.obj )
+endif()
+
 message( "Project: ${MEGA_PROJECT} Current: ${CMAKE_CURRENT_LIST_DIR}" )
 message( ${MEGA_PROGRAM} " EG Source:  " "${EGSourceFiles}" )
 message( ${MEGA_PROGRAM} " CPP Source: " "${CPPSourceFiles}" )
@@ -232,7 +237,8 @@ set_target_properties( ${MEGA_PROGRAM} PROPERTIES DEBUG_POSTFIX d )
 
 target_compile_definitions( ${MEGA_PROGRAM} PRIVATE ${CLANG_CXX_DEFINES} ${CLANG_CXX_OPTIONS} )
 
-target_link_options( ${MEGA_PROGRAM} PUBLIC /SAFESEH:NO ${LINK_CXX_OPTIONS} )
+# ${LINK_CXX_OPTIONS}
+target_link_options( ${MEGA_PROGRAM} PUBLIC /SAFESEH:NO )
 
 install( TARGETS ${MEGA_PROGRAM} DESTINATION bin )
 

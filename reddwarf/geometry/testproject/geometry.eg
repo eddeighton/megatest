@@ -33,7 +33,7 @@ action DumpBlueprint
     }
 }
 
-action TestHoudini
+action TestBlueprintDirect
 {
     dim std::string m_filePath;
     
@@ -44,7 +44,55 @@ action TestHoudini
     }
     else
     {
-        LOG( "Generating: " << strFilePath );
-        testHoudini( strFilePath );
+        Blueprint::Factory factory;
+        Blueprint::Site::Ptr pTestSite = factory.create( strFilePath );
+        VERIFY_RTE_MSG( pTestSite, "Failed to load blueprint: " << strFilePath );
+        
+        Blueprint::Blueprint::Ptr pBlueprint = 
+            boost::dynamic_pointer_cast< Blueprint::Blueprint >( pTestSite );
+        VERIFY_RTE_MSG( pBlueprint, "Failed to get blueprint: " << strFilePath );
+        
+        LOG( "Loaded blueprint: " << strFilePath );
     }
+}
+
+action SaveConfig
+{
+    dim std::string m_filePath;
+    
+    const std::string& strFilePath = m_filePath();
+    if( strFilePath.empty() )
+    {
+        LOG( "Got empty file path in SaveConfig" );
+    }
+    else
+    {
+        save_config( strFilePath );
+        LOG( "Saved config to: " << strFilePath );
+    }
+}
+
+action LoadConfig
+{
+    dim std::string m_filePath;
+    
+    const std::string& strFilePath = m_filePath();
+    if( strFilePath.empty() )
+    {
+        LOG( "Got empty file path in LoadConfig" );
+    }
+    else
+    {
+        load_config( strFilePath );
+        LOG( "Loaded config from: " << strFilePath );
+    }
+}
+
+action TestStringLookup
+{
+    dim std::string m_ref;
+    
+    eg::Event ev = convert_string_to_config_reference( m_ref() );
+    
+    LOG( "TestStringLookup: " << ev.data.type );
 }

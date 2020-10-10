@@ -25,3 +25,65 @@ object UnrealObject
 
 
 }
+
+
+
+object config
+{
+    action ships
+    {
+        action small
+        {
+            dim FVector size;
+            dim float mass;
+            dim float strength;
+        }
+        action medium
+        {
+            dim FVector size;
+            dim float mass;
+            dim float strength;
+        }
+        action large
+        {
+            dim FVector size;
+            dim float mass;
+            dim float strength;
+        }
+    }
+
+    action stuff
+    {
+        dim int x;
+        dim int y;
+    }
+}
+
+object BigShip
+{
+}
+
+object SmallShip
+{
+
+}
+
+object Factory
+{
+    action Create
+    {
+        dim Event type;
+        
+        BigShip bigShip( type() );
+        SmallShip smallShip( type() );
+        
+        if( bigShip )
+        {
+        
+        }
+        else if( smallShip )
+        {
+        }
+        
+    }
+}
