@@ -5,22 +5,8 @@ namespace test
     object Cube3
     {
         dependency( stuff/sphere.mega );
-        dependency( stuff/triangle.mega );
         include( <iostream> );
         
-        namespace nested2
-        {
-            action CoolStuff1
-            {
-                std::cout << "This is cool" << std::endl;
-            }
-        
-            action CoolInherit : CoolStuff1
-            {
-
-            }
-        }
-
         table TestTable
         {
             link Cube1  [ 0    : 0   ] <  [ 0   : 0    ] : Cube3;
@@ -44,21 +30,6 @@ namespace test
             {
                 std::cout << "This is cool" << std::endl;
             }
-            function foobar( int iValue, float fValue, bool other ) : void
-            {
-                // do stuff
-                int i = 1;
-            }
-        }
-
-        action Test
-        {
-
-            std::cout << "Ed was here" << std::endl;
-            std::cout << "Ed was here" << std::endl;
-
-
-            dim int foo;
         }
         action TestFF
         {

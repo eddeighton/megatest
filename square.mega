@@ -1,48 +1,41 @@
 
 object Square
 {    
-    include( test_cpp_include.hpp );
-    include( <string> );
-    include( <vector> );
-    include( <iostream> );
-
-    dependency( cube.mega );
-    dependency( stuff/sphere.mega );
-    dependency( stuff/triangle.mega );
-
-    include test_include( test_include.mega );
     
-    //ed was here!!!
+    dim int m_y;
 
-    dim int x;
-
-    event SomeData
+    namespace test
     {
-        dim std::vector< Square > squares;
-        dim std::vector< Square > squares1;
-        dim std::vector< Square > squares2;
-
-        
-        event SomeData2
-        {
-            dim std::vector< Square > squares;
-            dim std::vector< Square > squares1;
-            dim std::vector< Square > squares2;
-        }
+        dim int m_x;
+        dim int m_z;
+        dim int m_w;
     }
 
-    function test( int iValue, float fValue ) : void
+    function foo( float f, std::string s ) : std::string
     {
-        // do stuff
-        int i = 1;
-    }
+        include( <string> );
+        include( <sstream> );
 
-    action size_test_1
-    {
-        Square.x();
-
-        Square.SomeData2.squares();
+        std::ostringstream os;
+        os << "f: " << f << " s: " << s;
+        return os.str();
     }
 
 
+    action invocationTest[ 4 ]
+    {
+        include( <iostream> );
+
+        dim float toast;
+
+        int y = m_y();
+
+        m_y( y  + 1 );
+
+        std::cout << foo( y + test.m_x(), "testing" );
+
+        auto x = Square.test.m_x();
+
+        float f = Square.toast();
+    }
 }

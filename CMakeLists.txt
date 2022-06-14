@@ -16,10 +16,10 @@ include( ${WORKSPACE_ROOT_PATH}/thirdparty/boost/boost_include.cmake )
 
 MegaProject( MegaTest )
 
-MegaComponent( MegaTestComponent1 CPP test.cpp MEGA cube.mega square.mega )
+MegaComponent( MegaTestComponent1 CPP test.cpp MEGA square.mega )
 
 link_spdlog( MegaTestComponent1 )
 link_boost( MegaTestComponent1 filesystem )
 
-add_subdirectory(stuff)
+#add_subdirectory(stuff)
 
