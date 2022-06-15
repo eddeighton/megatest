@@ -31,9 +31,10 @@ namespace test
                 std::cout << "This is cool" << std::endl;
             }
         }
+
         action TestFF
         {
-            std::cout << "Ed was here" << std::endl;
+            std::cout << "Ed here" << std::endl;
             dim int foo;
         }
     }

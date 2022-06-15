@@ -35,7 +35,6 @@ object Square
         std::cout << foo( y + test.m_x(), "testing" );
 
         auto x = Square.test.m_x();
-
         float f = Square.toast();
     }
 }
