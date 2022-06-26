@@ -1,0 +1,18 @@
+
+
+
+
+
+object Cube3
+{
+    dependency( square.mega );
+    
+    dim float m_value;
+
+    function foobar() : int
+    {
+        return m_value();
+    }
+
+}
+

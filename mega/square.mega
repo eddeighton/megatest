@@ -1,0 +1,14 @@
+
+
+namespace test
+{
+    object Square
+    {    
+        dim int m_data;
+
+        function foobar2() : int
+        {
+            return m_data();
+        }
+    }
+}

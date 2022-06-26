@@ -7,27 +7,36 @@
 			<filepath>project.manifest</filepath>
 		</manifest_file_path>
 	</manifestFilePath>
-	<sourceFiles class_id="3" tracking_level="0" version="0">
+	<megaSourceFiles class_id="3" tracking_level="0" version="0">
 		<count>1</count>
 		<item_version>0</item_version>
 		<item class_id="4" tracking_level="0" version="0">
 			<mega_file_path>
-				<filepath>square.mega</filepath>
+				<filepath>mega/square.mega</filepath>
 			</mega_file_path>
 		</item>
-	</sourceFiles>
-	<compilationFileInfos class_id="5" tracking_level="0" version="0">
-		<count>12</count>
+	</megaSourceFiles>
+	<cppSourceFiles class_id="5" tracking_level="0" version="0">
+		<count>1</count>
 		<item_version>0</item_version>
 		<item class_id="6" tracking_level="0" version="0">
+			<cpp_file_path>
+				<filepath>mega/test_component/test.cpp</filepath>
+			</cpp_file_path>
+		</item>
+	</cppSourceFiles>
+	<compilationFileInfos class_id="7" tracking_level="0" version="0">
+		<count>13</count>
+		<item_version>0</item_version>
+		<item class_id="8" tracking_level="0" version="0">
 			<fileType>0</fileType>
 			<fileID>0</fileID>
-			<filePath class_id="7" tracking_level="0" version="0">
+			<filePath class_id="9" tracking_level="0" version="0">
 				<compilation_file_path>
 					<filepath>project.manifest.ComponentListing.Components.db</filepath>
 				</compilation_file_path>
 			</filePath>
-			<objectSourceFilePath class_id="8" tracking_level="0" version="0">
+			<objectSourceFilePath class_id="10" tracking_level="0" version="0">
 				<source_file_path>
 					<filepath>project.manifest</filepath>
 				</source_file_path>
@@ -94,12 +103,12 @@
 			<fileID>5</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>square.mega.ParserStage.AST.db</filepath>
+					<filepath>mega/square.mega.ParserStage.AST.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
 				<source_file_path>
-					<filepath>square.mega</filepath>
+					<filepath>mega/square.mega</filepath>
 				</source_file_path>
 			</objectSourceFilePath>
 		</item>
@@ -108,12 +117,12 @@
 			<fileID>6</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>square.mega.ParserStage.Body.db</filepath>
+					<filepath>mega/square.mega.ParserStage.Body.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
 				<source_file_path>
-					<filepath>square.mega</filepath>
+					<filepath>mega/square.mega</filepath>
 				</source_file_path>
 			</objectSourceFilePath>
 		</item>
@@ -122,12 +131,12 @@
 			<fileID>7</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>square.mega.InterfaceStage.Tree.db</filepath>
+					<filepath>mega/square.mega.InterfaceStage.Tree.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
 				<source_file_path>
-					<filepath>square.mega</filepath>
+					<filepath>mega/square.mega</filepath>
 				</source_file_path>
 			</objectSourceFilePath>
 		</item>
@@ -136,12 +145,12 @@
 			<fileID>8</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>square.mega.SymbolRollout.PerSourceSymbols.db</filepath>
+					<filepath>mega/square.mega.SymbolRollout.PerSourceSymbols.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
 				<source_file_path>
-					<filepath>square.mega</filepath>
+					<filepath>mega/square.mega</filepath>
 				</source_file_path>
 			</objectSourceFilePath>
 		</item>
@@ -150,12 +159,12 @@
 			<fileID>9</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>square.mega.InterfaceAnalysisStage.Clang.db</filepath>
+					<filepath>mega/square.mega.InterfaceAnalysisStage.Clang.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
 				<source_file_path>
-					<filepath>square.mega</filepath>
+					<filepath>mega/square.mega</filepath>
 				</source_file_path>
 			</objectSourceFilePath>
 		</item>
@@ -164,12 +173,12 @@
 			<fileID>10</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>square.mega.ConcreteStage.Concrete.db</filepath>
+					<filepath>mega/square.mega.ConcreteStage.Concrete.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
 				<source_file_path>
-					<filepath>square.mega</filepath>
+					<filepath>mega/square.mega</filepath>
 				</source_file_path>
 			</objectSourceFilePath>
 		</item>
@@ -178,12 +187,26 @@
 			<fileID>11</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>square.mega.OperationsStage.Operations.db</filepath>
+					<filepath>mega/square.mega.OperationsStage.Operations.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
 				<source_file_path>
-					<filepath>square.mega</filepath>
+					<filepath>mega/square.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>11</fileType>
+			<fileID>12</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/test_component/test.cpp.OperationsStage.Operations.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/test_component/test.cpp</filepath>
 				</source_file_path>
 			</objectSourceFilePath>
 		</item>
