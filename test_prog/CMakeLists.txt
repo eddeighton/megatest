@@ -5,6 +5,9 @@ cmake_minimum_required( VERSION 3.1...3.16 )
 #get boost
 include( ${WORKSPACE_ROOT_PATH}/thirdparty/boost/boost_include.cmake )
 
+#get clang
+include( ${WORKSPACE_ROOT_PATH}/thirdparty/llvm/clang_include.cmake )
+
 #get spdlog
 include( ${WORKSPACE_ROOT_PATH}/thirdparty/spdlog/spdlog_include.cmake )
 
@@ -32,6 +35,7 @@ target_include_directories( test_prog PUBLIC ${CMAKE_SOURCE_DIR} )
 link_boost( test_prog program_options )
 link_boost( test_prog filesystem )
 link_boost( test_prog atomic )
+link_orc( test_prog )
 link_spdlog( test_prog )
 link_json( test_prog )
 link_inja( test_prog )
