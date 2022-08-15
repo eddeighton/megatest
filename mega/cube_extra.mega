@@ -1,0 +1,11 @@
+
+
+object Cube4
+{
+    dim int m_value;
+}
+
+function Cube4::anotherFunction() : int
+{
+    return m_value();
+}

@@ -1,18 +1,91 @@
 
 
 
-
-
 object Cube3
 {
     dependency( square.mega );
     
     dim float m_value;
 
-    function foobar() : int
+    // foobar : 16
+    function foobar() : int 
     {
         return m_value();
     }
 
+    // foobar2 : 15
+    function foobar2() : int 
+    {
+        return m_value();
+    }
+    
+    // foobar3 : 
+    function foobar4() : int 
+    {
+        return m_value();
+    }
+
+    link l_Square[ 0:1 ][ 0:1 ] : test::Square;
+
+
+    function useLink() : void
+    {
+        // reset the link
+        //l_Square.Clear();
+
+        // acquire new object
+        //s = test::Square();
+
+        // set the link with object
+        //l_Square( s );
+
+        // acquire this through the link in the square
+        //auto c = s.l_Square.Cube3();
+
+        // read the link
+        //s = l_Square();
+
+    }
+
+    link l_Squares[ 0:1 ][ 0:* ] : test::Square;
+
+
+    function useLink2() : void
+    {
+        // reset ALL links
+        //l_Squares.Delete();
+
+        // set the link to 10 new squares
+        /*std::vector< test::Square > squares;
+        for( int i = 0; i < 10; ++i )
+        {
+            squares.push_back( test::Square() );
+        }*/
+        //l_Squares( squares.begin(), squares.end() );
+
+        // enumerate the squares through the link
+        /*for( test::Squares s : l_Squares() )
+        {
+
+        }*/
+
+        // add one
+        //l_Squares.insert( test::Square() );
+
+        // remove one
+        //l_Squares.erase( squares[ 0 ] );
+
+        // n-ary
+        //Foo( { test::Square(), test::Square() } );
+
+        //Foo.Delete();
+
+        //Foo.insert( { test::Square(), test::Square() } );
+    }
 }
 
+
+function Cube3::anotherFunction() : int
+{
+    return m_value();
+}

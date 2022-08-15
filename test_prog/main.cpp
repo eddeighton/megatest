@@ -60,6 +60,9 @@ int main( int argc, const char* argv[] )
 
     mega::runtime::initialiseRuntime( mega::network::Project( projectPath ) );
 
+    
+    auto foo = &mega::runtime::get_read;
+
     SPDLOG_INFO( "Initialised mega runtime with project {}", projectPath.string() );
 
     boost::shared_ptr< TestMega > pTest = boost::dll::import_symbol< TestMega >(

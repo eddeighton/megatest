@@ -12,3 +12,4 @@ add_subdirectory(mega)
 
 add_subdirectory(retail_test)
 add_subdirectory(test_prog)
+add_subdirectory(editor)

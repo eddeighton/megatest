@@ -5,10 +5,17 @@ namespace test
     object Square
     {    
         dim int m_data;
+        dim int m_state;
 
-        function foobar2() : int
+        function tick() : void
         {
-            return m_data();
+            switch( m_state() )
+            {
+                case 0:
+                case 1:
+                default:
+                    break;
+            }
         }
     }
 }

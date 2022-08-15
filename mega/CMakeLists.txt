@@ -8,7 +8,7 @@ include( ${WORKSPACE_ROOT_PATH}/thirdparty/boost/boost_include.cmake )
 
 MegaProject( MegaTest )
 
-MegaComponent( INTERFACE TestInterface MEGA square.mega )
+MegaComponent( INTERFACE TestInterface MEGA square.mega cube.mega cube_extra.mega )
 
 link_boost( TestInterface filesystem )
 
