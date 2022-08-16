@@ -60,8 +60,13 @@ int main( int argc, const char* argv[] )
 
     mega::runtime::initialiseRuntime( mega::network::Project( projectPath ) );
 
-    
-    auto foo = &mega::runtime::get_read;
+    {
+        mega::runtime::ReadFunction readFunction;
+        mega::InvocationID invocationID;
+        mega::ExecutionContext context;
+        mega::runtime::get_read( "", context, invocationID, &readFunction );
+        std::cout << "Got read function: " << readFunction << std::endl;
+    }
 
     SPDLOG_INFO( "Initialised mega runtime with project {}", projectPath.string() );
 
