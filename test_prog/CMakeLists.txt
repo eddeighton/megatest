@@ -28,6 +28,8 @@ set( TEST_PROG_SOURCE
 
 add_executable( test_prog ${TEST_PROG_SOURCE} )
 
+target_link_libraries( test_prog TestComponent )
+
 target_include_directories( test_prog PUBLIC ${CMAKE_SOURCE_DIR} )
 
 target_link_options( test_prog PUBLIC -export-dynamic )

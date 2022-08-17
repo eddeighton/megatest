@@ -17,7 +17,7 @@
 
 int main( int argc, const char* argv[] )
 {
-    boost::filesystem::path projectPath;
+    boost::filesystem::path projectPath, megaPath;
     std::string             strConsoleLogLevel = "info", strLogFileLevel = "debug";
     boost::filesystem::path logFolder = boost::filesystem::current_path() / "log";
     {
@@ -33,6 +33,7 @@ int main( int argc, const char* argv[] )
         ( "console", po::value< std::string >( &strConsoleLogLevel ),       "Console logging level" )
         ( "level",   po::value< std::string >( &strLogFileLevel ),          "Log file logging level" )
         
+        ( "mega",    po::value< boost::filesystem::path >( &megaPath ),     "Megastructure Installation Path" )
         ( "project", po::value< boost::filesystem::path >( &projectPath ),  "Project Path" )
         ;
         // clang-format on
@@ -58,22 +59,23 @@ int main( int argc, const char* argv[] )
     auto logThreads = mega::network::configureLog( logFolder, "terminal", mega::network::fromStr( strConsoleLogLevel ),
                                                    mega::network::fromStr( strLogFileLevel ) );
 
-    mega::runtime::initialiseRuntime( mega::network::Project( projectPath ) );
+    mega::runtime::initialiseRuntime(
+        mega::network::MegastructureInstallation( megaPath ), mega::network::Project( projectPath ) );
+    SPDLOG_INFO( "Initialised mega runtime with project {}", projectPath.string() );
 
-    {
+    /*{
         mega::runtime::ReadFunction readFunction;
         mega::InvocationID invocationID;
         mega::ExecutionContext context;
         mega::runtime::get_read( "", context, invocationID, &readFunction );
         std::cout << "Got read function: " << readFunction << std::endl;
-    }
+    }*/
+    //boost::shared_ptr< TestMega > pTest = boost::dll::import_symbol< TestMega >(
+    //    "TestComponent", "mega_test", boost::dll::load_mode::append_decorations );
+    //int iResult = pTest->testFunction();
 
-    SPDLOG_INFO( "Initialised mega runtime with project {}", projectPath.string() );
+    int iResult = testFunction();
 
-    boost::shared_ptr< TestMega > pTest = boost::dll::import_symbol< TestMega >(
-        "TestComponent", "mega_test", boost::dll::load_mode::append_decorations );
-
-    int iResult = pTest->testFunction();
     SPDLOG_INFO( "Test function returned: {}", iResult );
 
     return 0;
