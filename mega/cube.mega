@@ -5,7 +5,7 @@ object Cube3
 {
     dependency( square.mega );
     
-    dim float m_value;
+    dim int m_value;
 
     // foobar : 16
     function foobar() : int 
