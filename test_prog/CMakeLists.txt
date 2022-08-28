@@ -1,5 +1,3 @@
-
-
 cmake_minimum_required( VERSION 3.1...3.16 )
 
 #get boost
@@ -44,7 +42,6 @@ link_json( test_prog )
 link_inja( test_prog )
 link_common( test_prog )
 link_database( test_prog )
-link_runtime( test_prog )
-link_service( test_prog )
+link_tool( test_prog )
 
 install( TARGETS test_prog DESTINATION bin)

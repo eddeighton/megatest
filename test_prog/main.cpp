@@ -3,9 +3,11 @@
 
 #include "service/protocol/common/project.hpp"
 #include "service/network/log.hpp"
+#include "service/tool.hpp"
 
 #include "runtime/runtime.hpp"
 
+#include "boost/asio/spawn.hpp"
 #include "boost/dll/shared_library.hpp"
 #include "boost/dll/import.hpp"
 #include "boost/shared_ptr.hpp"
@@ -63,20 +65,22 @@ int main( int argc, const char* argv[] )
         mega::network::MegastructureInstallation( megaPath ), mega::network::Project( projectPath ) );
     SPDLOG_INFO( "Initialised mega runtime with project {}", projectPath.string() );
 
-    /*{
-        mega::runtime::ReadFunction readFunction;
-        mega::InvocationID invocationID;
-        mega::ExecutionContext context;
-        mega::runtime::get_read( "", context, invocationID, &readFunction );
-        std::cout << "Got read function: " << readFunction << std::endl;
-    }*/
-    //boost::shared_ptr< TestMega > pTest = boost::dll::import_symbol< TestMega >(
-    //    "TestComponent", "mega_test", boost::dll::load_mode::append_decorations );
-    //int iResult = pTest->testFunction();
-
-    int iResult = testFunction();
-
-    SPDLOG_INFO( "Test function returned: {}", iResult );
-
+    {
+        mega::service::Tool tool;
+        try
+        {
+            mega::service::Tool::Functor functor = []( boost::asio::yield_context& yield_ctx )
+            {
+                int iResult = testFunction();
+                SPDLOG_INFO( "Test function returned: {}", iResult );
+            };
+            tool.run( functor );
+        }
+        catch ( std::exception& ex )
+        {
+            std::cout << "Exception: " << ex.what() << std::endl;
+            return 1;
+        }
+    }
     return 0;
 }
