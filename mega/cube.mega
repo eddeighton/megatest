@@ -1,91 +1,95 @@
 
 
+/*
+
+link Identifier[ min:max ] <<->> Target;
+
+Link specifies min and max cardinality of how it relates to relation row.
+
+So the minimum is either 0 or 1 meaning for all instances of the link there
+exists a minimum of zero to one entries in the relation.
+
+Similarly the maximum specifies how there exists a maximum number of occurrences
+of the link in the relation.
+
+In the Socket -> Plug example.  The socket is 0:1.  This means that any object that
+inherits the link MUST occur a minimum of zero times and at most once in the relation.
+
+So essentially the Socket link is optional but singular.  This can be the default.
+
+If the Plug on the other hand was 1:* then any instance of Plug MUST ALWAYS be related
+to a Socket atleast once and at most many times.
+
+So Plug is mandatory and non-singular so it returns a range.
+
+*/
+
+link Socket [0:1] < Plug;
+link Plug [1:*] > Socket;
+
+
+
+object Cube3
+{
+    link Plug : Socket;
+
+    link Socket2[0:1] - Cube5::Plug2;
+
+    dim int m_value;
+}
+
+object Cube5
+{
+    link Socket : Plug;
+
+    link Plug2[1:*] - Cube3::Socket2;
+
+    dim int m_value;
+}
+
+/*
+object FloorSocket
+{
+    link AuxSystem : Socket;
+
+    function test : void
+    {
+        // FloorSocket IS a socket and can access the
+        // range of plugs
+        for( auto plug : AuxSystem.Range() )
+        {
+
+        }
+    }
+}
+
+object AuxSystem
+{
+    link FloorSocket : Plug;
+
+    function test : void
+    {
+        // so AuxSystem IS a plug.
+        // so it can access the optional singular Socket
+        auto socket = FloorSocket();
+    }
+
+}
+
 
 object Cube3
 {
     dependency( square.mega );
-    
+
     dim int m_value;
 
     // foobar : 16
-    function foobar() : int 
+    function foobar() : int
     {
         return m_value();
     }
 
-    // foobar2 : 15
-    function foobar2() : int 
-    {
-        return m_value();
-    }
-    
-    // foobar3 : 
-    function foobar4() : int 
-    {
-        return m_value();
-    }
+    //link l_Square[ 0:1 ] - test::Square;
 
-    link l_Square[ 0:1 ][ 0:1 ] : test::Square;
-
-
-    function useLink() : void
-    {
-        // reset the link
-        //l_Square.Clear();
-
-        // acquire new object
-        //s = test::Square();
-
-        // set the link with object
-        //l_Square( s );
-
-        // acquire this through the link in the square
-        //auto c = s.l_Square.Cube3();
-
-        // read the link
-        //s = l_Square();
-
-    }
-
-    link l_Squares[ 0:1 ][ 0:* ] : test::Square;
-
-
-    function useLink2() : void
-    {
-        // reset ALL links
-        //l_Squares.Delete();
-
-        // set the link to 10 new squares
-        /*std::vector< test::Square > squares;
-        for( int i = 0; i < 10; ++i )
-        {
-            squares.push_back( test::Square() );
-        }*/
-        //l_Squares( squares.begin(), squares.end() );
-
-        // enumerate the squares through the link
-        /*for( test::Squares s : l_Squares() )
-        {
-
-        }*/
-
-        // add one
-        //l_Squares.insert( test::Square() );
-
-        // remove one
-        //l_Squares.erase( squares[ 0 ] );
-
-        // n-ary
-        //Foo( { test::Square(), test::Square() } );
-
-        //Foo.Delete();
-
-        //Foo.insert( { test::Square(), test::Square() } );
-    }
 }
-
-
-function Cube3::anotherFunction() : int
-{
-    return m_value();
-}
+*/
