@@ -1,6 +1,10 @@
 
 #include "test.hpp"
 
+#include "mega/execution_context.hpp"
+
+#include "common/assert_verify.hpp"
+
 #include <vector>
 #include <iostream>
 
@@ -8,11 +12,21 @@
 
 int testFunction()
 {
-    Cube3 root;
-    //Cube3 c = root.Cube3();
-    //std::cout << "Created Cube3: "  << std::endl;
-    return root.m_value();
+    mega::ExecutionContext* pExecutionContext = mega::ExecutionContext::execution_get();
+    VERIFY_RTE( pExecutionContext );
 
-    //std::cout << "No invocation" << std::endl;
-    //return 345;
+    mega::reference ref;
+    {
+        ref.physical.execution = pExecutionContext->getThisExecutionIndex();
+        ref.physical.object    = 0;
+        ref.typeID             = FloorSocket::ID;
+        ref.instance           = 0;
+        ref.physical.type      = mega::PHYSICAL_ADDRESS;
+    }
+
+    FloorSocket root{ ref };
+
+    FloorSocket c = root.FloorSocket();
+
+    return 0;
 }

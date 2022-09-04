@@ -27,24 +27,24 @@ So Plug is mandatory and non-singular so it returns a range.
 link Socket [0:1] < Plug;
 link Plug [1:*] > Socket;
 
-
-
-object Cube3
+object FloorSocket
 {
     link Plug : Socket;
+    link Socket2[0:1] - AuxSystem::Plug2;
 
-    link Socket2[0:1] - Cube5::Plug2;
-
-    dim int m_value;
+    dim int m_intValue;
+    dim float m_floatValue;
 }
 
-object Cube5
+object AuxSystem
 {
     link Socket : Plug;
+    link Plug2[1:*] - FloorSocket::Socket2;
+}
 
-    link Plug2[1:*] - Cube3::Socket2;
-
-    dim int m_value;
+object AuxSystem2
+{
+    link Socket : Plug;
 }
 
 /*

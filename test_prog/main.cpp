@@ -36,7 +36,7 @@ int main( int argc, const char* argv[] )
         ( "level",   po::value< std::string >( &strLogFileLevel ),          "Log file logging level" )
         
         ( "mega",    po::value< boost::filesystem::path >( &megaPath ),     "Megastructure Installation Path" )
-        ( "project", po::value< boost::filesystem::path >( &projectPath ),  "Project Path" )
+        ( "project", po::value< boost::filesystem::path >( &projectPath ),  "Project Installation Path" )
         ;
         // clang-format on
 

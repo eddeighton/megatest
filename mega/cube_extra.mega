@@ -3,9 +3,42 @@
 object Cube4
 {
     dim int m_value;
+
+    action SomeAction[ 4 ] 
+    {
+        dim int m_value2;
+        
+        action Nested1[ 4 ] 
+        {
+            dim int m_x;
+            dim int m_y;
+            dim int m_z;
+
+            event Ev1[ 4 ] 
+            {
+                dim int m_x;
+                dim int m_y;
+                dim int m_z;
+            }
+        }
+
+    }
+
+    event Ev2[ 4 ] 
+    {
+        dim int m_x;
+        dim int m_y;
+        dim int m_z;
+    }
 }
 
+object CubeInherit : Cube4
+{
+
+}
+/*
 function Cube4::anotherFunction() : int
 {
     return m_value();
 }
+*/

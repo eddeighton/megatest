@@ -4,18 +4,5 @@ namespace test
 {
     object Square
     {    
-        dim int m_data;
-        dim int m_state;
-
-        function tick() : void
-        {
-            switch( m_state() )
-            {
-                case 0:
-                case 1:
-                default:
-                    break;
-            }
-        }
     }
 }
