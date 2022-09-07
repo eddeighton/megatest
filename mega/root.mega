@@ -1,0 +1,6 @@
+
+
+object Root
+{
+    dim int m_testDimension;
+}
