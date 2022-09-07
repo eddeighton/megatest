@@ -12,10 +12,11 @@
 
 int testFunction()
 {
-    mega::ExecutionContext* pExecutionContext = mega::ExecutionContext::execution_get();
-    VERIFY_RTE( pExecutionContext );
+    Root root = mega::ExecutionContext::get()->getRoot();
 
-    mega::reference ref;
+    int iValue = root.m_testDimension();
+
+    /*mega::reference ref;
     {
         ref.physical.execution = pExecutionContext->getThisExecutionIndex();
         ref.physical.object    = 0;
@@ -26,7 +27,11 @@ int testFunction()
 
     FloorSocket root{ ref };
 
-    FloorSocket c = root.FloorSocket();
 
+    FloorSocket c = root.FloorSocket();
+    //c.m_intValue();
+    //c.m_intValue(123);
+
+    return 123;//c.m_intValue();*/
     return 0;
 }

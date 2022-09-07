@@ -30,66 +30,27 @@ link Plug [1:*] > Socket;
 object FloorSocket
 {
     link Plug : Socket;
-    link Socket2[0:1] - AuxSystem::Plug2;
+    link Socket2 [0:1] - AuxSystem::Plug2;
 
-    dim int m_intValue;
+    dim int   m_intValue;
     dim float m_floatValue;
+
+    /*function test() : int
+    {
+        //m_intValue( 123 );
+        //FloorSocket::test f = *const_cast< FloorSocket::test* >( this );
+        //f.m_intValue( 123 );
+
+        //int iValue = f.m_intValue();
+        //return iValue;
+    }*/
 }
 
 object AuxSystem
 {
     link Socket : Plug;
-    link Plug2[1:*] - FloorSocket::Socket2;
+    link Plug2 [1:*] - FloorSocket::Socket2;
 }
 
-object AuxSystem2
-{
-    link Socket : Plug;
-}
+object AuxSystem2 { link Socket : Plug; }
 
-/*
-object FloorSocket
-{
-    link AuxSystem : Socket;
-
-    function test : void
-    {
-        // FloorSocket IS a socket and can access the
-        // range of plugs
-        for( auto plug : AuxSystem.Range() )
-        {
-
-        }
-    }
-}
-
-object AuxSystem
-{
-    link FloorSocket : Plug;
-
-    function test : void
-    {
-        // so AuxSystem IS a plug.
-        // so it can access the optional singular Socket
-        auto socket = FloorSocket();
-    }
-
-}
-
-
-object Cube3
-{
-    dependency( square.mega );
-
-    dim int m_value;
-
-    // foobar : 16
-    function foobar() : int
-    {
-        return m_value();
-    }
-
-    //link l_Square[ 0:1 ] - test::Square;
-
-}
-*/
