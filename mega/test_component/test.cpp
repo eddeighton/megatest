@@ -14,24 +14,11 @@ int testFunction()
 {
     Root root = mega::ExecutionContext::get()->getRoot();
 
-    int iValue = root.m_testDimension();
+    root.m_testDimension( 1 );
+    const int iValue1 = root.m_testDimension();   
 
-    /*mega::reference ref;
-    {
-        ref.physical.execution = pExecutionContext->getThisExecutionIndex();
-        ref.physical.object    = 0;
-        ref.typeID             = FloorSocket::ID;
-        ref.instance           = 0;
-        ref.physical.type      = mega::PHYSICAL_ADDRESS;
-    }
-
-    FloorSocket root{ ref };
-
-
-    FloorSocket c = root.FloorSocket();
-    //c.m_intValue();
-    //c.m_intValue(123);
-
-    return 123;//c.m_intValue();*/
-    return 0;
+    root.m_testDimension( 2 );
+    const int iValue2 = root.m_testDimension();
+    
+    return iValue1 + iValue2;
 }
