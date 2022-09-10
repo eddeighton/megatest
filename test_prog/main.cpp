@@ -63,7 +63,7 @@ int main( int argc, const char* argv[] )
 
     mega::runtime::initialiseRuntime(
         mega::network::MegastructureInstallation( megaPath ), mega::network::Project( projectPath ) );
-    SPDLOG_INFO( "Initialised mega runtime with project {}", projectPath.string() );
+    SPDLOG_TRACE( "Initialised mega runtime with project {}", projectPath.string() );
 
     {
         mega::service::Tool tool;
@@ -71,8 +71,11 @@ int main( int argc, const char* argv[] )
         {
             mega::service::Tool::Functor functor = []( boost::asio::yield_context& yield_ctx )
             {
-                int iResult = testFunction();
-                SPDLOG_INFO( "Test function returned: {}", iResult );
+                for( int i = 0; i < 1; ++i )
+                {
+                    const std::string strResult = testFunction();
+                    SPDLOG_INFO( "Test function returned: {}", strResult );
+                }
             };
             tool.run( functor );
         }

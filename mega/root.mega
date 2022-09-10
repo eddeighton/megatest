@@ -2,6 +2,10 @@
 
 object Root
 {
+    dependency( cube.mega );
+
+    link Sockets : SocketChild;
+
     dim int m_testDimension;
     dim int m_testDimension1;
     dim std::vector< int > m_testDimension2;
@@ -10,5 +14,29 @@ object Root
     {
         dim int m_x;
         dim int m_y;
+    }
+
+    include( <string> );
+    include( <sstream> );
+
+    function SomeFunction( int x, int y )
+        : std::string
+    {
+        //FloorSocket f = FloorSocket();
+        //f.m_intValue( x );
+        //Sockets( f );
+
+        inc( x + y );
+
+        std::ostringstream os;
+        os << "m_testDimension: " << m_testDimension() << " m_testDimension1: " << m_testDimension1();
+
+        return os.str();
+    }
+
+    function inc( int amt ) : void
+    {
+        m_testDimension( m_testDimension() + amt );
+        m_testDimension1( m_testDimension1() + amt );
     }
 }

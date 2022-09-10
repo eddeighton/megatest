@@ -1,4 +1,4 @@
-cmake_minimum_required( VERSION 3.1...3.16 )
+cmake_minimum_required(VERSION 3.2)
 
 #get boost
 include( ${WORKSPACE_ROOT_PATH}/thirdparty/boost/boost_include.cmake )
@@ -31,7 +31,6 @@ target_link_libraries( test_prog TestComponent )
 target_include_directories( test_prog PUBLIC ${CMAKE_SOURCE_DIR} )
 
 target_link_options( test_prog PUBLIC -export-dynamic )
-#target_link_libraries( test_prog TestComponent )
 
 link_boost( test_prog program_options )
 link_boost( test_prog filesystem )

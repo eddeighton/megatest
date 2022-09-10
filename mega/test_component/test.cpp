@@ -10,15 +10,18 @@
 
 #pragma mega
 
-int testFunction()
+std::string testFunction()
 {
     Root root = mega::ExecutionContext::get()->getRoot();
 
-    root.m_testDimension( 1 );
+    root.m_testDimension( 0 );
     const int iValue1 = root.m_testDimension();   
 
-    root.m_testDimension( 2 );
-    const int iValue2 = root.m_testDimension();
+    root.m_testDimension1( 5 );
+    const int iValue2 = root.m_testDimension1();
+
+
+    const std::string strResult = root.SomeFunction( iValue1, iValue2 );
     
-    return iValue1 + iValue2;
+    return strResult;
 }

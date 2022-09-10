@@ -1,5 +1,5 @@
 
-cmake_minimum_required( VERSION 3.1...3.16 )
+cmake_minimum_required(VERSION 3.2)
 
 include( ${WORKSPACE_ROOT_PATH}/src/mega/mega_include.cmake )
 

@@ -27,10 +27,15 @@ So Plug is mandatory and non-singular so it returns a range.
 link Socket [0:1] < Plug;
 link Plug [1:*] > Socket;
 
+link SocketParent [0:*] << SocketChild;
+link SocketChild [0:1] >> SocketParent;
+
 object FloorSocket
 {
-    link Plug : Socket;
-    link Socket2 [0:1] - AuxSystem::Plug2;
+    link Root : SocketParent;
+
+    //link Plug : Socket;
+    //link Socket2 [0:1] - AuxSystem::Plug2;
 
     dim int   m_intValue;
     dim float m_floatValue;
@@ -46,6 +51,7 @@ object FloorSocket
     }*/
 }
 
+/*
 object AuxSystem
 {
     link Socket : Plug;
@@ -54,3 +60,4 @@ object AuxSystem
 
 object AuxSystem2 { link Socket : Plug; }
 
+*/
