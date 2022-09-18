@@ -1,7 +1,7 @@
 
 #include "test.hpp"
 
-#include "mega/execution_context.hpp"
+#include "mega/mpo_context.hpp"
 
 #include "common/assert_verify.hpp"
 
@@ -12,7 +12,7 @@
 
 std::string testFunction()
 {
-    Root root = mega::ExecutionContext::get()->getRoot();
+    Root root = mega::MPOContext::get()->getRoot();
 
     root.m_testDimension( 0 );
     const int iValue1 = root.m_testDimension();   

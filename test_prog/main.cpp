@@ -20,6 +20,9 @@
 int main( int argc, const char* argv[] )
 {
     boost::filesystem::path projectPath, megaPath;
+
+    projectPath = boost::filesystem::current_path().parent_path();
+
     std::string             strConsoleLogLevel = "info", strLogFileLevel = "debug";
     boost::filesystem::path logFolder = boost::filesystem::current_path() / "log";
     {
@@ -61,8 +64,19 @@ int main( int argc, const char* argv[] )
     auto logThreads = mega::network::configureLog( logFolder, "terminal", mega::network::fromStr( strConsoleLogLevel ),
                                                    mega::network::fromStr( strLogFileLevel ) );
 
-    mega::runtime::initialiseRuntime(
-        mega::network::MegastructureInstallation( megaPath ), mega::network::Project( projectPath ) );
+    mega::network::MegastructureInstallation megastructureInstallation;
+    {
+        if ( megaPath.empty() )
+        {
+            megastructureInstallation = mega::network::MegastructureInstallation::fromEnvironment();
+        }
+        else
+        {
+            megastructureInstallation = mega::network::MegastructureInstallation( megaPath );
+        }
+    }
+
+    mega::runtime::initialiseRuntime( megastructureInstallation, mega::network::Project( projectPath ) );
     SPDLOG_TRACE( "Initialised mega runtime with project {}", projectPath.string() );
 
     {
@@ -71,7 +85,7 @@ int main( int argc, const char* argv[] )
         {
             mega::service::Tool::Functor functor = []( boost::asio::yield_context& yield_ctx )
             {
-                for( int i = 0; i < 1; ++i )
+                for ( int i = 0; i < 1; ++i )
                 {
                     const std::string strResult = testFunction();
                     SPDLOG_INFO( "Test function returned: {}", strResult );
