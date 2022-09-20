@@ -5,7 +5,7 @@
 #include "service/network/log.hpp"
 #include "service/tool.hpp"
 
-#include "runtime/runtime.hpp"
+#include "runtime/runtime_api.hpp"
 
 #include "boost/asio/spawn.hpp"
 #include "boost/dll/shared_library.hpp"
