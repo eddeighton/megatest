@@ -1,6 +1,8 @@
 
 #include "test.hpp"
 
+#include "mega/reference_io.hpp"
+
 #include "runtime/mpo_context.hpp"
 
 #include "common/assert_verify.hpp"
@@ -10,47 +12,11 @@
 
 #pragma mega
 
-std::string testFunction()
+std::string test1()
 {
-    /*
+    mega::Cycle cycle;
     {
-        mega::network::ConversationID SimID = mega::MPOContext::get()->createSim();
-
-        mega::Cycle cycle( mega::MPOContext::get()->getRoot() );
-
-        Root simRoot = mega::MPOContext::get()->getRoot( SimID );
-
-        simRoot.m_testDimension();
-    }
-*/
-
-    {
-        const mega::MPOContext::SimIDVector currentSimulations = mega::MPOContext::get()->getSimulationIDs();
-        for ( const auto& simID : currentSimulations )
-        {
-            std::cout << "SimID: " << simID << std::endl;
-        }
-        if ( !currentSimulations.empty() )
-        {
-            const auto simID = currentSimulations.front();
-            std::cout << "Attempting to acquire root of simID: " << simID << std::endl;
-
-            Root root = mega::MPOContext::get()->getRoot( simID );
-            root.m_testDimension( root.m_testDimension() + 1 );
-
-            std::ostringstream os;
-            os << "Acquired root of sim: " << currentSimulations.front()
-               << " and set m_testDimension to: " << root.m_testDimension() << std::endl;
-            return os.str();
-        }
-        else
-        {
-            return "No sim found";
-        }
-    }
-
-    /*{
-        Root root = mega::MPOContext::get()->getRoot();
+        Root root = mega::Context::get()->getThisRoot();
 
         root.m_testDimension( 4 );
         const int iValue1 = root.m_testDimension();
@@ -61,5 +27,28 @@ std::string testFunction()
         std::ostringstream os;
         os << iValue1 << ", " << iValue2 << " : " << root.SomeFunction( iValue1, iValue2 );
         return os.str();
-    }*/
+    }
+}
+
+std::string testFunction()
+{
+    std::ostringstream os;
+    for ( auto machine : mega::Context::get()->getMachines() )
+    {
+        for ( auto machineProcess : mega::Context::get()->getProcesses( machine ) )
+        {
+            for ( auto mpo : mega::Context::get()->getMPO( machineProcess ) )
+            {
+                if( mpo != mega::Context::get()->getThisMPO() )
+                {
+                    os << "\nFound other MPO: " << mpo;
+                    Root root = mega::Context::get()->getRoot( mpo );
+                    const int iValue1 = root.m_testDimension();
+                    root.m_testDimension( iValue1 + 1 );
+                    std::cout << "Value set to: " << root.m_testDimension() << std::endl;
+                }
+            }
+        }
+    }
+    return os.str();
 }

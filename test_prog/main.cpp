@@ -19,10 +19,6 @@
 
 int main( int argc, const char* argv[] )
 {
-    boost::filesystem::path projectPath, megaPath;
-
-    projectPath = boost::filesystem::current_path().parent_path();
-
     std::string             strConsoleLogLevel = "info", strLogFileLevel = "debug";
     boost::filesystem::path logFolder = boost::filesystem::current_path() / "log";
     {
@@ -37,9 +33,6 @@ int main( int argc, const char* argv[] )
         ( "log",     po::value< boost::filesystem::path >( &logFolder ),    "Logging folder" )
         ( "console", po::value< std::string >( &strConsoleLogLevel ),       "Console logging level" )
         ( "level",   po::value< std::string >( &strLogFileLevel ),          "Log file logging level" )
-        
-        ( "mega",    po::value< boost::filesystem::path >( &megaPath ),     "Megastructure Installation Path" )
-        ( "project", po::value< boost::filesystem::path >( &projectPath ),  "Project Installation Path" )
         ;
         // clang-format on
 
@@ -54,30 +47,10 @@ int main( int argc, const char* argv[] )
             std::cout << options << std::endl;
             return 0;
         }
-        if ( projectPath.empty() )
-        {
-            std::cout << "Missing project path" << std::endl;
-            return 0;
-        }
     }
 
     auto logThreads = mega::network::configureLog( logFolder, "terminal", mega::network::fromStr( strConsoleLogLevel ),
                                                    mega::network::fromStr( strLogFileLevel ) );
-
-    mega::network::MegastructureInstallation megastructureInstallation;
-    {
-        if ( megaPath.empty() )
-        {
-            megastructureInstallation = mega::network::MegastructureInstallation::fromEnvironment();
-        }
-        else
-        {
-            megastructureInstallation = mega::network::MegastructureInstallation( megaPath );
-        }
-    }
-
-    mega::runtime::initialiseRuntime( megastructureInstallation, mega::network::Project( projectPath ) );
-    SPDLOG_TRACE( "Initialised mega runtime with project {}", projectPath.string() );
 
     {
         mega::service::Tool tool;
