@@ -14,6 +14,8 @@
 #include "boost/program_options.hpp"
 #include "boost/filesystem/path.hpp"
 
+#include <spdlog/stopwatch.h>
+
 #include <iostream>
 #include <string>
 
@@ -58,11 +60,18 @@ int main( int argc, const char* argv[] )
         {
             mega::service::Tool::Functor functor = []( boost::asio::yield_context& yield_ctx )
             {
-                for ( int i = 0; i < 1; ++i )
+                VERIFY_RTE_MSG( mega::runtime::isRuntimeInitialised(), "Megastructure Runtime not initialised" );
+                std::optional< std::string > resultOpt;
+                //for ( int i = 0; i < 1000; ++i )
                 {
                     const std::string strResult = testFunction();
-                    SPDLOG_INFO( "Test function returned: {}", strResult );
+                    if ( !resultOpt.has_value() || resultOpt.value() != strResult )
+                    {
+                        resultOpt = strResult;
+                    }
                 }
+                if ( resultOpt.has_value() )
+                    SPDLOG_INFO( "Test function returned: {}", resultOpt.value() );
             };
             tool.run( functor );
         }

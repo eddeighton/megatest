@@ -9,6 +9,8 @@
 
 #include <vector>
 #include <iostream>
+#include <chrono>
+#include <iomanip>
 
 #pragma mega
 
@@ -30,6 +32,18 @@ std::string test1()
     }
 }
 
+template < typename T >
+void print( const T& dur, std::ostream& os )
+{
+    using DurationType = std::chrono::duration< mega::I64, std::ratio< 1, 1'000'000'000 > >;
+    auto c             = std::chrono::duration_cast< DurationType >( dur ).count();
+    auto sec           = ( c % 1'000'000'000'000 ) / 1'000'000'000;
+    auto ms            = ( c % 1'000'000'000 ) / 1'000'000;
+    auto us            = ( c % 1'000'000 ) / 1'000;
+    os << sec << "." << std::setw( 3 ) << std::setfill( '0' ) << ms << "ms." << std::setw( 3 )
+       << std::setfill( '0' ) << us << "us";
+}
+
 std::string testFunction()
 {
     std::ostringstream os;
@@ -39,13 +53,26 @@ std::string testFunction()
         {
             for ( auto mpo : mega::Context::get()->getMPO( machineProcess ) )
             {
-                if( mpo != mega::Context::get()->getThisMPO() )
+                if ( mpo != mega::Context::get()->getThisMPO() )
                 {
-                    os << "\nFound other MPO: " << mpo;
+                    auto start = std::chrono::steady_clock::now();
+                    // sw.reset();
+                    os << "\nFound other MPO: " << mpo << "\n";
                     Root root = mega::Context::get()->getRoot( mpo );
-                    const int iValue1 = root.m_testDimension();
-                    root.m_testDimension( iValue1 + 1 );
-                    std::cout << "Value set to: " << root.m_testDimension() << std::endl;
+
+                    for ( int i = 0; i < 1000; ++i )
+                    {
+                        const int iValue1 = root.m_testDimension();
+                        root.m_testDimension( iValue1 + 1 );
+                        // std::cout << "Value set to: " << root.m_testDimension() << std::endl;
+                    }
+
+                    os << "Time: ";
+                    print( std::chrono::duration_cast< std::chrono::steady_clock::duration >(
+                               std::chrono::steady_clock::now() - start ),
+                           os );
+
+                    return os.str();
                 }
             }
         }
