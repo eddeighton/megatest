@@ -9,8 +9,12 @@ object Root
     dim int m_testDimension;
     dim int m_testDimension1;
     dim std::vector< int > m_testDimension2;
-    dim int m_testDimension3;
-    dim int m_testDimension4;
+
+    dim int m_dim1;
+    dim int m_dim2;
+    dim int m_dim3;
+    dim int m_dim4;
+    dim int m_dim5;
 
     event SomeEvent[ 4 ]
     {

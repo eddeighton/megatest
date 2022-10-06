@@ -22,7 +22,6 @@ include( ${WORKSPACE_ROOT_PATH}/src/common/common_include.cmake )
 include( ${WORKSPACE_ROOT_PATH}/src/mega/mega_include.cmake )
 
 set( TEST_PROG_SOURCE 
-        /workspace/root/src/mega/src/api/mega/default_traits.cpp
         main.cpp )
 
 add_executable( test_prog ${TEST_PROG_SOURCE} )
@@ -30,8 +29,6 @@ add_executable( test_prog ${TEST_PROG_SOURCE} )
 target_link_libraries( test_prog TestComponent )
 
 target_include_directories( test_prog PUBLIC ${CMAKE_SOURCE_DIR} )
-
-target_link_options( test_prog PUBLIC -export-dynamic )
 
 link_boost( test_prog program_options )
 link_boost( test_prog filesystem )
