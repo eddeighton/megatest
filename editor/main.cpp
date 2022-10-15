@@ -6,6 +6,7 @@
 #ifndef Q_MOC_RUN
 
 #include "service/tool.hpp"
+#include "service/network/network.hpp"
 
 #include "boost/asio/spawn.hpp"
 
@@ -39,7 +40,7 @@ int runGui( int argc, char* argv[], boost::asio::yield_context& yield_ctx )
 
 int main( int argc, char* argv[] )
 {
-    mega::service::Tool tool;
+    mega::service::Tool tool( mega::network::MegaDaemonPort() );
 
     mega::service::Tool::Functor functor
         = [ argc, argv ]( boost::asio::yield_context& yield_ctx ) -> int { return runGui( argc, argv, yield_ctx ); };

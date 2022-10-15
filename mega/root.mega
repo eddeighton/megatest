@@ -17,8 +17,14 @@ object Root
         dim int m_z;
     }
 
-    include( <string> );
-    include( <sstream> );
+    include(<string>);
+    include(<sstream>);
+    include(<iostream>);
+
+    action TestAction 
+    { 
+        std::cout << "TestAction called!" << std::endl; 
+    }
 
     function SomeFunction( int x, int y )
         : std::string
@@ -37,7 +43,8 @@ object Root
         return os.str();
     }
 
-    function inc( int amt ) : void
+    function inc( int amt )
+        : void
     {
         m_testDimension( m_testDimension() + amt );
         m_testDimension1( m_testDimension1() + amt );

@@ -3,7 +3,7 @@
 
 #include "mega/reference_io.hpp"
 
-#include "runtime/mpo_context.hpp"
+#include "runtime/context.hpp"
 
 #include "common/assert_verify.hpp"
 
@@ -40,8 +40,8 @@ void print( const T& dur, std::ostream& os )
     auto sec           = ( c % 1'000'000'000'000 ) / 1'000'000'000;
     auto ms            = ( c % 1'000'000'000 ) / 1'000'000;
     auto us            = ( c % 1'000'000 ) / 1'000;
-    os << sec << "." << std::setw( 3 ) << std::setfill( '0' ) << ms << "ms." << std::setw( 3 )
-       << std::setfill( '0' ) << us << "us";
+    os << sec << "." << std::setw( 3 ) << std::setfill( '0' ) << ms << "ms." << std::setw( 3 ) << std::setfill( '0' )
+       << us << "us";
 }
 
 std::string testFunction()
@@ -58,14 +58,20 @@ std::string testFunction()
                     auto start = std::chrono::steady_clock::now();
                     // sw.reset();
                     os << "\nFound other MPO: " << mpo << "\n";
-                    Root root = mega::Context::get()->getRoot( mpo );
 
-                    for ( int i = 0; i < 1000; ++i )
+                    mega::Cycle cycle;
                     {
-                        const int iValue1 = root.m_testDimension();
-                        root.m_testDimension( iValue1 + 1 );
-                        // std::cout << "Value set to: " << root.m_testDimension() << std::endl;
+                        Root root = mega::Context::get()->getRoot( mpo );
+                        root.TestAction();
+
+                        std::cout << "Started TestAction" << std::endl;
+                        root.m_testDimension( root.m_testDimension() + 1 );
                     }
+
+                    /*for ( int i = 0; i < 1000; ++i )
+                    {
+                        root.m_testDimension( root.m_testDimension() + 1 );
+                    }*/
 
                     os << "Time: ";
                     print( std::chrono::duration_cast< std::chrono::steady_clock::duration >(

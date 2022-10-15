@@ -1,18 +1,17 @@
 
 #include "mega/test_component/test.hpp"
 
-#include "service/protocol/common/project.hpp"
 #include "service/network/log.hpp"
+#include "service/network/network.hpp"
+
 #include "service/tool.hpp"
 
-#include "runtime/runtime_api.hpp"
+#include "runtime/api.hpp"
 
 #include "boost/asio/spawn.hpp"
-#include "boost/dll/shared_library.hpp"
-#include "boost/dll/import.hpp"
-#include "boost/shared_ptr.hpp"
 #include "boost/program_options.hpp"
 #include "boost/filesystem/path.hpp"
+#include "boost/filesystem/operations.hpp"
 
 #include <spdlog/stopwatch.h>
 
@@ -55,7 +54,7 @@ int main( int argc, const char* argv[] )
                                                    mega::network::fromStr( strLogFileLevel ) );
 
     {
-        mega::service::Tool tool;
+        mega::service::Tool tool( mega::network::MegaDaemonPort() );
         try
         {
             mega::service::Tool::Functor functor = []( boost::asio::yield_context& yield_ctx )
