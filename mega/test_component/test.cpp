@@ -62,10 +62,10 @@ std::string testFunction()
                     mega::Cycle cycle;
                     {
                         Root root = mega::Context::get()->getRoot( mpo );
-                        root.TestAction();
+                        //root.TestAction();
 
-                        std::cout << "Started TestAction" << std::endl;
-                        root.m_testDimension( root.m_testDimension() + 1 );
+                        std::cout << "Got root for mpo: " << mpo << std::endl;
+                        //root.m_testDimension( root.m_testDimension() + 1 );
                     }
 
                     /*for ( int i = 0; i < 1000; ++i )

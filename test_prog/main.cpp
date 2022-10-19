@@ -59,7 +59,6 @@ int main( int argc, const char* argv[] )
         {
             mega::service::Tool::Functor functor = []( boost::asio::yield_context& yield_ctx )
             {
-                VERIFY_RTE_MSG( mega::runtime::isRuntimeInitialised(), "Megastructure Runtime not initialised" );
                 std::optional< std::string > resultOpt;
                 //for ( int i = 0; i < 1000; ++i )
                 {
