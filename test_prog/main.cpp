@@ -5,8 +5,7 @@
 #include "service/network/network.hpp"
 
 #include "service/tool.hpp"
-
-#include "runtime/api.hpp"
+#include "service/api.hpp"
 
 #include "boost/asio/spawn.hpp"
 #include "boost/program_options.hpp"
@@ -60,7 +59,7 @@ int main( int argc, const char* argv[] )
             mega::service::Tool::Functor functor = []( boost::asio::yield_context& yield_ctx )
             {
                 std::optional< std::string > resultOpt;
-                //for ( int i = 0; i < 1000; ++i )
+                // for ( int i = 0; i < 1000; ++i )
                 {
                     const std::string strResult = testFunction();
                     if ( !resultOpt.has_value() || resultOpt.value() != strResult )
