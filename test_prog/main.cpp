@@ -58,17 +58,8 @@ int main( int argc, const char* argv[] )
         {
             mega::service::Tool::Functor functor = []( boost::asio::yield_context& yield_ctx )
             {
-                std::optional< std::string > resultOpt;
-                // for ( int i = 0; i < 1000; ++i )
-                {
-                    const std::string strResult = testFunction();
-                    if ( !resultOpt.has_value() || resultOpt.value() != strResult )
-                    {
-                        resultOpt = strResult;
-                    }
-                }
-                if ( resultOpt.has_value() )
-                    SPDLOG_INFO( "Test function returned: {}", resultOpt.value() );
+                const std::string strResult = test3();
+                SPDLOG_INFO( "Test function returned: {}", strResult );
             };
             tool.run( functor );
         }

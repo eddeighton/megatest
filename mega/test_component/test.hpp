@@ -4,6 +4,8 @@
 
 #include <string>
 
-std::string testFunction();
+std::string test1();
+std::string test2();
+std::string test3();
 
 #endif //TEST_26_JUNE_2022

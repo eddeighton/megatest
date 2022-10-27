@@ -44,7 +44,7 @@ void print( const T& dur, std::ostream& os )
        << us << "us";
 }
 
-std::string testFunction()
+std::string test2()
 {
     std::ostringstream os;
     for ( auto machine : mega::Context::get()->getMachines() )
@@ -84,4 +84,21 @@ std::string testFunction()
         }
     }
     return os.str();
+}
+
+std::string test3()
+{
+    mega::Cycle cycle;
+    {
+        Root root = mega::Context::get()->getThisRoot();
+        
+        //for( int i = 0; i < 10000; ++i )
+        {
+            FloorSocket floorSocket = root.FloorSocket();
+        }
+
+        std::ostringstream os;
+        os << "Created 10000 floor sockets";
+        return os.str();
+    }
 }
