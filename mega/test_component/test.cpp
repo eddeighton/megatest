@@ -2,6 +2,7 @@
 #include "test.hpp"
 
 #include "mega/reference_io.hpp"
+#include "mega/archive.hpp"
 
 #include "service/context.hpp"
 
@@ -13,7 +14,7 @@
 #include <iomanip>
 
 #pragma mega
-
+/*
 std::string test1()
 {
     mega::Cycle cycle;
@@ -68,11 +69,6 @@ std::string test2()
                         //root.m_testDimension( root.m_testDimension() + 1 );
                     }
 
-                    /*for ( int i = 0; i < 1000; ++i )
-                    {
-                        root.m_testDimension( root.m_testDimension() + 1 );
-                    }*/
-
                     os << "Time: ";
                     print( std::chrono::duration_cast< std::chrono::steady_clock::duration >(
                                std::chrono::steady_clock::now() - start ),
@@ -92,13 +88,33 @@ std::string test3()
     {
         Root root = mega::Context::get()->getThisRoot();
         
-        //for( int i = 0; i < 10000; ++i )
+        for( int i = 0; i < 10000; ++i )
         {
             FloorSocket floorSocket = root.FloorSocket();
         }
 
         std::ostringstream os;
         os << "Created 10000 floor sockets";
+        return os.str();
+    }
+}
+
+*/
+
+std::string test4()
+{
+    mega::Cycle cycle;
+    {
+        Root root = mega::Context::get()->getThisRoot();
+
+        root.m_testDimension( 123 );
+
+        root.Save( "test.xml" );
+
+        //auto r = root.Get();
+
+        std::ostringstream os;
+        os << "Saved root to test.xml";
         return os.str();
     }
 }

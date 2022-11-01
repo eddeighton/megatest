@@ -5,7 +5,6 @@
 #include "service/network/network.hpp"
 
 #include "service/tool.hpp"
-#include "service/api.hpp"
 
 #include "boost/asio/spawn.hpp"
 #include "boost/program_options.hpp"
@@ -58,7 +57,7 @@ int main( int argc, const char* argv[] )
         {
             mega::service::Tool::Functor functor = []( boost::asio::yield_context& yield_ctx )
             {
-                const std::string strResult = test3();
+                const std::string strResult = test4();
                 SPDLOG_INFO( "Test function returned: {}", strResult );
             };
             tool.run( functor );

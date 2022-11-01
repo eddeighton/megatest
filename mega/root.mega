@@ -15,6 +15,16 @@ object Root
         dim int m_x;
         dim int m_y;
         dim int m_z;
+        event A1[ 2 ]
+        {
+            dim int m_i;
+            dim int m_j;
+            event B1[3]
+            {
+                dim int m_k;
+                dim std::string m_str;
+            }
+        }
     }
 
     include(<string>);
