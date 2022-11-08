@@ -57,7 +57,7 @@ int main( int argc, const char* argv[] )
         {
             mega::service::Tool::Functor functor = []( boost::asio::yield_context& yield_ctx )
             {
-                const std::string strResult = test4();
+                const std::string strResult = test2();
                 SPDLOG_INFO( "Test function returned: {}", strResult );
             };
             tool.run( functor );
