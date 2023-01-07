@@ -4,12 +4,14 @@
 #include "mega/reference_io.hpp"
 #include "mega/macros.hpp"
 
-#include "service/context.hpp"
+#include "service/protocol/common/context.hpp"
+#include "service/cycle.hpp"
 
 #include <vector>
 #include <iostream>
 #include <chrono>
 #include <iomanip>
+#include <sstream>
 
 template < typename T >
 void print( const T& dur, std::ostream& os )

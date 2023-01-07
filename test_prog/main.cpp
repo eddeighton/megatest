@@ -41,15 +41,15 @@ int main( int argc, const char* argv[] )
         po::store( parsedOptions, vm );
         po::notify( vm );
 
-        if ( bShowHelp )
+        if( bShowHelp )
         {
             std::cout << options << std::endl;
             return 0;
         }
     }
 
-    auto logThreads = mega::network::configureLog( logFolder, "terminal", mega::network::fromStr( strConsoleLogLevel ),
-                                                   mega::network::fromStr( strLogFileLevel ) );
+    mega::network::configureLog( logFolder, "terminal", mega::network::fromStr( strConsoleLogLevel ),
+                                 mega::network::fromStr( strLogFileLevel ) );
 
     {
         mega::service::Tool tool( mega::network::MegaDaemonPort() );
@@ -62,7 +62,7 @@ int main( int argc, const char* argv[] )
             };
             tool.run( functor );
         }
-        catch ( std::exception& ex )
+        catch( std::exception& ex )
         {
             std::cout << "Exception: " << ex.what() << std::endl;
             return 1;
