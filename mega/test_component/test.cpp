@@ -66,24 +66,41 @@ std::string test2()
     for( auto machine : mega::Context::get()->getMachines() )
     {
         os << "\nFound machine: " << static_cast< mega::U32 >( machine );
-        for( auto machineProcess : mega::Context::get()->getProcesses( machine ) )
+        for( mega::MP machineProcess : mega::Context::get()->getProcesses( machine ) )
         {
             os << "\nFound machineProcess: " << machineProcess;
-            for( auto mpo : mega::Context::get()->getMPO( machineProcess ) )
+            for( mega::MPO mpo : mega::Context::get()->getMPO( machineProcess ) )
             {
-                os << "\nFound mpo: " << mpo;
-                if( mpo != mega::Context::get()->getThisMPO() )
+                if( mpo == mega::Context::get()->getThisMPO() )
                 {
+                    os << "\nFound self mpo: " << mpo << std::endl;
+                    Root root = mega::Context::get()->getThisRoot();
+                    test::Square s = root.Square();
+                    s.m_x( 123 );
+                    os << "Created square with: " << s.m_x() << std::endl;
+                }
+                else
+                {
+                    os << "\nFound other mpo: " << mpo << std::endl;
                     auto start = std::chrono::steady_clock::now();
-                    os << "\nFound other MPO: " << mpo << "\n";
 
                     mega::Cycle cycle;
                     {
                         Root root = mega::Context::get()->getRoot( mpo );
                         // root.TestAction();
 
-                        os << "Got root for mpo: " << mpo << " with value: " << root.m_testDimension() << std::endl;
+                        os << "Got root: " << root << " mpo:" << mpo << std::endl;
+                        os << "before write: root.m_testDimension(): " << root.m_testDimension() << std::endl;
                         root.m_testDimension( root.m_testDimension() + 1 );
+                        os << "after write:  root.m_testDimension(): " << root.m_testDimension() << std::endl;
+
+                        os << "m_str before: " << root.m_str() << std::endl;
+                        {
+                            std::ostringstream os;
+                            os << root.m_str() << " " << mpo;
+                            root.m_str( os.str() );
+                        }
+                        os << "m_str after: " << root.m_str() << std::endl;
                     }
 
                     os << "Time: ";

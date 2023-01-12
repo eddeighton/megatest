@@ -16,11 +16,11 @@ object Root
         dim int m_x;
         dim int m_y;
         dim int m_z;
-        event A1[ 2 ]
+        event   A1[ 2 ]
         {
             dim int m_i;
             dim int m_j;
-            event B1[3]
+            event   B1[ 3 ]
             {
                 dim int m_k;
                 dim std::string m_str;
@@ -28,13 +28,13 @@ object Root
         }
     }
 
-    include(<string>);
-    include(<sstream>);
-    include(<iostream>);
+    include( <string> );
+    include( <sstream> );
+    include( <iostream> );
 
-    action TestAction 
-    { 
-        std::cout << "TestAction called!" << std::endl; 
+    action TestAction
+    {
+        std::cout << "TestAction called!" << std::endl;
     }
 
     function SomeFunction( int x, int y )
