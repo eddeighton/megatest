@@ -11,4 +11,4 @@ set( MEGA_PROJECT_BUILD_ROOT ${CMAKE_BINARY_DIR} )
 add_subdirectory(mega)
 
 add_subdirectory(test_prog)
-add_subdirectory(editor)
+#add_subdirectory(editor)

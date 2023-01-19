@@ -2,9 +2,10 @@
 
 object Root
 {
+    dependency( links.mega );
     dependency( cube.mega );
 
-    link Sockets : SocketChild;
+    link SocketSurface : l_SocketSurface;
 
     dim int m_testDimension;
     dim int m_testDimension1;

@@ -63,7 +63,7 @@ std::string test1()
 std::string test2()
 {
     std::ostringstream os;
-    for( auto machine : mega::Context::get()->getMachines() )
+    /*for( auto machine : mega::Context::get()->getMachines() )
     {
         os << "\nFound machine: " << static_cast< mega::U32 >( machine );
         for( mega::MP machineProcess : mega::Context::get()->getProcesses( machine ) )
@@ -110,28 +110,41 @@ std::string test2()
                 }
             }
         }
-    }
+    }*/
     return os.str();
 }
-/*
+
+
+
 std::string test3()
 {
     mega::Cycle cycle;
     {
         Root root = mega::Context::get()->getThisRoot();
 
-        for( int i = 0; i < 10000; ++i )
-        {
-            FloorSocket floorSocket = root.FloorSocket();
-        }
+        // allocate WallSocket
+        WallSocket w = root.WallSocket();
 
+        // Get the SocketChild link interface of WallSocket
+        WallSocket::SocketInstall s = w.SocketInstall.Get();
+
+        using SVec = std::vector< Var< FloorSocket::SocketInstall, WallSocket::SocketInstall > > ;
+
+        // Link to the root
+        Root::SocketSurface rootSocketSurface = root.SocketSurface( s ); // constructs SVec
+
+        SVec v = root.SocketSurface();
+
+        Root::SocketSurface rootSurface = w.SocketInstall();
+
+        // int i = v.m_intValue();
+        
         std::ostringstream os;
-        os << "Created 10000 floor sockets";
+       // os << "Read root.Sockets() : var.m_intValue()" << v <<  std::endl;
         return os.str();
     }
 }
 
-*/
 /*
 std::string test4()
 {

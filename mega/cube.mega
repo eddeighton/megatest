@@ -1,63 +1,31 @@
 
 
-/*
-
-link Identifier[ min:max ] <<->> Target;
-
-Link specifies min and max cardinality of how it relates to relation row.
-
-So the minimum is either 0 or 1 meaning for all instances of the link there
-exists a minimum of zero to one entries in the relation.
-
-Similarly the maximum specifies how there exists a maximum number of occurrences
-of the link in the relation.
-
-In the Socket -> Plug example.  The socket is 0:1.  This means that any object that
-inherits the link MUST occur a minimum of zero times and at most once in the relation.
-
-So essentially the Socket link is optional but singular.  This can be the default.
-
-If the Plug on the other hand was 1:* then any instance of Plug MUST ALWAYS be related
-to a Socket atleast once and at most many times.
-
-So Plug is mandatory and non-singular so it returns a range.
-
-*/
-
-link Socket [0:1] < Plug;
-link Plug [1:*] > Socket;
-
-link SocketParent [0:*] << SocketChild;
-link SocketChild [0:1] >> SocketParent;
-
 object FloorSocket
 {
-    link Root : SocketParent;
+    dependency( links.mega );
 
-    //link Plug : Socket;
-    //link Socket2 [0:1] - AuxSystem::Plug2;
+    link SocketInstall : l_SocketInstall; // is a l_SocketInstall
+    link Socket : l_Socket;               // is a Socket
 
     dim int   m_intValue;
     dim float m_floatValue;
-
-    /*function test() : int
-    {
-        //m_intValue( 123 );
-        //FloorSocket::test f = *const_cast< FloorSocket::test* >( this );
-        //f.m_intValue( 123 );
-
-        //int iValue = f.m_intValue();
-        //return iValue;
-    }*/
 }
 
-/*
+object WallSocket
+{
+    dependency( links.mega );
+
+    link SocketInstall : l_SocketInstall; // is a l_SocketInstall
+    link Socket : l_Socket;               // is a Socket
+
+    dim int m_intValue;
+}
+
 object AuxSystem
 {
-    link Socket : Plug;
-    link Plug2 [1:*] - FloorSocket::Socket2;
+    dependency( links.mega );
+
+    link Plug : l_Plug; // is a plug - can plug into socket
+
+    dim int m_floatValue;
 }
-
-object AuxSystem2 { link Socket : Plug; }
-
-*/
