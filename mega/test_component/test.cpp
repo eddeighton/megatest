@@ -118,31 +118,77 @@ std::string test2()
 
 std::string test3()
 {
+    std::ostringstream os;
     mega::Cycle cycle;
     {
         Root root = mega::Context::get()->getThisRoot();
 
         // allocate WallSocket
         WallSocket w = root.WallSocket();
-
-        // Get the SocketChild link interface of WallSocket
-        WallSocket::SocketInstall s = w.SocketInstall.Get();
-
-        using SVec = std::vector< Var< FloorSocket::SocketInstall, WallSocket::SocketInstall > > ;
-
-        // Link to the root
-        Root::SocketSurface rootSocketSurface = root.SocketSurface( s ); // constructs SVec
-
-        SVec v = root.SocketSurface();
-
-        Root::SocketSurface rootSurface = w.SocketInstall();
-
-        // int i = v.m_intValue();
         
-        std::ostringstream os;
+        // link the wall socket to the root
+        {
+            root.SocketSurface( w.SocketInstall.Get() );
+            for( auto v : root.SocketSurface() )
+            {
+                if( v == w.SocketInstall.Get() )
+                {
+                    os << "It works" << std::endl;
+                }
+            }
+            if( w.SocketInstall() == root.SocketSurface.Get() )
+            {
+                os << "Also other way round!" << std::endl;
+            }
+        }
+
+        // unlink
+        {
+            root.SocketSurface( WriteOperation::REMOVE, w.SocketInstall.Get() );
+            if( root.SocketSurface().empty() )
+            {
+                os << "Non singular link side reset" << std::endl;
+            }
+            if( !w.SocketInstall() )
+            {
+                os << "Singular link reset" << std::endl;
+            }
+        }
+
+        // link other way round
+        {
+            w.SocketInstall( root.SocketSurface.Get() );
+            for( auto v : root.SocketSurface() )
+            {
+                if( v == w.SocketInstall.Get() )
+                {
+                    os << "It works again" << std::endl;
+                }
+            }
+            if( w.SocketInstall() == root.SocketSurface.Get() )
+            {
+                os << "Also other way round again!" << std::endl;
+            }
+        }
+
+        // unlink other way
+        {
+            w.SocketInstall( WriteOperation::REMOVE, root.SocketSurface.Get() );
+            if( root.SocketSurface().empty() )
+            {
+                os << "Non singular link side reset" << std::endl;
+            }
+            if( !w.SocketInstall() )
+            {
+                os << "Singular link reset" << std::endl;
+            }
+        }
+
+        //Root::SocketSurface rootSurface = w.SocketInstall();
+        // int i = v.m_intValue();
        // os << "Read root.Sockets() : var.m_intValue()" << v <<  std::endl;
-        return os.str();
     }
+    return os.str();
 }
 
 /*
