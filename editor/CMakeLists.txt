@@ -6,6 +6,9 @@ include( ${WORKSPACE_ROOT_PATH}/thirdparty/boost/boost_include.cmake )
 #get clang
 include( ${WORKSPACE_ROOT_PATH}/thirdparty/llvm/clang_include.cmake )
 
+#get fmt
+include( ${WORKSPACE_ROOT_PATH}/thirdparty/fmt/fmt_include.cmake )
+
 #get spdlog
 include( ${WORKSPACE_ROOT_PATH}/thirdparty/spdlog/spdlog_include.cmake )
 
@@ -53,9 +56,11 @@ target_link_libraries( editor Qt6::Core)
 target_link_libraries( editor Qt6::Gui) 
 target_link_libraries( editor Qt6::Widgets) 
 
+link_boost( editor program_options )
 link_boost( editor filesystem )
 link_boost( editor atomic )
 link_orc( editor )
+link_fmt( editor )
 link_spdlog( editor )
 link_json( editor )
 link_inja( editor )

@@ -18,7 +18,7 @@
 
 int main( int argc, const char* argv[] )
 {
-    std::string             strConsoleLogLevel = "info", strLogFileLevel = "debug";
+    std::string             strConsoleLogLevel = "info", strLogFileLevel = "debug", strTest;
     boost::filesystem::path logFolder = boost::filesystem::current_path() / "log";
     {
         namespace po                      = boost::program_options;
@@ -32,6 +32,7 @@ int main( int argc, const char* argv[] )
         ( "log",     po::value< boost::filesystem::path >( &logFolder ),    "Logging folder" )
         ( "console", po::value< std::string >( &strConsoleLogLevel ),       "Console logging level" )
         ( "level",   po::value< std::string >( &strLogFileLevel ),          "Log file logging level" )
+        ( "test",    po::value< std::string >( &strTest ),                  "Test function" )
         ;
         // clang-format on
 
@@ -55,11 +56,47 @@ int main( int argc, const char* argv[] )
         mega::service::Tool tool( mega::network::MegaDaemonPort() );
         try
         {
-            mega::service::Tool::Functor functor = []( boost::asio::yield_context& yield_ctx )
+            mega::service::Tool::Functor functor = [ strTest ]( boost::asio::yield_context& yield_ctx )
             {
-                // const std::string strResult = test2();
-                const std::string strResult = test3();
-                SPDLOG_INFO( "Test function returned: {}", strResult );
+                if( strTest == "test0" )
+                {
+                    const std::string strResult = test0();
+                    SPDLOG_INFO( "Test0 function returned: {}", strResult );
+                }
+                else if( strTest == "test1" )
+                {
+                    const std::string strResult = test1();
+                    SPDLOG_INFO( "Test1 function returned: {}", strResult );
+                }
+                else if( strTest == "test2" )
+                {
+                    const std::string strResult = test2();
+                    SPDLOG_INFO( "Test2 function returned: {}", strResult );
+                }
+                else if( strTest == "test3" )
+                {
+                    const std::string strResult = test3();
+                    SPDLOG_INFO( "Test3 function returned: {}", strResult );
+                }
+                else if( strTest == "test4" )
+                {
+                    const std::string strResult = test4();
+                    SPDLOG_INFO( "Test4 function returned: {}", strResult );
+                }
+                else if( strTest == "test5" )
+                {
+                    const std::string strResult = test5();
+                    SPDLOG_INFO( "Test5 function returned: {}", strResult );
+                }
+                else if( strTest == "test6" )
+                {
+                    const std::string strResult = test6();
+                    SPDLOG_INFO( "Test6 function returned: {}", strResult );
+                }
+                else
+                {
+                    THROW_RTE( "Unknown test function specified: " << strTest );
+                }
             };
             tool.run( functor );
         }

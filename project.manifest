@@ -8,7 +8,7 @@
 		</manifest_file_path>
 	</manifestFilePath>
 	<megaSourceFiles class_id="3" tracking_level="0" version="0">
-		<count>5</count>
+		<count>3</count>
 		<item_version>0</item_version>
 		<item class_id="4" tracking_level="0" version="0">
 			<mega_file_path>
@@ -17,17 +17,7 @@
 		</item>
 		<item>
 			<mega_file_path>
-				<filepath>mega/square.mega</filepath>
-			</mega_file_path>
-		</item>
-		<item>
-			<mega_file_path>
 				<filepath>mega/cube.mega</filepath>
-			</mega_file_path>
-		</item>
-		<item>
-			<mega_file_path>
-				<filepath>mega/cube_extra.mega</filepath>
 			</mega_file_path>
 		</item>
 		<item>
@@ -46,7 +36,7 @@
 		</item>
 	</cppSourceFiles>
 	<compilationFileInfos class_id="7" tracking_level="0" version="0">
-		<count>62</count>
+		<count>40</count>
 		<item_version>0</item_version>
 		<item class_id="8" tracking_level="0" version="0">
 			<fileType>0</fileType>
@@ -291,160 +281,6 @@
 			<fileID>17</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/square.mega.ParserStage.AST.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/square.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>2</fileType>
-			<fileID>18</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/square.mega.ParserStage.Body.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/square.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>3</fileType>
-			<fileID>19</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/square.mega.InterfaceStage.Tree.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/square.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>6</fileType>
-			<fileID>20</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/square.mega.SymbolRollout.PerSourceSymbols.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/square.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>7</fileType>
-			<fileID>21</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/square.mega.InterfaceAnalysisStage.Clang.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/square.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>8</fileType>
-			<fileID>22</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/square.mega.ConcreteStage.Concrete.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/square.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>10</fileType>
-			<fileID>23</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/square.mega.DerivationAnalysisRollout.PerSourceDerivations.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/square.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>12</fileType>
-			<fileID>24</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/square.mega.HyperGraphAnalysisRollout.PerSourceModel.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/square.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>13</fileType>
-			<fileID>25</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/square.mega.MemoryStage.MemoryLayout.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/square.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>15</fileType>
-			<fileID>26</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/square.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/square.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>16</fileType>
-			<fileID>27</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/square.mega.OperationsStage.Operations.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/square.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>1</fileType>
-			<fileID>28</fileID>
-			<filePath>
-				<compilation_file_path>
 					<filepath>mega/cube.mega.ParserStage.AST.db</filepath>
 				</compilation_file_path>
 			</filePath>
@@ -456,7 +292,7 @@
 		</item>
 		<item>
 			<fileType>2</fileType>
-			<fileID>29</fileID>
+			<fileID>18</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/cube.mega.ParserStage.Body.db</filepath>
@@ -470,7 +306,7 @@
 		</item>
 		<item>
 			<fileType>3</fileType>
-			<fileID>30</fileID>
+			<fileID>19</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/cube.mega.InterfaceStage.Tree.db</filepath>
@@ -484,7 +320,7 @@
 		</item>
 		<item>
 			<fileType>6</fileType>
-			<fileID>31</fileID>
+			<fileID>20</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/cube.mega.SymbolRollout.PerSourceSymbols.db</filepath>
@@ -498,7 +334,7 @@
 		</item>
 		<item>
 			<fileType>7</fileType>
-			<fileID>32</fileID>
+			<fileID>21</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/cube.mega.InterfaceAnalysisStage.Clang.db</filepath>
@@ -512,7 +348,7 @@
 		</item>
 		<item>
 			<fileType>8</fileType>
-			<fileID>33</fileID>
+			<fileID>22</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/cube.mega.ConcreteStage.Concrete.db</filepath>
@@ -526,7 +362,7 @@
 		</item>
 		<item>
 			<fileType>10</fileType>
-			<fileID>34</fileID>
+			<fileID>23</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/cube.mega.DerivationAnalysisRollout.PerSourceDerivations.db</filepath>
@@ -540,7 +376,7 @@
 		</item>
 		<item>
 			<fileType>12</fileType>
-			<fileID>35</fileID>
+			<fileID>24</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/cube.mega.HyperGraphAnalysisRollout.PerSourceModel.db</filepath>
@@ -554,7 +390,7 @@
 		</item>
 		<item>
 			<fileType>13</fileType>
-			<fileID>36</fileID>
+			<fileID>25</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/cube.mega.MemoryStage.MemoryLayout.db</filepath>
@@ -568,7 +404,7 @@
 		</item>
 		<item>
 			<fileType>15</fileType>
-			<fileID>37</fileID>
+			<fileID>26</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/cube.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
@@ -582,7 +418,7 @@
 		</item>
 		<item>
 			<fileType>16</fileType>
-			<fileID>38</fileID>
+			<fileID>27</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/cube.mega.OperationsStage.Operations.db</filepath>
@@ -596,161 +432,7 @@
 		</item>
 		<item>
 			<fileType>1</fileType>
-			<fileID>39</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/cube_extra.mega.ParserStage.AST.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/cube_extra.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>2</fileType>
-			<fileID>40</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/cube_extra.mega.ParserStage.Body.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/cube_extra.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>3</fileType>
-			<fileID>41</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/cube_extra.mega.InterfaceStage.Tree.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/cube_extra.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>6</fileType>
-			<fileID>42</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/cube_extra.mega.SymbolRollout.PerSourceSymbols.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/cube_extra.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>7</fileType>
-			<fileID>43</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/cube_extra.mega.InterfaceAnalysisStage.Clang.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/cube_extra.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>8</fileType>
-			<fileID>44</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/cube_extra.mega.ConcreteStage.Concrete.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/cube_extra.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>10</fileType>
-			<fileID>45</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/cube_extra.mega.DerivationAnalysisRollout.PerSourceDerivations.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/cube_extra.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>12</fileType>
-			<fileID>46</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/cube_extra.mega.HyperGraphAnalysisRollout.PerSourceModel.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/cube_extra.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>13</fileType>
-			<fileID>47</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/cube_extra.mega.MemoryStage.MemoryLayout.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/cube_extra.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>15</fileType>
-			<fileID>48</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/cube_extra.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/cube_extra.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>16</fileType>
-			<fileID>49</fileID>
-			<filePath>
-				<compilation_file_path>
-					<filepath>mega/cube_extra.mega.OperationsStage.Operations.db</filepath>
-				</compilation_file_path>
-			</filePath>
-			<objectSourceFilePath>
-				<source_file_path>
-					<filepath>mega/cube_extra.mega</filepath>
-				</source_file_path>
-			</objectSourceFilePath>
-		</item>
-		<item>
-			<fileType>1</fileType>
-			<fileID>50</fileID>
+			<fileID>28</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/links.mega.ParserStage.AST.db</filepath>
@@ -764,7 +446,7 @@
 		</item>
 		<item>
 			<fileType>2</fileType>
-			<fileID>51</fileID>
+			<fileID>29</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/links.mega.ParserStage.Body.db</filepath>
@@ -778,7 +460,7 @@
 		</item>
 		<item>
 			<fileType>3</fileType>
-			<fileID>52</fileID>
+			<fileID>30</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/links.mega.InterfaceStage.Tree.db</filepath>
@@ -792,7 +474,7 @@
 		</item>
 		<item>
 			<fileType>6</fileType>
-			<fileID>53</fileID>
+			<fileID>31</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/links.mega.SymbolRollout.PerSourceSymbols.db</filepath>
@@ -806,7 +488,7 @@
 		</item>
 		<item>
 			<fileType>7</fileType>
-			<fileID>54</fileID>
+			<fileID>32</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/links.mega.InterfaceAnalysisStage.Clang.db</filepath>
@@ -820,7 +502,7 @@
 		</item>
 		<item>
 			<fileType>8</fileType>
-			<fileID>55</fileID>
+			<fileID>33</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/links.mega.ConcreteStage.Concrete.db</filepath>
@@ -834,7 +516,7 @@
 		</item>
 		<item>
 			<fileType>10</fileType>
-			<fileID>56</fileID>
+			<fileID>34</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/links.mega.DerivationAnalysisRollout.PerSourceDerivations.db</filepath>
@@ -848,7 +530,7 @@
 		</item>
 		<item>
 			<fileType>12</fileType>
-			<fileID>57</fileID>
+			<fileID>35</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/links.mega.HyperGraphAnalysisRollout.PerSourceModel.db</filepath>
@@ -862,7 +544,7 @@
 		</item>
 		<item>
 			<fileType>13</fileType>
-			<fileID>58</fileID>
+			<fileID>36</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/links.mega.MemoryStage.MemoryLayout.db</filepath>
@@ -876,7 +558,7 @@
 		</item>
 		<item>
 			<fileType>15</fileType>
-			<fileID>59</fileID>
+			<fileID>37</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/links.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
@@ -890,7 +572,7 @@
 		</item>
 		<item>
 			<fileType>16</fileType>
-			<fileID>60</fileID>
+			<fileID>38</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/links.mega.OperationsStage.Operations.db</filepath>
@@ -904,7 +586,7 @@
 		</item>
 		<item>
 			<fileType>16</fileType>
-			<fileID>61</fileID>
+			<fileID>39</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/test_component/test.cpp.OperationsStage.Operations.db</filepath>

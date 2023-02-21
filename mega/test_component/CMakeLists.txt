@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.2)
 include( ${WORKSPACE_ROOT_PATH}/thirdparty/boost/boost_include.cmake )
 include( ${WORKSPACE_ROOT_PATH}/src/common/common_include.cmake )
 
-MegaComponent( LIBRARY TestComponent CPP test.cpp DEPENDENCIES ../root.mega ../square.mega )
+MegaComponent( LIBRARY TestComponent CPP test.cpp DEPENDENCIES ../root.mega ../links.mega ../cube.mega  )
 
 link_boost( TestComponent filesystem )
 link_common( TestComponent )

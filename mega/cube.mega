@@ -7,8 +7,43 @@ object FloorSocket
     link SocketInstall : l_SocketInstall; // is a l_SocketInstall
     link Socket : l_Socket;               // is a Socket
 
+
+    action TestAction[ 4 ]
+    {
+        dim int m_actionValue;
+
+        action TestActionNested[ 4 ]
+        {
+            dim int m_actionValue;
+        }
+    }
+    action TestAction2[ 4 ]
+    {
+        dim int m_actionValue;
+
+        action TestActionNested[ 4 ]
+        {
+            dim int m_actionValue;
+            dim std::vector<int> m_ints;
+        }
+    }
+    
     dim int   m_intValue;
     dim float m_floatValue;
+
+    function test() : std::string
+    {
+        std::ostringstream os;
+        os << "m_intValue is: " << m_intValue();
+        os << "m_floatValue is: " << m_floatValue();
+        return os.str();
+    }
+}
+
+object AdvancedFloorSocket : FloorSocket
+{
+
+    dim int m_intValue2;
 }
 
 object WallSocket
@@ -19,6 +54,8 @@ object WallSocket
     link Socket : l_Socket;               // is a Socket
 
     dim int m_intValue;
+    dim FloorSocket m_FloorSocketRef;
+    dim std::vector< FloorSocket > m_floorSocketVector;
 }
 
 object AuxSystem
@@ -27,5 +64,5 @@ object AuxSystem
 
     link Plug : l_Plug; // is a plug - can plug into socket
 
-    dim int m_floatValue;
+    dim float m_floatValue;
 }

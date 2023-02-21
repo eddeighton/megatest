@@ -5,60 +5,40 @@ object Root
     dependency( links.mega );
     dependency( cube.mega );
 
-    link SocketSurface : l_SocketSurface;
+    include(<iostream>);
+    include(<string>);
+    include(mega/reference_io.hpp);
 
-    dim int m_testDimension;
-    dim int m_testDimension1;
+    dim mega::I32 m_x;
+    dim mega::I32 m_int;
+    dim float m_float;
     dim std::string m_str;
-    dim std::vector< int > m_testDimension2;
+    dim mega::I32 m_iCounter;
+    dim mega::I32 m_iCounter2;
 
-    event SomeEvent[ 3 ]
+
+    link SocketSurface : l_SocketSurface;
+    /*action doStuff
     {
-        dim int m_x;
-        dim int m_y;
-        dim int m_z;
-        event   A1[ 2 ]
+        mega::reference ref = *this;
+        using ::operator<<;
+        std::cout << "Hello world from doStuff: " << ref << std::endl;
+        // m_iCounter( m_iCounter() + 1 );
+
+    }*/
+    action doStuff
+    {
+        static bool bOnce = true;
+        if( bOnce )
         {
-            dim int m_i;
-            dim int m_j;
-            event   B1[ 3 ]
-            {
-                dim int m_k;
-                dim std::string m_str;
-            }
+            m_iCounter( 1 );
+            std::cout << "Hello world from doStuff: " << m_iCounter() << std::endl;
+            bOnce = false;
         }
-    }
-
-    include( <string> );
-    include( <sstream> );
-    include( <iostream> );
-
-    action TestAction
-    {
-        std::cout << "TestAction called!" << std::endl;
-    }
-
-    function SomeFunction( int x, int y )
-        : std::string
-    {
-        FloorSocket f = FloorSocket();
-        f.m_intValue( x + y );
-
-        FloorSocket f2 = FloorSocket();
-        f2.m_intValue( x + y );
-
-        inc( x + y );
-
-        std::ostringstream os;
-        os << "m_testDimension: " << m_testDimension() << " m_testDimension1: " << m_testDimension1();
-
-        return os.str();
-    }
-
-    function inc( int amt )
-        : void
-    {
-        m_testDimension( m_testDimension() + amt );
-        m_testDimension1( m_testDimension1() + amt );
+        if( m_iCounter() % 60 == 0 )
+        {
+             std::cout << "Hello world from doStuff: " << m_iCounter() << std::endl;
+        }
+        m_iCounter( m_iCounter() + 1 );
     }
 }

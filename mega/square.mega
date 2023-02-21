@@ -1,9 +1,0 @@
-
-
-namespace test
-{
-    object Square
-    {    
-        dim int m_x;
-    }
-}
