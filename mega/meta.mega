@@ -1,0 +1,30 @@
+
+
+interface ControlSystem
+{
+}
+
+interface AuxiliarySystem : ControlSystem
+{
+    
+}
+
+interface PrimarySystem : ControlSystem
+{
+
+}
+
+interface ExteriorSystem : ControlSystem
+{
+
+}
+
+interface Command
+{
+
+}
+
+interface Control
+{
+    
+}

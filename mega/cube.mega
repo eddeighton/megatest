@@ -2,11 +2,11 @@
 
 object FloorSocket
 {
-    dependency( links.mega );
+    dependency(meta.mega);
+    dependency(links.mega);
 
     link SocketInstall : l_SocketInstall; // is a l_SocketInstall
     link Socket : l_Socket;               // is a Socket
-
 
     action TestAction[ 4 ]
     {
@@ -46,12 +46,21 @@ object AdvancedFloorSocket : FloorSocket
     dim int m_intValue2;
 }
 
-object WallSocket
+object WallSocket : ControlSystem, ExteriorSystem
 {
     dependency( links.mega );
 
     link SocketInstall : l_SocketInstall; // is a l_SocketInstall
     link Socket : l_Socket;               // is a Socket
+
+    action TestCmd : Command
+    {
+    }
+
+    event TestControl : Control
+    {
+        
+    }
 
     dim int m_intValue;
     dim FloorSocket m_FloorSocketRef;

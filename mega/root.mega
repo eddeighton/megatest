@@ -1,9 +1,9 @@
 
-
 object Root
 {
-    dependency( links.mega );
-    dependency( cube.mega );
+    dependency(meta.mega);
+    dependency(links.mega);
+    dependency(cube.mega);
 
     include(<iostream>);
     include(<string>);
@@ -16,7 +16,6 @@ object Root
     dim mega::I32 m_iCounter;
     dim mega::I32 m_iCounter2;
 
-
     link SocketSurface : l_SocketSurface;
     /*action doStuff
     {
@@ -26,6 +25,13 @@ object Root
         // m_iCounter( m_iCounter() + 1 );
 
     }*/
+    function testFunction() : std::string
+    {
+        std::ostringstream os;
+        os << "m_x is: " << m_x();
+        return os.str();
+    }
+
     action doStuff
     {
         static bool bOnce = true;

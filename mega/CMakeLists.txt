@@ -8,7 +8,7 @@ include( ${WORKSPACE_ROOT_PATH}/src/common/common_include.cmake )
 
 MegaProject( Basic )
 
-MegaComponent( INTERFACE TestInterface MEGA root.mega cube.mega links.mega  )
+MegaComponent( INTERFACE TestInterface MEGA meta.mega root.mega cube.mega links.mega SCH test_schematic.sch )
 
 link_boost( TestInterface filesystem )
 link_common( TestInterface )

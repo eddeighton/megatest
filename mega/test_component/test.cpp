@@ -58,7 +58,7 @@ std::string test0()
 
                         root.m_iCounter( 3 );
                         os << "\nroot.m_iCounter: " << root.m_iCounter();
-                        root.doStuff();
+                        os << "\n" << root.testFunction();
 
                         /*FloorSocket f = root.SocketSurface.AdvancedFloorSocket();
 
