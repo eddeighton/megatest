@@ -2,8 +2,8 @@
 
 object FloorSocket
 {
-    dependency(meta.mega);
-    dependency(links.mega);
+    dependency( meta.mega );
+    dependency( links.mega );
 
     link SocketInstall : l_SocketInstall; // is a l_SocketInstall
     link Socket : l_Socket;               // is a Socket
@@ -24,14 +24,15 @@ object FloorSocket
         action TestActionNested[ 4 ]
         {
             dim int m_actionValue;
-            dim std::vector<int> m_ints;
+            dim std::vector< int > m_ints;
         }
     }
-    
+
     dim int   m_intValue;
     dim float m_floatValue;
 
-    function test() : std::string
+    function test()
+        : std::string
     {
         std::ostringstream os;
         os << "m_intValue is: " << m_intValue();
@@ -42,7 +43,6 @@ object FloorSocket
 
 object AdvancedFloorSocket : FloorSocket
 {
-
     dim int m_intValue2;
 }
 
@@ -59,10 +59,9 @@ object WallSocket : ControlSystem, ExteriorSystem
 
     event TestControl : Control
     {
-        
     }
 
-    dim int m_intValue;
+    dim int         m_intValue;
     dim FloorSocket m_FloorSocketRef;
     dim std::vector< FloorSocket > m_floorSocketVector;
 }

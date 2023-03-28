@@ -4,27 +4,17 @@ interface ControlSystem
 {
 }
 
-interface AuxiliarySystem : ControlSystem
-{
-    
+interface AuxiliarySystem : ControlSystem {
 }
 
-interface PrimarySystem : ControlSystem
-{
-
+interface PrimarySystem : ControlSystem {
 }
 
-interface ExteriorSystem : ControlSystem
-{
-
+interface ExteriorSystem : ControlSystem {
 }
 
-interface Command
-{
-
+interface Command {
 }
 
-interface Control
-{
-    
+interface Control {
 }
