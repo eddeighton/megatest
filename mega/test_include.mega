@@ -1,5 +1,0 @@
-
-action TestIncludeAction
-{
-    std::cout << "TestIncludeAction" << std::endl;
-}

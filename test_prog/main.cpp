@@ -6,12 +6,16 @@
 
 #include "service/tool.hpp"
 
+#include "/workspace/root/src/mega/src/tests/edsUnitTestWrapper.hpp"
+
 #include "boost/asio/spawn.hpp"
 #include "boost/program_options.hpp"
 #include "boost/filesystem/path.hpp"
 #include "boost/filesystem/operations.hpp"
 
 #include <spdlog/stopwatch.h>
+
+#include <gtest/gtest.h>
 
 #include <iostream>
 #include <string>
@@ -28,11 +32,11 @@ int main( int argc, const char* argv[] )
         // clang-format off
         std::string strHostName;
         options.add_options()
-        ( "help,?",  po::bool_switch( &bShowHelp ),                         "Show Command Line Help" )
-        ( "log",     po::value< boost::filesystem::path >( &logFolder ),    "Logging folder" )
-        ( "console", po::value< std::string >( &strConsoleLogLevel ),       "Console logging level" )
-        ( "level",   po::value< std::string >( &strLogFileLevel ),          "Log file logging level" )
-        ( "test",    po::value< std::string >( &strTest ),                  "Test function" )
+        ( "help,?",         po::bool_switch( &bShowHelp ),                         "Show Command Line Help" )
+        ( "log",            po::value< boost::filesystem::path >( &logFolder ),    "Logging folder" )
+        ( "console",        po::value< std::string >( &strConsoleLogLevel ),       "Console logging level" )
+        ( "level",          po::value< std::string >( &strLogFileLevel ),          "Log file logging level" )
+        ( "gtest_filter",   po::value< std::string >( &strTest ),                  "GTest Test Filter" )
         ;
         // clang-format on
 
@@ -49,50 +53,33 @@ int main( int argc, const char* argv[] )
         }
     }
 
-    mega::network::configureLog( logFolder, "terminal", mega::network::fromStr( strConsoleLogLevel ),
+    mega::U64 szResult = 0U;
+
+    mega::network::configureLog( logFolder, "test_prog", mega::network::fromStr( strConsoleLogLevel ),
                                  mega::network::fromStr( strLogFileLevel ) );
 
     {
         mega::service::Tool tool( mega::network::MegaDaemonPort() );
         try
         {
-            mega::service::Tool::Functor functor = [ strTest ]( boost::asio::yield_context& yield_ctx )
+            mega::service::Tool::Functor functor = [ &szResult, strTest ]( boost::asio::yield_context& yield_ctx )
             {
-                if( strTest.empty() || strTest == "test0" )
+                std::unique_ptr< EDUTS::UnitTestResultWrapper > results;
+                try
                 {
-                    const std::string strResult = test0();
-                    SPDLOG_INFO( "Test0 function returned: {}", strResult );
+                    EDUTS::UnitTestWrapper test( EDUTS::UnitTestOptions( false, false, 1, strTest.c_str(), "" ) );
+                    szResult = test.run();
+                    results = test.getResult();
                 }
-                if( strTest.empty() || strTest == "test1" )
+                catch( std::runtime_error& e )
                 {
-                    const std::string strResult = test1();
-                    SPDLOG_INFO( "Test1 function returned: {}", strResult );
+                    std::cout << "Encountered exception: " << e.what() << std::endl;
                 }
-                if( strTest.empty() || strTest == "test2" )
+                catch( ... )
                 {
-                    const std::string strResult = test2();
-                    SPDLOG_INFO( "Test2 function returned: {}", strResult );
+                    std::cout << "Encountered unknown exception" << std::endl;
                 }
-                if( strTest.empty() || strTest == "test3" )
-                {
-                    const std::string strResult = test3();
-                    SPDLOG_INFO( "Test3 function returned: {}", strResult );
-                }
-                if( strTest.empty() || strTest == "test4" )
-                {
-                    const std::string strResult = test4();
-                    SPDLOG_INFO( "Test4 function returned: {}", strResult );
-                }
-                if( strTest.empty() || strTest == "test5" )
-                {
-                    const std::string strResult = test5();
-                    SPDLOG_INFO( "Test5 function returned: {}", strResult );
-                }
-                if( strTest.empty() || strTest == "test6" )
-                {
-                    const std::string strResult = test6();
-                    SPDLOG_INFO( "Test6 function returned: {}", strResult );
-                }
+
             };
             tool.run( functor );
         }

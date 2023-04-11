@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.2)
 #get boost
 include( ${WORKSPACE_ROOT_PATH}/thirdparty/boost/boost_include.cmake )
 
+#get gtest
+include( ${WORKSPACE_ROOT_PATH}/thirdparty/gtest/gtest_include.cmake )
+
 #get clang
 include( ${WORKSPACE_ROOT_PATH}/thirdparty/llvm/clang_include.cmake )
 
@@ -29,8 +32,6 @@ set( TEST_PROG_SOURCE
 
 add_executable( test_prog ${TEST_PROG_SOURCE} )
 
-# target_link_options( test_prog PUBLIC -export-dynamic )
-
 target_link_libraries( test_prog TestComponent )
 
 target_include_directories( test_prog PUBLIC ${CMAKE_SOURCE_DIR} )
@@ -46,5 +47,6 @@ link_inja( test_prog )
 link_common( test_prog )
 link_database( test_prog )
 link_tool( test_prog )
+link_gtest( test_prog )
 
 install( TARGETS test_prog DESTINATION bin)

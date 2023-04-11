@@ -2,9 +2,12 @@
 // define link interfaces
 
 // For each Socket Surface there exists zero to many Socket Installations
-link l_SocketSurface [0:*] >> l_SocketInstall;
-link l_SocketInstall [1:1] < l_SocketSurface;
 
-// For each Socket there exists zero to one Plugs
-link l_Socket [0:1] >> l_Plug;
-link l_Plug [0:1] < l_Socket;
+// ZeroToMany_OneToOne
+link Link_Parent_ZeroToMany_OneToOne [0:*] >> Link_Child_ZeroToMany_OneToOne;
+link Link_Child_ZeroToMany_OneToOne [1:1] < Link_Parent_ZeroToMany_OneToOne;
+
+
+// ZeroToOne_OneToOne
+link Link_Parent_ZeroToOne_OneToOne [0:1] >> Link_Child_ZeroToOne_OneToOne;
+link Link_Child_ZeroToOne_OneToOne [1:1] < Link_Parent_ZeroToOne_OneToOne;

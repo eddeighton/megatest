@@ -1,54 +1,23 @@
 
+
+
+object ObjZeroToMany_OneToOne
+{
+    link Child_ZeroToMany_OneToOne : Link_Child_ZeroToMany_OneToOne;
+
+}
+
+object ObjChild_ZeroToOne_OneToOne
+{
+    link Child_ZeroToOne_OneToOne : Link_Child_ZeroToOne_OneToOne;
+}
+
 object Root
 {
     dependency( meta.mega );
     dependency( links.mega );
-    dependency( cube.mega );
 
-    include( < iostream > );
-    include( < string > );
-    include( mega / reference_io.hpp );
+    link Parent_ZeroToMany_OneToOne : Link_Parent_ZeroToMany_OneToOne;
+    link Parent_ZeroToOne_OneToOne : Link_Parent_ZeroToOne_OneToOne;
 
-    dim mega::I32 m_x;
-    dim mega::I32 m_int;
-    dim float     m_float     = 1.2f;
-    dim mega::I32 m_iCounter  = 2;
-    dim mega::I32 m_iCounter2 = 4;
-    dim std::string m_str     = "Cool!";
-    dim std::string m_str2    = "Cool!";
-
-    link SocketSurface : l_SocketSurface;
-
-    function testFunction()
-        : std::string
-    {
-        std::ostringstream os;
-        os << "m_x is: " << m_x();
-        return os.str();
-    }
-    function testFunction2()
-        : std::string
-    {
-        std::ostringstream os;
-        os << "m_float is: " << m_float();
-        return os.str();
-    }
-
-    action doStuff
-    {
-        if( m_iCounter() % 60 == 0 )
-        {
-            std::cout << "doStuff: " << m_iCounter() << std::endl;
-        }
-        m_iCounter( m_iCounter() + 1 );
-    }
-
-    action doMoreStuff
-    {
-        if( m_iCounter() % 60 == 0 )
-        {
-            std::cout << "doMoreStuff: " << m_iCounter() << std::endl;
-        }
-        m_iCounter( m_iCounter() + 1 );
-    }
 }

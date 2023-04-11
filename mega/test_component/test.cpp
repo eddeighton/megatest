@@ -7,6 +7,8 @@
 #include "service/protocol/common/context.hpp"
 #include "service/cycle.hpp"
 
+#include <gtest/gtest.h>
+
 #include <vector>
 #include <iostream>
 #include <chrono>
@@ -27,330 +29,88 @@ void print( const T& dur, std::ostream& os )
 
 #pragma mega
 
-/*
-#ifndef MEGA_COMPILATION
-
-struct Root
+TEST( TestProg, ZeroToMany_OneToOne )
 {
-    Root( mega::reference );
+    mega::Cycle cycle;
 
-    int m_testDimension();
-    Root m_testDimension( int );
-};
-
-#endif
-*/
-
-std::string test0()
-{
-    std::ostringstream os;
+    Root r = mega::Context::get()->getThisRoot();
     {
-        mega::Cycle cycle;
-        {
-            for( auto machine : mega::Context::get()->getMachines() )
-            {
-                for( mega::MP machineProcess : mega::Context::get()->getProcesses( machine ) )
-                {
-                    for( mega::MPO mpo : mega::Context::get()->getMPO( machineProcess ) )
-                    {
-                        os << "\nFound MPO: " << mpo;
-                        Root root = mega::Context::get()->getRoot( mpo );
-
-                        root.m_iCounter( 3 );
-                        os << "\nroot.m_iCounter: " << root.m_iCounter();
-                        os << "\n" << root.testFunction();
-
-                        /*FloorSocket f = root.SocketSurface.AdvancedFloorSocket();
-
-                        int i = f.m_intValue();
-
-                        Var< FloorSocket, WallSocket > v = f;
-                        int i2 = v.m_intValue();
-
-                        if( mega_cast< FloorSocket >( f ) )
-                        {
-                            os << "\nCast from FloorSocket to FloorSocket succeeded";
-                        }
-                        else
-                        {
-                            os << "\nCast from FloorSocket to FloorSocket failed";
-                        }
-                        if( mega_cast< AdvancedFloorSocket >( f ) )
-                        {
-                            os << "\nCast from FloorSocket to AdvancedFloorSocket succeeded";
-                        }
-                        else
-                        {
-                            os << "\nCast from FloorSocket to AdvancedFloorSocket failed";
-                        }
-                        if( mega_cast< WallSocket >( f ) )
-                        {
-                            os << "\nCast from FloorSocket to WallSocket succeeded";
-                        }
-                        else
-                        {
-                            os << "\nCast from FloorSocket to WallSocket failed";
-                        }
-
-                        root.doStuff();
-                        os << "\nCalled doStuff on: " << root << "\n";*/
-                    }
-                }
-            }
-        }
+        mega::reference ref = r;
+        ASSERT_EQ( ref.getType(), mega::ROOT_TYPE_ID ) << "Root is wrong: " << ref;
+        ASSERT_TRUE( ref.is_valid() );
     }
-    return os.str();
+    ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
+
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    r.ThisIsStupidWhyDoesThisCompile();
+
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+
+    ObjZeroToMany_OneToOne t1 = r.Parent_ZeroToMany_OneToOne.ObjZeroToMany_OneToOne();
+    ASSERT_TRUE( ( ( mega::reference )t1 ).is_valid() );
+
+    auto theList = r.Parent_ZeroToMany_OneToOne();
+    ASSERT_EQ( theList.size(), 1 );
+    ASSERT_EQ( theList.front(), t1.Child_ZeroToMany_OneToOne.Get() );
+
+    r.Parent_ZeroToMany_OneToOne( WriteOperation::REMOVE, t1.Child_ZeroToMany_OneToOne.Get() );
+
+    ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
 }
 
-std::string test1()
+TEST( TestProg, ZeroToMany_OneToOne_Many )
 {
-    std::ostringstream os;
-    for( auto machine : mega::Context::get()->getMachines() )
+    mega::Cycle cycle;
+
+    Root r = mega::Context::get()->getThisRoot();
+    ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
+
+    std::vector< ObjZeroToMany_OneToOne > added;
+    for( int i = 0; i != 10; ++i )
     {
-        os << "\nFound machine: " << static_cast< mega::U32 >( machine );
-        for( mega::MP machineProcess : mega::Context::get()->getProcesses( machine ) )
-        {
-            os << "\nFound machineProcess: " << machineProcess;
-            for( mega::MPO mpo : mega::Context::get()->getMPO( machineProcess ) )
-            {
-                Root root = mega::Context::get()->getRoot( mpo );
-
-                std::ostringstream osFile;
-                osFile << "mpo_" << mpo << ".xml";
-
-                root.Save( osFile.str() );
-                os << "\nSaved: " << mpo << " to: " << osFile.str();
-            }
-        }
+        added.push_back( r.Parent_ZeroToMany_OneToOne.ObjZeroToMany_OneToOne() );
     }
-    return os.str();
+
+    std::random_shuffle( added.begin(), added.end() );
+
+    ASSERT_EQ( 10, added.size() );
+    ASSERT_EQ( r.Parent_ZeroToMany_OneToOne().size(), added.size() );
+
+    for( auto& t : added )
+    {
+        r.Parent_ZeroToMany_OneToOne( WriteOperation::REMOVE, t.Child_ZeroToMany_OneToOne.Get() );
+    }
+
+    ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
 }
 
-std::string test2()
+TEST( TestProg, ZeroToOne_OneToOne )
 {
-    std::ostringstream os;
-    for( auto machine : mega::Context::get()->getMachines() )
-    {
-        os << "\nFound machine: " << static_cast< mega::U32 >( machine );
-        for( mega::MP machineProcess : mega::Context::get()->getProcesses( machine ) )
-        {
-            os << "\nFound machineProcess: " << machineProcess;
-            for( mega::MPO mpo : mega::Context::get()->getMPO( machineProcess ) )
-            {
-                if( mpo != mega::Context::get()->getThisMPO() )
-                {
-                    os << "\nFound other mpo: " << mpo << std::endl;
-                    auto start = std::chrono::steady_clock::now();
+    mega::Cycle cycle;
 
-                    mega::Cycle cycle;
-                    {
-                        Root root = mega::Context::get()->getRoot( mpo );
-                        root.doStuff();
-                        root.m_testDimension( root.m_testDimension() + 1 );
-                        {
-                            std::ostringstream os;
-                            os << root.m_str() << " " << mpo;
-                            root.m_str( os.str() );
-                        }
+    Root r = mega::Context::get()->getThisRoot();
+    ASSERT_TRUE( ( ( mega::reference )r ).is_valid() );
+    ObjChild_ZeroToOne_OneToOne t1 = r.Parent_ZeroToOne_OneToOne.ObjChild_ZeroToOne_OneToOne();
+    ASSERT_TRUE( ( ( mega::reference )t1 ).is_valid() );
 
-                        // FloorSocket f = root.SocketSurface.FloorSocket();
-                        // f.m_intValue( 123 );
-                        // f.m_floatValue( 10.0f );
-
-                        os << "Got root: " << root << " mpo:" << mpo << std::endl;
-                        os << "after write:  root.m_testDimension(): " << root.m_testDimension() << std::endl;
-                        os << "m_str after: " << root.m_str() << std::endl;
-                    }
-
-                    os << "Time: ";
-                    print( std::chrono::duration_cast< std::chrono::steady_clock::duration >(
-                               std::chrono::steady_clock::now() - start ),
-                           os );
-                }
-            }
-        }
-    }
-    return os.str();
-}
-
-std::string test3()
-{
-    std::ostringstream os;
-    mega::Cycle        cycle;
-    {
-        Root root = mega::Context::get()->getThisRoot();
-
-        // allocate WallSocket
-        WallSocket w = root.SocketSurface.WallSocket();
-
-        // create an aux system plugged into wallsocket
-        AuxSystem aux = w.Socket.AuxSystem();
-
-        {
-            for( auto v : root.SocketSurface() )
-            {
-                if( v == w.SocketInstall.Get() )
-                {
-                    os << "It works" << std::endl;
-                }
-            }
-            if( w.SocketInstall() == root.SocketSurface.Get() )
-            {
-                os << "Also other way round!" << std::endl;
-            }
-        }
-
-        // unlink
-        {
-            root.SocketSurface( WriteOperation::REMOVE, w.SocketInstall.Get() );
-            if( root.SocketSurface().empty() )
-            {
-                os << "Non singular link side reset" << std::endl;
-            }
-            if( !w.SocketInstall() )
-            {
-                os << "Singular link reset" << std::endl;
-            }
-        }
-
-        // link explicitly
-        {
-            root.SocketSurface( w.SocketInstall.Get() );
-            for( auto v : root.SocketSurface() )
-            {
-                if( v == w.SocketInstall.Get() )
-                {
-                    os << "It works" << std::endl;
-                }
-            }
-            if( w.SocketInstall() == root.SocketSurface.Get() )
-            {
-                os << "Also other way round!" << std::endl;
-            }
-        }
-
-        // unlink
-        {
-            root.SocketSurface( WriteOperation::REMOVE, w.SocketInstall.Get() );
-            if( root.SocketSurface().empty() )
-            {
-                os << "Non singular link side reset" << std::endl;
-            }
-            if( !w.SocketInstall() )
-            {
-                os << "Singular link reset" << std::endl;
-            }
-        }
-
-        // link other way round
-        {
-            w.SocketInstall( root.SocketSurface.Get() );
-            for( auto v : root.SocketSurface() )
-            {
-                if( v == w.SocketInstall.Get() )
-                {
-                    os << "It works again" << std::endl;
-                }
-            }
-            if( w.SocketInstall() == root.SocketSurface.Get() )
-            {
-                os << "Also other way round again!" << std::endl;
-            }
-        }
-
-        root.Save( "test_linked.xml" );
-
-        // unlink other way
-        {
-            w.SocketInstall( WriteOperation::REMOVE, root.SocketSurface.Get() );
-            if( root.SocketSurface().empty() )
-            {
-                os << "Non singular link side reset" << std::endl;
-            }
-            if( !w.SocketInstall() )
-            {
-                os << "Singular link reset" << std::endl;
-            }
-        }
-
-        root.Save( "test_unlinked.xml" );
-    }
-    return os.str();
-}
-
-std::string test4()
-{
-    std::ostringstream os;
-    mega::Cycle        cycle;
-    {
-        Root root = mega::Context::get()->getThisRoot();
-        root.m_int( 123 );
-        root.m_float( 3.21f );
-
-        WallSocket otherWS = root.SocketSurface.WallSocket();
-
-        FloorSocket                fTemp;
-        std::vector< FloorSocket > floorSockets;
-        floorSockets.push_back( fTemp );
-        for( int i = 0; i < 4; ++i )
-        {
-            // allocate WallSocket
-            FloorSocket f = root.SocketSurface.FloorSocket();
-            f.m_intValue( i );
-            f.m_floatValue( 10.0f );
-
-            if( !fTemp )
-                fTemp = f;
-            floorSockets.push_back( f );
-
-            // create an aux system plugged into wallsocket
-            AuxSystem aux = f.Socket.AuxSystem();
-            aux.m_floatValue( 0.2f );
-        }
-
-        for( int i = 0; i < 4; ++i )
-        {
-            // allocate WallSocket
-            WallSocket w = root.SocketSurface.WallSocket();
-            w.m_intValue( i * 2 );
-            if( i % 2 )
-            {
-                w.m_FloorSocketRef( fTemp );
-                w.m_floorSocketVector( floorSockets );
-            }
-
-            // create an aux system plugged into wallsocket
-            AuxSystem aux = w.Socket.AuxSystem();
-            aux.m_floatValue( 0.3f );
-            // aux.m_otherWallSocket( otherWS );
-        }
-        root.Save( "test4.xml" );
-    }
-    return os.str();
-}
-
-std::string test5()
-{
-    std::ostringstream os;
-    mega::Cycle        cycle;
-    {
-        Root root = mega::Context::get()->getThisRoot();
-        root.Load( "test4.xml" );
-        root.Save( "test5.xml" );
-    }
-    return os.str();
-}
-
-std::string test6()
-{
-    std::ostringstream os;
-    mega::Cycle        cycle;
-    {
-        Root root = mega::Context::get()->getThisRoot();
-
-        Root::doStuff d = root.doStuff();
-
-        d.Stop();
-    }
-    return os.str();
+    r.Parent_ZeroToOne_OneToOne( WriteOperation::REMOVE, t1.Child_ZeroToOne_OneToOne.Get() );
+    ObjChild_ZeroToOne_OneToOne t2 = r.Parent_ZeroToOne_OneToOne();
+    ASSERT_TRUE( !( ( mega::reference )t2 ).is_valid() );
 }
