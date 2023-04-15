@@ -1,10 +1,8 @@
 
 
-
 object ObjZeroToMany_OneToOne
 {
     link Child_ZeroToMany_OneToOne : Link_Child_ZeroToMany_OneToOne;
-
 }
 
 object ObjChild_ZeroToOne_OneToOne
@@ -20,4 +18,87 @@ object Root
     link Parent_ZeroToMany_OneToOne : Link_Parent_ZeroToMany_OneToOne;
     link Parent_ZeroToOne_OneToOne : Link_Parent_ZeroToOne_OneToOne;
 
+    // all types defined in native_types.hpp
+    dim U8        m_U8;
+    dim I8        m_I8;
+    dim U16       m_U16;
+    dim I16       m_I16;
+    dim U32       m_U32;
+    dim I32       m_I32;
+    dim U64       m_U64;
+    dim I64       m_I64;
+    dim F32       m_F32;
+    dim F64       m_F64;
+    dim TimeStamp m_TimeStamp;
+
+    // all user defined supported types
+    dim mega::reference                 m_reference;
+    dim std::vector< mega::reference >  m_vector_reference;
+    dim std::string                     m_string;
+    dim std::vector< I32 >              m_vector_I32;
+
+    // math types
+    dim F2 m_F2;
+    dim F3 m_F3;
+    dim F4 m_F4;
+    dim Quat m_Quat;
+    dim F33 m_F33;
+
+    include( <iostream> );
+
+    // maths
+    function Math_Basic() : void
+    {
+        std::cout << "Math_Basic" << std::endl;
+
+        F3 v1{ 1, 2, 3 };
+        F3 v2{ 1, 0, 2 };
+
+        using namespace qvm;
+        F3 v3 = v1 + v2;
+        
+        std::cout << qvm::to_string( v3 )  << std::endl;
+
+        v3 *= 2;
+        std::cout << "multiply: " << qvm::to_string( v3 )  << std::endl;
+
+        normalize( v3 );
+        std::cout << qvm::to_string( v3 )  << std::endl;
+
+        v3 += v3;
+        std::cout << qvm::to_string( v3 )  << std::endl;
+
+        v3 *= 3;
+        std::cout << qvm::to_string( v3 )  << std::endl;
+
+        v3 += F3{ 3, 3, 3 };
+        std::cout << qvm::to_string( v3 )  << std::endl;
+
+        float f = qvm::dot( v1, v3 );
+        std::cout << "dot: " << f  << std::endl;
+
+        F3 v4 = qvm::cross( v1, v3 );
+        std::cout << "cross: " << qvm::to_string( v4 )  << std::endl;
+    }
+
+    function Math_Basic2() : void
+    {
+        std::cout << "Math_Basic2" << std::endl;
+    }
+
+    function AllTypesAreRef() : void
+    {
+        mega::MPO mpo = getMPO();
+        std::cout << "MPO is: " << mpo << std::endl;
+    }
+
+    function TestSave() : void
+    {
+        Root.Save( "test.xml" );
+    }
+
+    function TestLoad() : void
+    {
+        Root.Load( "test.xml" );
+    }
 }
