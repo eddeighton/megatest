@@ -101,4 +101,83 @@ object Root
     {
         Root.Load( "test.xml" );
     }
+
+    action animTest1
+    {
+        std::cout << "animTest1" << std::endl;
+
+        dim mega::I64 m_i64;
+
+        function Estimator() : void
+        {
+            m_i64( m_i64() + 1 );
+        }
+    }
+
+    action animTest2
+    {
+        std::cout << "animTest2" << std::endl;
+
+        dim mega::I64 m_i64;
+
+        function Estimator() : void
+        {
+            m_i64( m_i64() + 1 );
+        }
+    }
+
+    action animTest3
+    {
+        std::cout << "animTest3" << std::endl;
+
+        dim mega::I64 m_i64;
+
+        function Estimator() : void
+        {
+            m_i64( m_i64() + 1 );
+        }
+    }
+
+    action automataTest : IAutomata
+    {
+        seq
+        {
+            // hello
+            animTest1 a1 = animTest1();
+            a1.m_I64( 123 );
+        }
+        seq
+        {
+            animTest2 a2 = animTest2();
+            a2.m_I64( 123 );
+
+            // hello again
+            repeat
+            {
+                // repeat this
+                
+                maybe
+                {
+                    // maybe this
+                    animTest1 a3 = animTest1();
+                    a3.m_I64( 12 );
+                }
+                or
+                {
+                    // or this
+                    animTest2();
+                }
+                seq
+                {
+                    // and then this
+                    animTest3();
+                }
+                seq
+                {
+                    // and then this
+                    animTest1 a3 = animTest1();
+                }
+            }
+        }
+    }
 }

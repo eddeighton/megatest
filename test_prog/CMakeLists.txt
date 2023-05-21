@@ -28,6 +28,7 @@ include( ${WORKSPACE_ROOT_PATH}/src/common/common_include.cmake )
 include( ${WORKSPACE_ROOT_PATH}/src/mega/mega_include.cmake )
 
 set( TEST_PROG_SOURCE 
+        unit_test_wrapper.hpp
         main.cpp )
 
 add_executable( test_prog ${TEST_PROG_SOURCE} )

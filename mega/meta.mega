@@ -1,7 +1,9 @@
 
-
-interface ControlSystem
+interface IAutomata
 {
+}
+
+interface ControlSystem {
 }
 
 interface AuxiliarySystem : ControlSystem {

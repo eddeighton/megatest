@@ -6,7 +6,7 @@
 
 #include "service/tool.hpp"
 
-#include "/workspace/root/src/mega/src/tests/edsUnitTestWrapper.hpp"
+#include "unit_test_wrapper.hpp"
 
 #include "boost/asio/spawn.hpp"
 #include "boost/program_options.hpp"
@@ -64,10 +64,10 @@ int main( int argc, const char* argv[] )
         {
             mega::service::Tool::Functor functor = [ &szResult, strTest ]( boost::asio::yield_context& yield_ctx )
             {
-                std::unique_ptr< EDUTS::UnitTestResultWrapper > results;
+                std::unique_ptr< TestProg::UnitTestResultWrapper > results;
                 try
                 {
-                    EDUTS::UnitTestWrapper test( EDUTS::UnitTestOptions( false, false, 1, strTest.c_str(), "" ) );
+                    TestProg::UnitTestWrapper test( TestProg::UnitTestOptions( false, false, 1, strTest.c_str(), "" ) );
                     szResult = test.run();
                     results = test.getResult();
                 }

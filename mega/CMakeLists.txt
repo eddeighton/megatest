@@ -11,6 +11,7 @@ MegaProject( Basic )
 MegaComponent( INTERFACE TestInterface MEGA meta.mega links.mega root.mega )
 
 link_boost( TestInterface filesystem )
+link_boost( TestInterface serialization )
 link_common( TestInterface )
 
 #add_subdirectory(stuff)

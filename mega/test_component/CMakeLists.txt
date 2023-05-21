@@ -8,5 +8,6 @@ include( ${WORKSPACE_ROOT_PATH}/src/common/common_include.cmake )
 MegaComponent( LIBRARY TestComponent CPP test.cpp DEPENDENCIES ../root.mega ../links.mega  )
 
 link_boost( TestComponent filesystem )
+link_boost( TestComponent serialization )
 link_common( TestComponent )
 link_gtest( TestComponent )
