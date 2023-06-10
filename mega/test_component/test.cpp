@@ -33,7 +33,7 @@ void print( const T& dur, std::ostream& os )
 TEST( TestProg, ThisShouldNOTCompile )
 {
     Root r = mega::Context::get()->getThisRoot();
-    
+
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -43,6 +43,29 @@ TEST( TestProg, ThisShouldNOTCompile )
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
+
+TEST( TestProg, SaveNested )
+{
+    mega::Cycle cycle;
+    Root        r = mega::Context::get()->getThisRoot();
+
+    ObjChild_ZeroToOne_OneToOne t1 = r.Parent_ZeroToOne_OneToOne.ObjChild_ZeroToOne_OneToOne();
+    t1.m_string( "test nested object" );
+
+    r.Save( "TestProg_SaveNested.xml" );
+    {
+        r.Parent_ZeroToOne_OneToOne( WriteOperation::REMOVE, t1.Child_ZeroToOne_OneToOne.Get() );
+        ObjChild_ZeroToOne_OneToOne t2 = r.Parent_ZeroToOne_OneToOne();
+        ASSERT_TRUE( !( ( mega::reference )t2 ).is_valid() );
+    }
+
+    r.Load( "TestProg_SaveNested.xml" );
+    {
+        ObjChild_ZeroToOne_OneToOne t2 = r.Parent_ZeroToOne_OneToOne();
+        ASSERT_TRUE( ( ( mega::reference )t2 ).is_valid() );
+        ASSERT_EQ( t2.m_string(), "test nested object" );
+    }
 }
 
 TEST( TestProg, ZeroToMany_OneToOne )

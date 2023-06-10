@@ -3,11 +3,15 @@
 object ObjZeroToMany_OneToOne
 {
     link Child_ZeroToMany_OneToOne : Link_Child_ZeroToMany_OneToOne;
+
+    dim std::string m_string;
 }
 
 object ObjChild_ZeroToOne_OneToOne
 {
     link Child_ZeroToOne_OneToOne : Link_Child_ZeroToOne_OneToOne;
+
+    dim std::string m_string;
 }
 
 object Root
@@ -102,6 +106,16 @@ object Root
         Root.Load( "test.xml" );
     }
 
+    function TestCallee( int a, int b ) : int 
+    {
+        return a + b;
+    }
+    
+    function TestCall() : int
+    {
+        return TestCallee( 1, 2 );
+    }
+
     action animTest1
     {
         std::cout << "animTest1" << std::endl;
@@ -143,12 +157,12 @@ object Root
         seq
         {
             // hello
-            animTest1 a1 = animTest1();
+            struct animTest1 a1 = animTest1();
             a1.m_I64( 123 );
         }
         seq
         {
-            animTest2 a2 = animTest2();
+            struct animTest2 a2 = animTest2();
             a2.m_I64( 123 );
 
             // hello again
@@ -159,7 +173,7 @@ object Root
                 maybe
                 {
                     // maybe this
-                    animTest1 a3 = animTest1();
+                    struct animTest1 a3 = animTest1();
                     a3.m_I64( 12 );
                 }
                 or
@@ -175,7 +189,7 @@ object Root
                 seq
                 {
                     // and then this
-                    animTest1 a3 = animTest1();
+                    struct animTest1 a3 = animTest1();
                 }
             }
         }

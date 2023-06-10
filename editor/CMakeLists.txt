@@ -46,7 +46,7 @@ set_target_properties( editor PROPERTIES
     #CXX_STANDARD_REQUIRED ON
     #CXX_EXTENSIONS OFF
     #VERSION ${VERSION_SHORT}
-    EXPORT_NAME "Mission Editor"
+    EXPORT_NAME "Schematic Editor"
     #ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${ads_PlatformDir}/lib"
     #LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${ads_PlatformDir}/lib"
     #RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${ads_PlatformDir}/bin"
