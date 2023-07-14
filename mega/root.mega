@@ -4,6 +4,9 @@ object ObjZeroToMany_OneToOne
 {
     link Child_ZeroToMany_OneToOne : Link_Child_ZeroToMany_OneToOne;
 
+    link Parent_ZeroToMany_OneToMany : Link_Parent_ZeroToMany_OneToMany;
+    link Child_ZeroToMany_OneToMany : Link_Child_ZeroToMany_OneToMany;
+
     dim std::string m_string;
 }
 
