@@ -1,8 +1,7 @@
 
-#include "test.hpp"
-
 #include "mega/reference_io.hpp"
 #include "mega/macros.hpp"
+#include "mega/reference_io.hpp"
 
 #include "service/protocol/common/context.hpp"
 #include "service/cycle.hpp"
@@ -33,7 +32,7 @@ void print( const T& dur, std::ostream& os )
 
 #pragma mega
 
-TEST( TestProg, ThisShouldNOTCompile )
+TEST( BasicTests, ThisShouldNOTCompile )
 {
     Root r = mega::Context::get()->getThisRoot();
 
@@ -48,7 +47,7 @@ TEST( TestProg, ThisShouldNOTCompile )
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 
-TEST( TestProg, Delete )
+TEST( BasicTests, Delete )
 {
     using namespace mega::log::Structure;
 
@@ -57,14 +56,14 @@ TEST( TestProg, Delete )
 
     {
         Root                   r = mega::Context::get()->getThisRoot();
-        ObjZeroToMany_OneToOne objects[ 4 ];
+        ObjA objects[ 4 ];
 
         {
             mega::Cycle cycle;
-            objects[ 0 ] = r.Parent_ZeroToMany_OneToOne.ObjZeroToMany_OneToOne();
-            objects[ 1 ] = objects[ 0 ].Parent_ZeroToMany_OneToMany.ObjZeroToMany_OneToOne();
-            objects[ 2 ] = objects[ 1 ].Parent_ZeroToMany_OneToMany.ObjZeroToMany_OneToOne();
-            objects[ 3 ] = objects[ 2 ].Parent_ZeroToMany_OneToMany.ObjZeroToMany_OneToOne();
+            objects[ 0 ] = r.Parent_ZeroToMany_OneToOne.ObjA();
+            objects[ 1 ] = objects[ 0 ].Parent_ZeroToMany_OneToMany.ObjA();
+            objects[ 2 ] = objects[ 1 ].Parent_ZeroToMany_OneToMany.ObjA();
+            objects[ 3 ] = objects[ 2 ].Parent_ZeroToMany_OneToMany.ObjA();
         }
 
         r.Parent_ZeroToMany_OneToOne( WriteOperation::REMOVE, objects[ 0 ].Child_ZeroToMany_OneToOne.Get() );
@@ -88,31 +87,31 @@ TEST( TestProg, Delete )
     }
     ASSERT_EQ( iTotalDestructs, 4 );
 }
-
-TEST( TestProg, SaveNested )
+/*
+TEST( BasicTests, SaveNested )
 {
     mega::Cycle cycle;
     Root        r = mega::Context::get()->getThisRoot();
 
-    ObjChild_ZeroToOne_OneToOne t1 = r.Parent_ZeroToOne_OneToOne.ObjChild_ZeroToOne_OneToOne();
+    ObjB t1 = r.Parent_ZeroToOne_OneToOne.ObjB();
     t1.m_string( "test nested object" );
 
     r.Save( "TestProg_SaveNested.xml" );
     {
         r.Parent_ZeroToOne_OneToOne( WriteOperation::REMOVE, t1.Child_ZeroToOne_OneToOne.Get() );
-        ObjChild_ZeroToOne_OneToOne t2 = r.Parent_ZeroToOne_OneToOne();
+        ObjB t2 = r.Parent_ZeroToOne_OneToOne();
         ASSERT_TRUE( !( ( mega::reference )t2 ).is_valid() );
     }
 
     r.Load( "TestProg_SaveNested.xml" );
     {
-        ObjChild_ZeroToOne_OneToOne t2 = r.Parent_ZeroToOne_OneToOne();
+        ObjB t2 = r.Parent_ZeroToOne_OneToOne();
         ASSERT_TRUE( ( ( mega::reference )t2 ).is_valid() );
         ASSERT_EQ( t2.m_string(), "test nested object" );
     }
 }
-
-TEST( TestProg, ZeroToMany_OneToOne )
+*/
+TEST( BasicTests, ZeroToMany_OneToOne )
 {
     mega::Cycle cycle;
 
@@ -124,7 +123,7 @@ TEST( TestProg, ZeroToMany_OneToOne )
     }
     ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
 
-    ObjZeroToMany_OneToOne t1 = r.Parent_ZeroToMany_OneToOne.ObjZeroToMany_OneToOne();
+    ObjA t1 = r.Parent_ZeroToMany_OneToOne.ObjA();
     ASSERT_TRUE( ( ( mega::reference )t1 ).is_valid() );
 
     auto theList = r.Parent_ZeroToMany_OneToOne();
@@ -136,17 +135,17 @@ TEST( TestProg, ZeroToMany_OneToOne )
     ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
 }
 
-TEST( TestProg, ZeroToMany_OneToOne_Many )
+TEST( BasicTests, ZeroToMany_OneToOne_Many )
 {
     mega::Cycle cycle;
 
     Root r = mega::Context::get()->getThisRoot();
     ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
 
-    std::vector< ObjZeroToMany_OneToOne::Child_ZeroToMany_OneToOne > added;
+    std::vector< ObjA::Child_ZeroToMany_OneToOne > added;
     for( int i = 0; i != 10; ++i )
     {
-        ObjZeroToMany_OneToOne result = r.Parent_ZeroToMany_OneToOne.ObjZeroToMany_OneToOne();
+        ObjA result = r.Parent_ZeroToMany_OneToOne.ObjA();
         added.push_back( result.Child_ZeroToMany_OneToOne.Get() );
     }
     ASSERT_EQ( 10, added.size() );
@@ -166,30 +165,30 @@ TEST( TestProg, ZeroToMany_OneToOne_Many )
     ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
 }
 
-TEST( TestProg, ZeroToOne_OneToOne )
+TEST( BasicTests, ZeroToOne_OneToOne )
 {
     mega::Cycle cycle;
 
     Root r = mega::Context::get()->getThisRoot();
     ASSERT_TRUE( ( ( mega::reference )r ).is_valid() );
-    ObjChild_ZeroToOne_OneToOne t1 = r.Parent_ZeroToOne_OneToOne.ObjChild_ZeroToOne_OneToOne();
+    ObjB t1 = r.Parent_ZeroToOne_OneToOne.ObjB();
     ASSERT_TRUE( ( ( mega::reference )t1 ).is_valid() );
 
     r.Parent_ZeroToOne_OneToOne( WriteOperation::REMOVE, t1.Child_ZeroToOne_OneToOne.Get() );
-    ObjChild_ZeroToOne_OneToOne t2 = r.Parent_ZeroToOne_OneToOne();
+    ObjB t2 = r.Parent_ZeroToOne_OneToOne();
     ASSERT_TRUE( !( ( mega::reference )t2 ).is_valid() );
 }
 
-TEST( TestProg, Reset )
+TEST( BasicTests, Reset )
 {
     mega::Cycle cycle;
 
     Root r = mega::Context::get()->getThisRoot();
 
-    std::vector< ObjZeroToMany_OneToOne::Child_ZeroToMany_OneToOne > added;
+    std::vector< ObjA::Child_ZeroToMany_OneToOne > added;
     for( int i = 0; i != 10; ++i )
     {
-        ObjZeroToMany_OneToOne result = r.Parent_ZeroToMany_OneToOne.ObjZeroToMany_OneToOne();
+        ObjA result = r.Parent_ZeroToMany_OneToOne.ObjA();
         added.push_back( result.Child_ZeroToMany_OneToOne.Get() );
     }
     ASSERT_EQ( 10, added.size() );

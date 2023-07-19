@@ -14,5 +14,5 @@ link_boost( TestInterface filesystem )
 link_boost( TestInterface serialization )
 link_common( TestInterface )
 
-#add_subdirectory(stuff)
-add_subdirectory(test_component)
+add_subdirectory(basic_tests)
+add_subdirectory(move_tests)

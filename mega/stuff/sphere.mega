@@ -1,7 +1,0 @@
-
-object Sphere
-{
-    dim int m_counter1;
-    dim int m_counter2;
-    include( <memory> );
-}

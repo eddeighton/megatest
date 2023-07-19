@@ -1,6 +1,6 @@
 
 
-object ObjZeroToMany_OneToOne
+object ObjA
 {
     link Child_ZeroToMany_OneToOne : Link_Child_ZeroToMany_OneToOne;
 
@@ -10,9 +10,12 @@ object ObjZeroToMany_OneToOne
     dim std::string m_string;
 }
 
-object ObjChild_ZeroToOne_OneToOne
+object ObjB
 {
     link Child_ZeroToOne_OneToOne : Link_Child_ZeroToOne_OneToOne;
+
+    link Parent_ZeroToMany_OneToOne_Other : Link_Parent_ZeroToMany_OneToOne_Other;
+    link Child_ZeroToMany_OneToOne_Other : Link_Child_ZeroToMany_OneToOne_Other;
 
     dim std::string m_string;
 }
@@ -95,6 +98,7 @@ object Root
 
     function AllTypesAreRef() : void
     {
+        include( mega/reference_io.hpp );
         mega::MPO mpo = getMPO();
         std::cout << "MPO is: " << mpo << std::endl;
     }

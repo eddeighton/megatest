@@ -27,11 +27,16 @@
 		</item>
 	</megaSourceFiles>
 	<cppSourceFiles class_id="5" tracking_level="0" version="0">
-		<count>1</count>
+		<count>2</count>
 		<item_version>0</item_version>
 		<item class_id="6" tracking_level="0" version="0">
 			<cpp_file_path>
-				<filepath>mega/test_component/test.cpp</filepath>
+				<filepath>mega/basic_tests/test.cpp</filepath>
+			</cpp_file_path>
+		</item>
+		<item>
+			<cpp_file_path>
+				<filepath>mega/move_tests/test.cpp</filepath>
 			</cpp_file_path>
 		</item>
 	</cppSourceFiles>
@@ -44,7 +49,7 @@
 		<item_version>0</item_version>
 	</schematicSourceFiles>
 	<compilationFileInfos class_id="9" tracking_level="0" version="0">
-		<count>55</count>
+		<count>56</count>
 		<item_version>0</item_version>
 		<item class_id="10" tracking_level="0" version="0">
 			<fileType>0</fileType>
@@ -807,12 +812,26 @@
 			<fileID>54</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/test_component/test.cpp.OperationsStage.Operations.db</filepath>
+					<filepath>mega/basic_tests/test.cpp.OperationsStage.Operations.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
 				<source_file_path>
-					<filepath>mega/test_component/test.cpp</filepath>
+					<filepath>mega/basic_tests/test.cpp</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>20</fileType>
+			<fileID>55</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/move_tests/test.cpp.OperationsStage.Operations.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/move_tests/test.cpp</filepath>
 				</source_file_path>
 			</objectSourceFilePath>
 		</item>

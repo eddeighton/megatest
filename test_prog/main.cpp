@@ -1,6 +1,4 @@
 
-#include "mega/test_component/test.hpp"
-
 #include "service/network/log.hpp"
 #include "service/network/network.hpp"
 
@@ -21,6 +19,52 @@
 
 #include <iostream>
 #include <string>
+
+
+mega::U64 runTestGroup( const std::string& strTest )
+{
+    mega::U64 szResult = 0U;
+    mega::service::Tool tool( mega::network::MegaDaemonPort() );
+    try
+    {
+        mega::service::Tool::Functor functor = [ &szResult, strTest ]( boost::asio::yield_context& yield_ctx )
+        {
+            std::unique_ptr< TestProg::UnitTestResultWrapper > results;
+            try
+            {
+                TestProg::UnitTestWrapper test( TestProg::UnitTestOptions( false, false, 1, strTest.c_str(), "" ) );
+                szResult = test.run();
+                results = test.getResult();
+            }
+            catch( std::runtime_error& e )
+            {
+                std::cout << "Encountered exception: " << e.what() << std::endl;
+            }
+            catch( mega::runtime::JITException& ex )
+            {
+                std::cout << "Encountered JIT exception: " << ex.what() << std::endl;
+            }
+            catch( ... )
+            {
+                std::cout << "Encountered unknown exception" << std::endl;
+            }
+
+        };
+        tool.run( functor );
+    }
+    catch( mega::runtime::JITException& ex )
+    {
+        std::cout << "Encountered JIT exception: " << ex.what() << std::endl;
+        tool.shutdown();
+    }
+    catch( std::exception& ex )
+    {
+        std::cout << "TestProg Exception: " << ex.what() << std::endl;
+        tool.shutdown();
+        return 1;
+    }
+    return szResult;
+}
 
 int main( int argc, const char* argv[] )
 {
@@ -55,51 +99,19 @@ int main( int argc, const char* argv[] )
         }
     }
 
-    mega::U64 szResult = 0U;
 
     mega::network::configureLog( logFolder, "test_prog", mega::network::fromStr( strConsoleLogLevel ),
                                  mega::network::fromStr( strLogFileLevel ) );
 
+    if( !strTest.empty() )
     {
-        mega::service::Tool tool( mega::network::MegaDaemonPort() );
-        try
-        {
-            mega::service::Tool::Functor functor = [ &szResult, strTest ]( boost::asio::yield_context& yield_ctx )
-            {
-                std::unique_ptr< TestProg::UnitTestResultWrapper > results;
-                try
-                {
-                    TestProg::UnitTestWrapper test( TestProg::UnitTestOptions( false, false, 1, strTest.c_str(), "" ) );
-                    szResult = test.run();
-                    results = test.getResult();
-                }
-                catch( std::runtime_error& e )
-                {
-                    std::cout << "Encountered exception: " << e.what() << std::endl;
-                }
-                catch( mega::runtime::JITException& ex )
-                {
-                    std::cout << "Encountered JIT exception: " << ex.what() << std::endl;
-                }
-                catch( ... )
-                {
-                    std::cout << "Encountered unknown exception" << std::endl;
-                }
-
-            };
-            tool.run( functor );
-        }
-        catch( mega::runtime::JITException& ex )
-        {
-            std::cout << "Encountered JIT exception: " << ex.what() << std::endl;
-            tool.shutdown();
-        }
-        catch( std::exception& ex )
-        {
-            std::cout << "TestProg Exception: " << ex.what() << std::endl;
-            tool.shutdown();
-            return 1;
-        }
+        return runTestGroup( strTest );
     }
+    else
+    {
+        runTestGroup( "BasicTests.*" );
+        runTestGroup( "MoveTests.*" );
+    }
+
     return 0;
 }

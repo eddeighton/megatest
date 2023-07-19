@@ -7,12 +7,14 @@
 link Link_Parent_ZeroToMany_OneToOne [0:*] >> Link_Child_ZeroToMany_OneToOne;
 link Link_Child_ZeroToMany_OneToOne [1:1] < Link_Parent_ZeroToMany_OneToOne;
 
-
 // ZeroToOne_OneToOne
 link Link_Parent_ZeroToOne_OneToOne [0:1] >> Link_Child_ZeroToOne_OneToOne;
 link Link_Child_ZeroToOne_OneToOne [1:1] < Link_Parent_ZeroToOne_OneToOne;
 
-
-// ZeroToOne_OneToOne
+// ZeroToMany_OneToMany
 link Link_Parent_ZeroToMany_OneToMany [0:*] >> Link_Child_ZeroToMany_OneToMany;
 link Link_Child_ZeroToMany_OneToMany [1:*] < Link_Parent_ZeroToMany_OneToMany;
+
+// ZeroToMany_OneToOne_Other
+link Link_Parent_ZeroToMany_OneToOne_Other [0:*] >> Link_Child_ZeroToMany_OneToOne_Other;
+link Link_Child_ZeroToMany_OneToOne_Other [1:1] < Link_Parent_ZeroToMany_OneToOne_Other;
