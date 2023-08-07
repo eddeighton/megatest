@@ -29,8 +29,6 @@ object Root
     link Parent_ZeroToOne_OneToOne : Link_Parent_ZeroToOne_OneToOne;
 
     // all types defined in native_types.hpp
-    dim U8        m_U8;
-    dim I8        m_I8;
     dim U16       m_U16;
     dim I16       m_I16;
     dim U32       m_U32;

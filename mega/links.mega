@@ -1,8 +1,6 @@
 
 // define link interfaces
 
-// For each Socket Surface there exists zero to many Socket Installations
-
 // ZeroToMany_OneToOne
 link Link_Parent_ZeroToMany_OneToOne [0:*] >> Link_Child_ZeroToMany_OneToOne;
 link Link_Child_ZeroToMany_OneToOne [1:1] < Link_Parent_ZeroToMany_OneToOne;

@@ -3,6 +3,8 @@
 #include "mega/macros.hpp"
 #include "mega/reference_io.hpp"
 
+#include "jit/jit_exception.hpp"
+
 #include "service/protocol/common/context.hpp"
 #include "service/cycle.hpp"
 
@@ -23,7 +25,6 @@ struct ObjA
 {
     ObjA() = default;
     ObjA( mega::reference );
-
 
     struct _Parent_ZeroToMany_OneToMany
     {
@@ -48,8 +49,6 @@ struct ObjA
             void operator()( _Parent_ZeroToMany_OneToMany );
         } Move;
     } Child_ZeroToMany_OneToMany;
-
-    
 };
 
 struct Root
@@ -144,37 +143,58 @@ TEST( MoveTests, InMPOMoveRemote )
         ASSERT_EQ( objA3.Parent_ZeroToMany_OneToMany().size(), 0 );
     }
 
-    //ctx->destroyExecutor( newExecutor );
+    // ctx->destroyExecutor( newExecutor );
 }
-/*
-TEST( MoveTests, SimpleMove )
+
+template < typename T >
+mega::reference toRef( const T& r )
+{
+    return static_cast< mega::reference >( r );
+}
+
+TEST( MoveTests, MoveInterMPO )
 {
     auto ctx = mega::Context::get();
 
     auto thisMPO     = ctx->getThisMPO();
     auto newExecutor = ctx->constructExecutor( thisMPO.getMachineID() );
-    auto remoteMPO   = ctx->constructMPO( newExecutor );
-    Root remoteRoot  = ctx->getRoot( remoteMPO );
-    Root r           = ctx->getThisRoot();
+    auto m1          = ctx->constructMPO( newExecutor );
+    Root r1          = ctx->getRoot( m1 );
+
+    auto m2 = ctx->constructMPO( newExecutor );
+    Root r2 = ctx->getRoot( m2 );
+
+    ASSERT_EQ( toRef( r1 ).getMP(), toRef( r2 ).getMP() );
+    ASSERT_NE( toRef( r1 ).getMPO().getOwnerID(), toRef( r2 ).getMPO().getOwnerID() );
 
     ObjA objectToMove;
 
     {
         mega::Cycle cycle;
-        ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
-        objectToMove = r.Parent_ZeroToMany_OneToOne.ObjA();
-        ASSERT_FALSE( r.Parent_ZeroToMany_OneToOne().empty() );
-        objectToMove.Move( remoteRoot );
-        // object still in same place for this cycle
-        ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
+        ASSERT_TRUE( r1.Parent_ZeroToMany_OneToOne().empty() );
+        objectToMove = r1.Parent_ZeroToMany_OneToOne.ObjA();
+        ASSERT_FALSE( r1.Parent_ZeroToMany_OneToOne().empty() );
+        ASSERT_EQ( toRef( objectToMove ).getMPO(), toRef( r1 ).getMPO() );
+
+        // ASSERT_THROW( objectToMove.Child_ZeroToMany_OneToMany.Move( remoteRoot.Parent_ZeroToMany_OneToOne.Get() ),
+        //               mega::runtime::JITException );
+
+        objectToMove.Child_ZeroToMany_OneToOne.Move( r2.Parent_ZeroToMany_OneToOne.Get() );
+        // object immediately unparented from old parent
+        ASSERT_TRUE( r1.Parent_ZeroToMany_OneToOne().empty() );
+        // object not moved to remote root yet
+        ASSERT_TRUE( r2.Parent_ZeroToMany_OneToOne().empty() );
     }
 
-    {
+   {
         mega::Cycle cycle;
-        ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
-        ASSERT_FALSE( remoteRoot.Parent_ZeroToMany_OneToOne().empty() );
+
+        // ASSERT_EQ( toRef( objectToMove ).getMPO(), toRef( r2 ).getMPO() );
+        // ASSERT_NE( toRef( r1 ).getMPO(), toRef( r2 ).getMPO() );
+
+        ASSERT_TRUE( r1.Parent_ZeroToMany_OneToOne().empty() );
+        ASSERT_FALSE( r2.Parent_ZeroToMany_OneToOne().empty() );
     }
 
-    ctx->destroyExecutor( newExecutor );
+    // ctx->destroyExecutor( newExecutor );
 }
-*/
