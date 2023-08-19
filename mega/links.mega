@@ -16,3 +16,7 @@ link Link_Child_ZeroToMany_OneToMany [1:*] < Link_Parent_ZeroToMany_OneToMany;
 // ZeroToMany_OneToOne_Other
 link Link_Parent_ZeroToMany_OneToOne_Other [0:*] >> Link_Child_ZeroToMany_OneToOne_Other;
 link Link_Child_ZeroToMany_OneToOne_Other [1:1] < Link_Parent_ZeroToMany_OneToOne_Other;
+
+
+link Link_Parent_Toaster [0:*] >> Link_Child_Toaster;
+link Link_Child_Toaster [1:1] < Link_Parent_Toaster;

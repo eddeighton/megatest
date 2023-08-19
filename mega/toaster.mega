@@ -1,0 +1,25 @@
+
+
+object Toaster
+{
+    dependency( meta.mega );
+    dependency( links.mega );
+
+    link Child : Link_Child_Toaster;
+
+    event PowerOn;
+    event PowerOff;
+
+    action Off
+    {
+        interupt i( PowerOn ) -> On;
+        co_return mega::sleep();
+    }
+
+    action On
+    {
+        interupt i( PowerOff ) -> Off;
+        co_return mega::sleep();
+    }
+
+}

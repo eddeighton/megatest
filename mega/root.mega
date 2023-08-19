@@ -27,7 +27,8 @@ object Root
 
     link Parent_ZeroToMany_OneToOne : Link_Parent_ZeroToMany_OneToOne;
     link Parent_ZeroToOne_OneToOne : Link_Parent_ZeroToOne_OneToOne;
-
+    link Parent_Toaster : Link_Parent_Toaster;
+    
     // all types defined in native_types.hpp
     dim U16       m_U16;
     dim I16       m_I16;
@@ -40,22 +41,23 @@ object Root
     dim TimeStamp m_TimeStamp;
 
     // all user defined supported types
-    dim mega::reference                 m_reference;
-    dim std::vector< mega::reference >  m_vector_reference;
-    dim std::string                     m_string;
-    dim std::vector< I32 >              m_vector_I32;
+    dim mega::reference m_reference;
+    dim std::vector< mega::reference > m_vector_reference;
+    dim std::string m_string;
+    dim std::vector< I32 > m_vector_I32;
 
     // math types
-    dim F2 m_F2;
-    dim F3 m_F3;
-    dim F4 m_F4;
+    dim F2   m_F2;
+    dim F3   m_F3;
+    dim F4   m_F4;
     dim Quat m_Quat;
-    dim F33 m_F33;
+    dim F33  m_F33;
 
-    include( <iostream> );
+    include( < iostream > );
 
     // maths
-    function Math_Basic() : void
+    function Math_Basic()
+        : void
     {
         std::cout << "Math_Basic" << std::endl;
 
@@ -64,139 +66,67 @@ object Root
 
         using namespace qvm;
         F3 v3 = v1 + v2;
-        
-        std::cout << qvm::to_string( v3 )  << std::endl;
+
+        std::cout << qvm::to_string( v3 ) << std::endl;
 
         v3 *= 2;
-        std::cout << "multiply: " << qvm::to_string( v3 )  << std::endl;
+        std::cout << "multiply: " << qvm::to_string( v3 ) << std::endl;
 
         normalize( v3 );
-        std::cout << qvm::to_string( v3 )  << std::endl;
+        std::cout << qvm::to_string( v3 ) << std::endl;
 
         v3 += v3;
-        std::cout << qvm::to_string( v3 )  << std::endl;
+        std::cout << qvm::to_string( v3 ) << std::endl;
 
         v3 *= 3;
-        std::cout << qvm::to_string( v3 )  << std::endl;
+        std::cout << qvm::to_string( v3 ) << std::endl;
 
         v3 += F3{ 3, 3, 3 };
-        std::cout << qvm::to_string( v3 )  << std::endl;
+        std::cout << qvm::to_string( v3 ) << std::endl;
 
         float f = qvm::dot( v1, v3 );
-        std::cout << "dot: " << f  << std::endl;
+        std::cout << "dot: " << f << std::endl;
 
         F3 v4 = qvm::cross( v1, v3 );
-        std::cout << "cross: " << qvm::to_string( v4 )  << std::endl;
+        std::cout << "cross: " << qvm::to_string( v4 ) << std::endl;
     }
 
-    function Math_Basic2() : void
+    function Math_Basic2()
+        : void
     {
         std::cout << "Math_Basic2" << std::endl;
     }
 
-    function AllTypesAreRef() : void
+    function AllTypesAreRef()
+        : void
     {
-        include( mega/reference_io.hpp );
+        include( mega / reference_io.hpp );
         mega::MPO mpo = getMPO();
         std::cout << "MPO is: " << mpo << std::endl;
     }
 
-    function TestSave() : void
+    function TestSave()
+        : void
     {
         Root.Save( "test.xml" );
     }
 
-    function TestLoad() : void
+    function TestLoad()
+        : void
     {
         Root.Load( "test.xml" );
     }
 
-    function TestCallee( int a, int b ) : int 
+    function TestCallee( int a, int b )
+        : int
     {
         return a + b;
     }
-    
-    function TestCall() : int
+
+    function TestCall()
+        : int
     {
         return TestCallee( 1, 2 );
     }
 
-    action animTest1
-    {
-        std::cout << "animTest1" << std::endl;
-
-        dim mega::I64 m_i64;
-
-        function Estimator() : void
-        {
-            m_i64( m_i64() + 1 );
-        }
-    }
-
-    action animTest2
-    {
-        std::cout << "animTest2" << std::endl;
-
-        dim mega::I64 m_i64;
-
-        function Estimator() : void
-        {
-            m_i64( m_i64() + 1 );
-        }
-    }
-
-    action animTest3
-    {
-        std::cout << "animTest3" << std::endl;
-
-        dim mega::I64 m_i64;
-
-        function Estimator() : void
-        {
-            m_i64( m_i64() + 1 );
-        }
-    }
-
-    action automataTest : IAutomata
-    {
-        seq
-        {
-            // hello
-            struct animTest1 a1 = animTest1();
-            a1.m_I64( 123 );
-        }
-        seq
-        {
-            struct animTest2 a2 = animTest2();
-            a2.m_I64( 123 );
-
-            // hello again
-            repeat
-            {
-                // repeat this
-                
-                maybe
-                {
-                    // maybe this
-                    struct animTest1 a3 = animTest1();
-                    a3.m_I64( 12 );
-                }
-                or
-                {
-                    // or this
-                    animTest2();
-                }
-                seq
-                {
-                    // and then this
-                    animTest3();
-                }
-                seq
-                {
-                    // and then this
-                    struct animTest1 a3 = animTest1();
-                }
-            }
-        }
-    }
 }
