@@ -40,7 +40,7 @@ TEST( BasicTests, ThisShouldNOTCompile )
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    r.BadSymbolThisSHuldNOTWork();
+    r.BadSymbolThisSHuldNOTWork( 123 );
 
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

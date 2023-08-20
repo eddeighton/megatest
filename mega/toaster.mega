@@ -1,25 +1,43 @@
 
 
+link Link_ToasterInteract [1:1] << Link_Toaster;
+link Link_Toaster [1:1] > Link_ToasterInteract;
+
 object Toaster
 {
     dependency( meta.mega );
     dependency( links.mega );
 
     link Child : Link_Child_Toaster;
+    link Interact : Link_ToasterInteract;
 
     event PowerOn;
     event PowerOff;
 
     action Off
     {
-        interupt i( PowerOn ) -> On;
+        interupt i( PowerOn )->On;
         co_return mega::sleep();
     }
 
     action On
     {
-        interupt i( PowerOff ) -> Off;
+        interupt i( PowerOff )->Off
+        {
+        }
+
+        interupt j( Interact.StartInteraction ev )
+        {
+        }
+
         co_return mega::sleep();
     }
+}
 
+object ToasterIneraction
+{
+    link Child : Link_Child_Toaster;
+    link Toaster : Link_Toaster;
+
+    event StartInteraction;
 }
