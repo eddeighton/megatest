@@ -13,28 +13,22 @@ object Toaster
 
     event PowerOn;
     event PowerOff;
+    event Reset;
 
     action Off
     {
-        interupt i( PowerOn )->On;
         co_return mega::sleep();
+
+        interupt( PowerOn ) > On;
     }
 
-    action On
+    action On > Off
     {
-        interupt i( PowerOff )->Off
-        {
-        }
-
-        interupt j( Interact.StartInteraction ev )
-        {
-        }
-
         co_return mega::sleep();
     }
 }
 
-object ToasterIneraction
+object ToasterInteraction
 {
     link Child : Link_Child_Toaster;
     link Toaster : Link_Toaster;
