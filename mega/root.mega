@@ -105,18 +105,6 @@ object Root
         std::cout << "MPO is: " << mpo << std::endl;
     }
 
-    function TestSave()
-        : void
-    {
-        Root.Save( "test.xml" );
-    }
-
-    function TestLoad()
-        : void
-    {
-        Root.Load( "test.xml" );
-    }
-
     function TestCallee( int a, int b )
         : int
     {
