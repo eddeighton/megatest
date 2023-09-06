@@ -55,6 +55,17 @@ object Root
 
     include( < iostream > );
 
+    /*action TestAction[ 4 ] > TestB
+    {
+        action TestB[ 3 ] > TestC
+        {
+            action TestC[ 2 ]
+            {
+                dim int m_inner_dimension;
+            }
+        }
+    }*/
+
     // maths
     function Math_Basic()
         : void

@@ -33,7 +33,7 @@ object Toaster
 object ToasterInteraction
 {
     link Child : Link_Child_Toaster;
-    link Toaster : Link_Toaster;
+    link TheToaster : Link_Toaster;
 
     event StartInteraction;
 

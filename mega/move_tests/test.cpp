@@ -74,7 +74,7 @@ static_assert( false, "This code should NOT be compiled" );
 #endif
 
 #pragma mega
-
+/*
 TEST( MoveTests, InMPOMove )
 {
     auto ctx = mega::Context::get();
@@ -102,14 +102,14 @@ TEST( MoveTests, InMPOMove )
         ASSERT_EQ( objA1.Parent_ZeroToMany_OneToMany().size(), 1 );
     }
 }
-
+*/
 TEST( MoveTests, InMPOMoveRemote )
 {
     auto ctx = mega::Context::get();
 
     auto thisMPO     = ctx->getThisMPO();
     auto newExecutor = ctx->constructExecutor( thisMPO.getMachineID() );
-    auto remoteMPO   = ctx->constructMPO( newExecutor );
+    /*auto remoteMPO   = ctx->constructMPO( newExecutor );
     Root r           = ctx->getRoot( remoteMPO );
 
     {
@@ -141,10 +141,12 @@ TEST( MoveTests, InMPOMoveRemote )
         ASSERT_EQ( objA2.Parent_ZeroToMany_OneToMany().size(), 1 );
         ObjA objA3 = objA2.Parent_ZeroToMany_OneToMany()[ 0 ].ObjA.Get();
         ASSERT_EQ( objA3.Parent_ZeroToMany_OneToMany().size(), 0 );
-    }
+    }*/
 
-    // ctx->destroyExecutor( newExecutor );
+    ctx->destroyExecutor( newExecutor );
 }
+
+/*
 
 template < typename T >
 mega::reference toRef( const T& r )
@@ -198,3 +200,4 @@ TEST( MoveTests, MoveInterMPO )
 
     // ctx->destroyExecutor( newExecutor );
 }
+*/

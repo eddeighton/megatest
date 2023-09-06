@@ -100,13 +100,13 @@ TEST( BasicTests, SaveNested )
     {
         r.Parent_ZeroToOne_OneToOne( WriteOperation::REMOVE, t1.Child_ZeroToOne_OneToOne.Get() );
         ObjB t2 = r.Parent_ZeroToOne_OneToOne();
-        ASSERT_TRUE( !( ( mega::reference )t2 ).is_valid() );
+        ASSERT_TRUE( !( ( mega::reference )t2 ).valid() );
     }
 
     r.Load( "TestProg_SaveNested.xml" );
     {
         ObjB t2 = r.Parent_ZeroToOne_OneToOne();
-        ASSERT_TRUE( ( ( mega::reference )t2 ).is_valid() );
+        ASSERT_TRUE( ( ( mega::reference )t2 ).valid() );
         ASSERT_EQ( t2.m_string(), "test nested object" );
     }
 }
@@ -119,12 +119,12 @@ TEST( BasicTests, ZeroToMany_OneToOne )
     {
         mega::reference ref = r;
         ASSERT_EQ( ref.getType(), mega::ROOT_TYPE_ID ) << "Root is wrong: " << ref;
-        ASSERT_TRUE( ref.is_valid() );
+        ASSERT_TRUE( ref.valid() );
     }
     ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
 
     ObjA t1 = r.Parent_ZeroToMany_OneToOne.ObjA();
-    ASSERT_TRUE( ( ( mega::reference )t1 ).is_valid() );
+    ASSERT_TRUE( ( ( mega::reference )t1 ).valid() );
 
     auto theList = r.Parent_ZeroToMany_OneToOne();
     ASSERT_EQ( theList.size(), 1 );
@@ -170,13 +170,13 @@ TEST( BasicTests, ZeroToOne_OneToOne )
     mega::Cycle cycle;
 
     Root r = mega::Context::get()->getThisRoot();
-    ASSERT_TRUE( ( ( mega::reference )r ).is_valid() );
+    ASSERT_TRUE( ( ( mega::reference )r ).valid() );
     ObjB t1 = r.Parent_ZeroToOne_OneToOne.ObjB();
-    ASSERT_TRUE( ( ( mega::reference )t1 ).is_valid() );
+    ASSERT_TRUE( ( ( mega::reference )t1 ).valid() );
 
     r.Parent_ZeroToOne_OneToOne( WriteOperation::REMOVE, t1.Child_ZeroToOne_OneToOne.Get() );
     ObjB t2 = r.Parent_ZeroToOne_OneToOne();
-    ASSERT_TRUE( !( ( mega::reference )t2 ).is_valid() );
+    ASSERT_TRUE( !( ( mega::reference )t2 ).valid() );
 }
 
 TEST( BasicTests, Reset )
