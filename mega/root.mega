@@ -8,6 +8,22 @@ object ObjA
     link Child_ZeroToMany_OneToMany : Link_Child_ZeroToMany_OneToMany;
 
     dim std::string m_string;
+
+    action MoveTest
+    {
+        dim ObjA m_from;
+        dim ObjA m_to;
+        
+        if( m_from() && m_to() )
+        {
+            m_from().Child_ZeroToMany_OneToMany.Move( m_to().Parent_ZeroToMany_OneToMany.Get() );
+
+            //reset
+            ObjA reset;
+            m_from( reset );
+            m_to( reset );
+        }
+    }
 }
 
 object ObjB

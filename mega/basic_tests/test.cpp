@@ -40,11 +40,13 @@ TEST( BasicTests, ThisShouldNOTCompile )
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    r.BadSymbolThisSHuldNOTWork( 123 );
+    // r.BadSymbolThisSHuldNOTWork( 123 );
 
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    r.TestCall();
 }
 
 TEST( BasicTests, Delete )
