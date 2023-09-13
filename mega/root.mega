@@ -2,6 +2,8 @@
 
 object ObjA
 {
+    include( "mega/macros.hpp" );
+
     link Child_ZeroToMany_OneToOne : Link_Child_ZeroToMany_OneToOne;
 
     link Parent_ZeroToMany_OneToMany : Link_Parent_ZeroToMany_OneToMany;
@@ -16,12 +18,14 @@ object ObjA
         
         if( m_from() && m_to() )
         {
-            m_from().Child_ZeroToMany_OneToMany.Move( m_to().Parent_ZeroToMany_OneToMany.Get() );
+            // m_from().Child_ZeroToMany_OneToMany.Move( m_to().Parent_ZeroToMany_OneToMany.Get() );
 
             //reset
-            ObjA reset;
+            ObjA reset = {};
             m_from( reset );
             m_to( reset );
+
+            LOG( Info, "MoveTest complete" );
         }
     }
 }

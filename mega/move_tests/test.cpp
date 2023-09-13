@@ -126,7 +126,7 @@ TEST( MoveTests, SimMove )
         root2ObjA      = root2.Parent_ZeroToMany_OneToOne.ObjA();
     }
 
-    /*{
+    {
         // test
         mega::Cycle cycle;
 
@@ -134,17 +134,20 @@ TEST( MoveTests, SimMove )
         ASSERT_FALSE( root2.Parent_ZeroToMany_OneToOne().empty() );
         ASSERT_FALSE( root1ObjA.Parent_ZeroToMany_OneToMany().empty() );
         ASSERT_TRUE( root2ObjA.Parent_ZeroToMany_OneToMany().empty() );
-    }*/
+    }
 
-    /* {
+    {
         mega::Cycle cycle;
         // issue move via action
 
         root1ObjA.MoveTest.m_from( root1ObjAChild );
         root1ObjA.MoveTest.m_to( root2ObjA );
         root1ObjA.MoveTest();
-    }*/
+    }
 
+    {
+        mega::Cycle cycle;
+    }
     /*{
         // test
         mega::Cycle cycle;
