@@ -20,61 +20,12 @@
 
 #ifndef MEGA_CLANG_COMPILATION
 
-struct Root;
-struct ObjA
-{
-    ObjA() = default;
-    ObjA( mega::reference );
-
-    struct _Parent_ZeroToMany_OneToMany
-    {
-        std::vector< ObjA > operator()();
-
-        struct _ObjZeroToMany_OneToOne
-        {
-            ObjA operator()();
-
-        } ObjA;
-
-        struct _Get
-        {
-            _Parent_ZeroToMany_OneToMany operator()();
-        } Get;
-    } Parent_ZeroToMany_OneToMany;
-
-    struct _Child_ZeroToMany_OneToMany
-    {
-        struct _Move
-        {
-            void operator()( _Parent_ZeroToMany_OneToMany );
-        } Move;
-    } Child_ZeroToMany_OneToMany;
-};
-
-struct Root
-{
-    Root() = default;
-    Root( mega::reference );
-
-    struct _Parent_ZeroToMany_OneToOne
-    {
-        std::vector< ObjA > operator()();
-
-        struct _ObjZeroToMany_OneToOne
-        {
-            ObjA operator()();
-
-        } ObjA;
-
-    } Parent_ZeroToMany_OneToOne;
-};
-
 static_assert( false, "This code should NOT be compiled" );
 
 #endif
 
 #pragma mega
-
+/*
 TEST( MoveTests, LocalMove )
 {
     auto ctx = mega::Context::get();
@@ -148,7 +99,7 @@ TEST( MoveTests, SimMove )
     {
         mega::Cycle cycle;
     }
-    /*{
+    {
         // test
         mega::Cycle cycle;
 
@@ -156,10 +107,10 @@ TEST( MoveTests, SimMove )
         ASSERT_FALSE( root2.Parent_ZeroToMany_OneToOne().empty() );
         ASSERT_TRUE( root1ObjA.Parent_ZeroToMany_OneToMany().empty() );
         ASSERT_FALSE( root2ObjA.Parent_ZeroToMany_OneToMany().empty() );
-    }*/
+    }
 
     ctx->destroyExecutor( newExecutor );
-}
+}*/
 
 /*
 TEST( MoveTests, RemoteMove )

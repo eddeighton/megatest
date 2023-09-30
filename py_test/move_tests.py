@@ -34,6 +34,9 @@ sys.path.append(MEGA_BIN)
 
 os.chdir("/home/foobar/test_{}".format(CFG_TYPE))
 
+print( "PID: ", os.getpid() )
+print( "CWD: ", os.getcwd() )
+
 import megastructure
 import asyncio
 
@@ -82,6 +85,9 @@ def basicMove( process ):
     
     o1.MoveTest.m_from( o1 );
     o1.MoveTest.m_to( o2 );
+    
+    mega.cycle()
+    
     o1.MoveTest();
     
     mega.cycle()

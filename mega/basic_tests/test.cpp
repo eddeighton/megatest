@@ -36,19 +36,49 @@ TEST( BasicTests, ThisShouldNOTCompile )
 {
     Root r = mega::Context::get()->getThisRoot();
 
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    mega::Cycle cycle1;
+    {
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    // r.BadSymbolThisSHuldNOTWork( 123 );
+        // r.BadSymbolThisSHuldNOTWork( 123 );
 
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        for( int i = 0; i != 10; ++i )
+        {
+            auto result = r.TestCallee( i, 234 );
 
-    r.TestCall();
+            LOG( Info, "Got result of: " << result );
+
+            LOG( Info, r.m_U16() );
+            LOG( Info, r.m_I16() );
+            LOG( Info, r.m_U32() );
+            LOG( Info, r.m_I32() );
+            LOG( Info, r.m_U64() );
+            LOG( Info, r.m_I64() );
+            LOG( Info, r.m_F32() );
+            LOG( Info, r.m_F64() );
+            LOG( Info, r.m_TimeStamp() );
+
+            // all user defined supported types
+            LOG( Info, r.m_reference() );
+            //LOG( Info, r.m_vector_reference() );
+            LOG( Info, r.m_string() );
+            //LOG( Info, r.m_vector_I32() );
+
+            // math types
+            /*LOG( Info, r.m_F2() );
+            LOG( Info, r.m_F3() );
+            LOG( Info, r.m_F4() );
+            LOG( Info, r.m_Quat() );
+            LOG( Info, r.m_F33() );*/
+        }
+    }
 }
-
+/*
 TEST( BasicTests, Delete )
 {
     using namespace mega::log::Structure;
@@ -89,7 +119,7 @@ TEST( BasicTests, Delete )
     }
     ASSERT_EQ( iTotalDestructs, 4 );
 }
-/*
+
 TEST( BasicTests, SaveNested )
 {
     mega::Cycle cycle;
@@ -112,7 +142,7 @@ TEST( BasicTests, SaveNested )
         ASSERT_EQ( t2.m_string(), "test nested object" );
     }
 }
-*/
+
 TEST( BasicTests, ZeroToMany_OneToOne )
 {
     mega::Cycle cycle;
@@ -199,3 +229,4 @@ TEST( BasicTests, Reset )
     r.Parent_ZeroToMany_OneToOne( WriteOperation::RESET );
     ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
 }
+*/

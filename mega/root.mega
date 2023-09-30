@@ -1,77 +1,52 @@
 
 
-object ObjA
-{
-    include( "mega/macros.hpp" );
-
-    link Child_ZeroToMany_OneToOne : Link_Child_ZeroToMany_OneToOne;
-
-    link Parent_ZeroToMany_OneToMany : Link_Parent_ZeroToMany_OneToMany;
-    link Child_ZeroToMany_OneToMany : Link_Child_ZeroToMany_OneToMany;
-
-    dim std::string m_string;
-
-    action MoveTest
-    {
-        dim ObjA m_from;
-        dim ObjA m_to;
-        
-        if( m_from() && m_to() )
-        {
-            // m_from().Child_ZeroToMany_OneToMany.Move( m_to().Parent_ZeroToMany_OneToMany.Get() );
-
-            //reset
-            ObjA reset = {};
-            m_from( reset );
-            m_to( reset );
-
-            LOG( Info, "MoveTest complete" );
-        }
-    }
-}
-
-object ObjB
-{
-    link Child_ZeroToOne_OneToOne : Link_Child_ZeroToOne_OneToOne;
-
-    link Parent_ZeroToMany_OneToOne_Other : Link_Parent_ZeroToMany_OneToOne_Other;
-    link Child_ZeroToMany_OneToOne_Other : Link_Child_ZeroToMany_OneToOne_Other;
-
-    dim std::string m_string;
-}
-
 object Root
 {
     dependency( meta.mega );
-    dependency( links.mega );
+    dependency( toaster.mega );
 
-    link Parent_ZeroToMany_OneToOne : Link_Parent_ZeroToMany_OneToOne;
-    link Parent_ZeroToOne_OneToOne : Link_Parent_ZeroToOne_OneToOne;
-    link Parent_Toaster : Link_Parent_Toaster;
-    
+    owns Toaster [0:*];
+    // owns Slice [0:*];
+
     // all types defined in native_types.hpp
-    dim U16       m_U16;
-    dim I16       m_I16;
-    dim U32       m_U32;
-    dim I32       m_I32;
-    dim U64       m_U64;
-    dim I64       m_I64;
-    dim F32       m_F32;
-    dim F64       m_F64;
-    dim TimeStamp m_TimeStamp;
+    component DataTypes
+    {
+        component Integers
+        {
+            dim U16       m_U16;
+            dim I16       m_I16;
+            dim U32       m_U32;
+            dim I32       m_I32;
+            dim U64       m_U64;
+            dim I64       m_I64;
+            dim F32       m_F32;
+            dim F64       m_F64;
+            dim TimeStamp m_TimeStamp;
+        }
 
-    // all user defined supported types
-    dim mega::reference m_reference;
-    dim std::vector< mega::reference > m_vector_reference;
-    dim std::string m_string;
-    dim std::vector< I32 > m_vector_I32;
+        component References
+        {
+            // all user defined supported types
+            dim mega::reference m_reference;
+            dim std::vector< mega::reference > m_vector_reference;
+        }
 
-    // math types
-    dim F2   m_F2;
-    dim F3   m_F3;
-    dim F4   m_F4;
-    dim Quat m_Quat;
-    dim F33  m_F33;
+        component STL
+        {
+            dim std::string m_string;
+            dim std::vector< I32 > m_vector_I32;
+        }
+
+        component Maths
+        {
+            // math types
+            dim F2   m_F2;
+            dim F3   m_F3;
+            dim F4   m_F4;
+            dim Quat m_Quat;
+            dim F33  m_F33;
+        }
+    }
 
     include( < iostream > );
 
@@ -147,5 +122,4 @@ object Root
     {
         return TestCallee( 1, 2 );
     }
-
 }
