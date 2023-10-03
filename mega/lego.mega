@@ -1,0 +1,38 @@
+
+
+object Brick
+{
+    link Brick[0:*];
+
+    F3 m_colour;
+
+    component Plug
+    {
+        link Brick.Socket;
+
+        action Disconnected
+        {
+        }
+        action Connected
+        {
+            require( Brick.Socket );
+
+            std::cout << "Connected brick colour is: " << Socket.m_colour() << std::endl;
+            std::cout << "This brick colour is: " << m_colour() << std::endl;
+        }
+    }
+
+    component Socket
+    {
+        link Brick.Plug;
+
+        action Disconnected
+        {
+        }
+        action Connected
+        {
+            require( Brick.Plug );
+
+        }
+    }
+}

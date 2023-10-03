@@ -5,7 +5,7 @@ object Root
     dependency( meta.mega );
     dependency( toaster.mega );
 
-    owns Toaster [0:*];
+    owns Toaster;
     // owns Slice [0:*];
 
     // all types defined in native_types.hpp

@@ -5,10 +5,10 @@ object Slice
     dim bool  m_bIsBrownBread;
     dim float m_toastedness = 0.0f;
 
-    // owner Toaster.Slot
-
     component Toastable
     {
+        //alias ToastingSystem = Owner.ToastingSystem;
+
         dim float m_toastedness;
 
         action Toasted
@@ -17,7 +17,7 @@ object Slice
 
         action Toasting > Toasted
         {
-            requirement( ToastingSystem );
+            //requirement( ToastingSystem );
         }
 
         action Idle > Toasting
@@ -26,7 +26,7 @@ object Slice
     }
 
 }
-
+/*
 object Tool : Slice
 {
     component UseByDateChip
@@ -38,17 +38,19 @@ object Tool : Slice
         {
         }
     }
-}
+}*/
 
 object Toaster
 {
     dependency( meta.mega );
 
+    dim std::string m_version;
+
     component Slot[ 4 ]
     {
-        part( One, Two, Three, Four );
+        part( One, Two, Three, Four );qqq
 
-        owns Slice [0:1];
+        owns Slice;
 
         component ToastingSystem
         {
@@ -56,7 +58,7 @@ object Toaster
 
             action Toasting
             {
-                requirement( Toastable );
+                requirement( Slice.Toastable );
 
                 /*link toastedness = Toastable.m_toastedness;
 
@@ -64,6 +66,8 @@ object Toaster
                 {
                     toastedness( toastedness() + m_temp() );
                 }*/
+
+
             }
             action Idle
             {

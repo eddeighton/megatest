@@ -31,7 +31,7 @@ void print( const T& dur, std::ostream& os )
 }
 
 #pragma mega
-
+/*
 TEST( BasicTests, ThisShouldNOTCompile )
 {
     Root r = mega::Context::get()->getThisRoot();
@@ -65,17 +65,35 @@ TEST( BasicTests, ThisShouldNOTCompile )
 
             // all user defined supported types
             LOG( Info, r.m_reference() );
-            //LOG( Info, r.m_vector_reference() );
+            // LOG( Info, r.m_vector_reference() );
             LOG( Info, r.m_string() );
-            //LOG( Info, r.m_vector_I32() );
+            // LOG( Info, r.m_vector_I32() );
 
             // math types
-            /*LOG( Info, r.m_F2() );
+            LOG( Info, r.m_F2() );
             LOG( Info, r.m_F3() );
             LOG( Info, r.m_F4() );
             LOG( Info, r.m_Quat() );
-            LOG( Info, r.m_F33() );*/
+            LOG( Info, r.m_F33() );
         }
+    }
+}
+*/
+
+TEST( BasicTests, InterObject )
+{
+    Root        r = mega::Context::get()->getThisRoot();
+    mega::Cycle cycle1;
+    {
+        auto newToaster = mega_new< Toaster >();
+        LOG( Info, "Created toaster: " << newToaster );
+
+        r.Toaster( newToaster );
+
+        std::string strToasterVersion = r.Toaster.m_version();
+        LOG( Info, strToasterVersion );
+
+        // mega_delete( newToaster );
     }
 }
 /*
