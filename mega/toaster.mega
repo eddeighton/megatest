@@ -42,13 +42,11 @@ object Tool : Slice
 
 object Toaster
 {
-    dependency( meta.mega );
-
     dim std::string m_version;
 
     component Slot[ 4 ]
     {
-        part( One, Two, Three, Four );qqq
+        part( One, Two, Three, Four );
 
         owns Slice;
 

@@ -5,7 +5,7 @@ include( ${WORKSPACE_ROOT_PATH}/thirdparty/boost/boost_include.cmake )
 include( ${WORKSPACE_ROOT_PATH}/thirdparty/gtest/gtest_include.cmake )
 include( ${WORKSPACE_ROOT_PATH}/src/common/common_include.cmake )
 
-MegaComponent( LIBRARY MoveTests CPP test.cpp DEPENDENCIES ../root.mega ../toaster.mega  )
+MegaComponent( LIBRARY MoveTests CPP test.cpp DEPENDENCIES ../root.mega ../toaster.mega ../lego.mega   )
 
 link_boost( MoveTests filesystem )
 link_boost( MoveTests serialization )

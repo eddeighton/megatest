@@ -8,7 +8,7 @@
 		</manifest_file_path>
 	</manifestFilePath>
 	<megaSourceFiles class_id="3" tracking_level="0" version="0">
-		<count>3</count>
+		<count>4</count>
 		<item_version>0</item_version>
 		<item class_id="4" tracking_level="0" version="0">
 			<mega_file_path>
@@ -23,6 +23,11 @@
 		<item>
 			<mega_file_path>
 				<filepath>mega/toaster.mega</filepath>
+			</mega_file_path>
+		</item>
+		<item>
+			<mega_file_path>
+				<filepath>mega/lego.mega</filepath>
 			</mega_file_path>
 		</item>
 	</megaSourceFiles>
@@ -49,7 +54,7 @@
 		<item_version>0</item_version>
 	</schematicSourceFiles>
 	<compilationFileInfos class_id="9" tracking_level="0" version="0">
-		<count>63</count>
+		<count>80</count>
 		<item_version>0</item_version>
 		<item class_id="10" tracking_level="0" version="0">
 			<fileType>0</fileType>
@@ -906,8 +911,246 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>22</fileType>
+			<fileType>1</fileType>
 			<fileID>61</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.ParserStage.AST.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>2</fileType>
+			<fileID>62</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.ParserStage.Body.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>3</fileType>
+			<fileID>63</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.InterfaceStage.Tree.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>4</fileType>
+			<fileID>64</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.MetaStage.MetaAnalysis.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>7</fileType>
+			<fileID>65</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.SymbolRollout.PerSourceSymbols.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>8</fileType>
+			<fileID>66</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.InterfaceAnalysisStage.Clang.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>9</fileType>
+			<fileID>67</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.ConcreteStage.Concrete.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>11</fileType>
+			<fileID>68</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.InheritanceAnalysisRollout.PerSourceDerivations.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>13</fileType>
+			<fileID>69</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.HyperGraphAnalysisRollout.PerSourceModel.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>15</fileType>
+			<fileID>70</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.AliasAnalysisRollout.PerSourceModel.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>16</fileType>
+			<fileID>71</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.MemoryStage.MemoryLayout.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>18</fileType>
+			<fileID>72</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.GlobalMemoryStageRollout.GlobalMemoryRollout.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>20</fileType>
+			<fileID>73</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>21</fileType>
+			<fileID>74</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.AutomataStage.AutomataAnalysis.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>22</fileType>
+			<fileID>75</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.OperationsStage.Operations.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>23</fileType>
+			<fileID>76</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.OperationsLocs.Locations.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>24</fileType>
+			<fileID>77</fileID>
+			<filePath>
+				<compilation_file_path>
+					<filepath>mega/lego.mega.ValueSpaceStage.ValueSpace.db</filepath>
+				</compilation_file_path>
+			</filePath>
+			<objectSourceFilePath>
+				<source_file_path>
+					<filepath>mega/lego.mega</filepath>
+				</source_file_path>
+			</objectSourceFilePath>
+		</item>
+		<item>
+			<fileType>22</fileType>
+			<fileID>78</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/basic_tests/test.cpp.OperationsStage.Operations.db</filepath>
@@ -921,7 +1164,7 @@
 		</item>
 		<item>
 			<fileType>22</fileType>
-			<fileID>62</fileID>
+			<fileID>79</fileID>
 			<filePath>
 				<compilation_file_path>
 					<filepath>mega/move_tests/test.cpp.OperationsStage.Operations.db</filepath>

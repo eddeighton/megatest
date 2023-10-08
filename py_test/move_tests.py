@@ -45,8 +45,6 @@ F2 = mega.F2
 F3 = mega.F3
 F4 = mega.F4
 Quat = mega.Quat
-REMOVE = mega.WriteOperation.REMOVE
-RESET = mega.WriteOperation.RESET
 
 _continue = True
 
@@ -69,26 +67,6 @@ def basicMove( process ):
     
     exe = mega.getProcess( process )
     print( "Got process: ", exe )
-    
-    m1 = exe.createMPO()
-    r1 = m1.getRoot()
-    
-    m2 = exe.createMPO()
-    r2 = m2.getRoot()
-    
-    o1 = r1.Parent_ZeroToMany_OneToOne.ObjA()
-    o2 = r2.Parent_ZeroToMany_OneToOne.ObjA()
-    
-    print( "Created object: ", o1, o2 )
-    
-    mega.cycle()
-    
-    o1.MoveTest.m_from( o1 );
-    o1.MoveTest.m_to( o2 );
-    
-    mega.cycle()
-    
-    o1.MoveTest();
     
     mega.cycle()
     

@@ -41,25 +41,11 @@ def run():
 
 def test_basic():
     megastructure.run_one()
-
-    root = mega.getMPO().getRoot()
-    assert root
-    assert len( root.Parent_ZeroToMany_OneToOne() ) == 0
-    objZeroToMany_OneToOne = root.Parent_ZeroToMany_OneToOne.ObjA();
-    assert len( root.Parent_ZeroToMany_OneToOne() ) == 1
-    assert str( root.Parent_ZeroToMany_OneToOne()[ 0 ]) == str(objZeroToMany_OneToOne.Child_ZeroToMany_OneToOne.Get())
-    root.Parent_ZeroToMany_OneToOne( mega.WriteOperation.REMOVE, objZeroToMany_OneToOne.Child_ZeroToMany_OneToOne.Get() );
-    assert len( root.Parent_ZeroToMany_OneToOne() ) == 0
     mega.cycle()
 
 
 def test_basic2():
     megastructure.run_one()
-
-    root = mega.getMPO().getRoot()
-    objZeroToMany_OneToOne = root.Parent_ZeroToMany_OneToOne.ObjA();
-    assert len( root.Parent_ZeroToMany_OneToOne() ) == 1
-    root.Parent_ZeroToMany_OneToOne( mega.WriteOperation.REMOVE, objZeroToMany_OneToOne );
-    assert len( root.Parent_ZeroToMany_OneToOne() ) == 1
+    mega.cycle()
 
 

@@ -1,12 +1,12 @@
 
-
 object Root
 {
     dependency( meta.mega );
     dependency( toaster.mega );
+    dependency( lego.mega );
 
     owns Toaster;
-    // owns Slice [0:*];
+    owns Brick;
 
     // all types defined in native_types.hpp
     component DataTypes

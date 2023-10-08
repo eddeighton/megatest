@@ -1,38 +1,66 @@
 
-
 object Brick
 {
-    link Brick[0:*];
+    include( <sstream> );
+    include( mega/macros.hpp );
 
-    F3 m_colour;
+    owns OwnedBricks = Brick [0:*];
 
     component Plug
     {
-        link Brick.Socket;
-
-        action Disconnected
-        {
-        }
-        action Connected
-        {
-            require( Brick.Socket );
-
-            std::cout << "Connected brick colour is: " << Socket.m_colour() << std::endl;
-            std::cout << "This brick colour is: " << m_colour() << std::endl;
-        }
+        link AttachedSocket = Brick.Socket;
     }
 
     component Socket
     {
-        link Brick.Plug;
+        link AttachedPlug = Brick.Plug;
+    }
 
-        action Disconnected
-        {
-        }
-        action Connected
-        {
-            require( Brick.Plug );
+    function connect( Brick brick )
+        : void
+    {
+        OwnedBricks( brick );
+        Socket.AttachedPlug( brick.Plug.GET() );
+    }
 
+    function print( int indent ) : void
+    {
+        std::ostringstream os;
+        for( int i = 0; i != indent; ++i )
+            os << ' ';
+        if( Socket.AttachedPlug() )
+        {
+            os << getName() << " -> " << Socket.AttachedPlug.getName();
         }
+        else
+        {
+            os << getName();
+        }
+        LOG( Info, os.str() );
+        for( auto b : OwnedBricks() )
+        {
+            b.print( indent + 2 );
+        }
+    }
+
+    function getName() : std::string
+    {
+        return "Brick";
+    }
+}
+
+object SmallBrick : Brick
+{
+    function getName() : std::string
+    {
+        return "SmallBrick";
+    }
+}
+
+object LargeBrick : Brick
+{
+    function getName() : std::string
+    {
+        return "LargeBrick";
     }
 }

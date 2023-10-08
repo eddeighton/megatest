@@ -16,235 +16,167 @@
 #include <algorithm>
 #include <random>
 
-// #ifndef MEGA_CLANG_COMPILATION
+#ifndef MEGA_CLANG_COMPILATION
 
-template < typename T >
-void print( const T& dur, std::ostream& os )
-{
-    using DurationType = std::chrono::duration< mega::I64, std::ratio< 1, 1'000'000'000 > >;
-    auto c             = std::chrono::duration_cast< DurationType >( dur ).count();
-    auto sec           = ( c % 1'000'000'000'000 ) / 1'000'000'000;
-    auto ms            = ( c % 1'000'000'000 ) / 1'000'000;
-    auto us            = ( c % 1'000'000 ) / 1'000;
-    os << sec << "." << std::setw( 3 ) << std::setfill( '0' ) << ms << "ms." << std::setw( 3 ) << std::setfill( '0' )
-       << us << "us";
-}
+#endif
 
 #pragma mega
-/*
-TEST( BasicTests, ThisShouldNOTCompile )
-{
-    Root r = mega::Context::get()->getThisRoot();
 
-    mega::Cycle cycle1;
-    {
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        // r.BadSymbolThisSHuldNOTWork( 123 );
-
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        for( int i = 0; i != 10; ++i )
-        {
-            auto result = r.TestCallee( i, 234 );
-
-            LOG( Info, "Got result of: " << result );
-
-            LOG( Info, r.m_U16() );
-            LOG( Info, r.m_I16() );
-            LOG( Info, r.m_U32() );
-            LOG( Info, r.m_I32() );
-            LOG( Info, r.m_U64() );
-            LOG( Info, r.m_I64() );
-            LOG( Info, r.m_F32() );
-            LOG( Info, r.m_F64() );
-            LOG( Info, r.m_TimeStamp() );
-
-            // all user defined supported types
-            LOG( Info, r.m_reference() );
-            // LOG( Info, r.m_vector_reference() );
-            LOG( Info, r.m_string() );
-            // LOG( Info, r.m_vector_I32() );
-
-            // math types
-            LOG( Info, r.m_F2() );
-            LOG( Info, r.m_F3() );
-            LOG( Info, r.m_F4() );
-            LOG( Info, r.m_Quat() );
-            LOG( Info, r.m_F33() );
-        }
-    }
-}
-*/
-
-TEST( BasicTests, InterObject )
+TEST( BasicTests, ToasterReadAndWrite )
 {
     Root        r = mega::Context::get()->getThisRoot();
     mega::Cycle cycle1;
     {
+        ASSERT_FALSE( r.Toaster() );
         auto newToaster = mega_new< Toaster >();
-        LOG( Info, "Created toaster: " << newToaster );
+        ASSERT_EQ( "", newToaster.m_version() );
+        newToaster.m_version( "test" );
+        ASSERT_EQ( "test", newToaster.m_version() );
+        r.Toaster( newToaster );
+        ASSERT_TRUE( r.Toaster() );
+        ASSERT_EQ( "test", r.Toaster.m_version() );
+        r.Toaster.m_version( "testing" );
+        ASSERT_EQ( "testing", r.Toaster.m_version() );
+        LOG( Info, "Toaster version is: " << r.Toaster.m_version() );
+        r.Toaster.REMOVE( newToaster );
+        ASSERT_FALSE( r.Toaster() );
+    }
+}
+
+TEST( BasicTests, CreateAndRemoveToaster )
+{
+    Root        r = mega::Context::get()->getThisRoot();
+    mega::Cycle cycle1;
+    {
+        ASSERT_FALSE( r.Toaster() );
+        auto newToaster = mega_new< Toaster >();
+        LOG( Info, "Root: " << r << " net: " << (&r)->getNetworkAddress() );
+        LOG( Info, "Created toaster: " << newToaster << " net: " << (&newToaster)->getNetworkAddress() );
 
         r.Toaster( newToaster );
-
-        std::string strToasterVersion = r.Toaster.m_version();
-        LOG( Info, strToasterVersion );
-
-        // mega_delete( newToaster );
+        ASSERT_TRUE( r.Toaster() );
+        r.Toaster.REMOVE( newToaster );
+        ASSERT_FALSE( r.Toaster() );
     }
 }
-/*
-TEST( BasicTests, Delete )
+
+TEST( BasicTests, ClearToaster )
 {
-    using namespace mega::log::Structure;
-
-    auto& log = mega::Context::get()->getLog();
-    auto  t   = log.getTimeStamp();
-
-    {
-        Root                   r = mega::Context::get()->getThisRoot();
-        ObjA objects[ 4 ];
-
-        {
-            mega::Cycle cycle;
-            objects[ 0 ] = r.Parent_ZeroToMany_OneToOne.ObjA();
-            objects[ 1 ] = objects[ 0 ].Parent_ZeroToMany_OneToMany.ObjA();
-            objects[ 2 ] = objects[ 1 ].Parent_ZeroToMany_OneToMany.ObjA();
-            objects[ 3 ] = objects[ 2 ].Parent_ZeroToMany_OneToMany.ObjA();
-        }
-
-        r.Parent_ZeroToMany_OneToOne( WriteOperation::REMOVE, objects[ 0 ].Child_ZeroToMany_OneToOne.Get() );
-    }
-
-    for( int j = 0; j != 8; ++j )
-    {
-        {
-            mega::Cycle cycle;
-        }
-    }
-
-    int iTotalDestructs = 0;
-    for( auto i = log.begin< Read >( t ); i != log.end< Read >(); ++i )
-    {
-        const Read& record = *i;
-        if( record.getType() == mega::log::Structure::eDestruct )
-        {
-            ++iTotalDestructs;
-        }
-    }
-    ASSERT_EQ( iTotalDestructs, 4 );
-}
-
-TEST( BasicTests, SaveNested )
-{
-    mega::Cycle cycle;
     Root        r = mega::Context::get()->getThisRoot();
-
-    ObjB t1 = r.Parent_ZeroToOne_OneToOne.ObjB();
-    t1.m_string( "test nested object" );
-
-    r.Save( "TestProg_SaveNested.xml" );
+    mega::Cycle cycle1;
     {
-        r.Parent_ZeroToOne_OneToOne( WriteOperation::REMOVE, t1.Child_ZeroToOne_OneToOne.Get() );
-        ObjB t2 = r.Parent_ZeroToOne_OneToOne();
-        ASSERT_TRUE( !( ( mega::reference )t2 ).valid() );
-    }
-
-    r.Load( "TestProg_SaveNested.xml" );
-    {
-        ObjB t2 = r.Parent_ZeroToOne_OneToOne();
-        ASSERT_TRUE( ( ( mega::reference )t2 ).valid() );
-        ASSERT_EQ( t2.m_string(), "test nested object" );
+        ASSERT_FALSE( r.Toaster() );
+        r.Toaster( mega_new< Toaster >() );
+        ASSERT_TRUE( r.Toaster() );
+        r.Toaster.CLEAR();
+        ASSERT_FALSE( r.Toaster() );
     }
 }
 
-TEST( BasicTests, ZeroToMany_OneToOne )
+
+TEST( BasicTests, DeleteToaster )
 {
-    mega::Cycle cycle;
-
-    Root r = mega::Context::get()->getThisRoot();
+    Root        r = mega::Context::get()->getThisRoot();
+    mega::Cycle cycle1;
     {
-        mega::reference ref = r;
-        ASSERT_EQ( ref.getType(), mega::ROOT_TYPE_ID ) << "Root is wrong: " << ref;
-        ASSERT_TRUE( ref.valid() );
+        ASSERT_FALSE( r.Toaster() );
+        r.Toaster( mega_new< Toaster >() );
+        ASSERT_TRUE( r.Toaster() );
+        mega_delete( r.Toaster() );
+        ASSERT_FALSE( r.Toaster() );
     }
-    ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
-
-    ObjA t1 = r.Parent_ZeroToMany_OneToOne.ObjA();
-    ASSERT_TRUE( ( ( mega::reference )t1 ).valid() );
-
-    auto theList = r.Parent_ZeroToMany_OneToOne();
-    ASSERT_EQ( theList.size(), 1 );
-    ASSERT_EQ( theList.front(), t1.Child_ZeroToMany_OneToOne.Get() );
-
-    r.Parent_ZeroToMany_OneToOne( WriteOperation::REMOVE, t1.Child_ZeroToMany_OneToOne.Get() );
-
-    ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
 }
 
-TEST( BasicTests, ZeroToMany_OneToOne_Many )
+
+TEST( BasicTests, RecreateToaster )
 {
-    mega::Cycle cycle;
-
-    Root r = mega::Context::get()->getThisRoot();
-    ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
-
-    std::vector< ObjA::Child_ZeroToMany_OneToOne > added;
-    for( int i = 0; i != 10; ++i )
+    Root        r = mega::Context::get()->getThisRoot();
+    mega::Cycle cycle1;
     {
-        ObjA result = r.Parent_ZeroToMany_OneToOne.ObjA();
-        added.push_back( result.Child_ZeroToMany_OneToOne.Get() );
+        ASSERT_FALSE( r.Toaster() );
+        r.Toaster( mega_new< Toaster >() );
+        r.Toaster( mega_new< Toaster >() );
+        r.Toaster( mega_new< Toaster >() );
+        ASSERT_TRUE( r.Toaster() );
+        mega_delete( r.Toaster() );
+        ASSERT_FALSE( r.Toaster() );
     }
-    ASSERT_EQ( 10, added.size() );
-    ASSERT_EQ( r.Parent_ZeroToMany_OneToOne(), added );
-
-    {
-        std::random_device rd;
-        std::mt19937       g( rd() );
-        std::shuffle( added.begin(), added.end(), g );
-    }
-
-    for( auto& t : added )
-    {
-        r.Parent_ZeroToMany_OneToOne( WriteOperation::REMOVE, t );
-    }
-
-    ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
+    mega::Cycle cycle2;
 }
 
-TEST( BasicTests, ZeroToOne_OneToOne )
+TEST( BasicTests, LegoChain )
 {
-    mega::Cycle cycle;
-
-    Root r = mega::Context::get()->getThisRoot();
-    ASSERT_TRUE( ( ( mega::reference )r ).valid() );
-    ObjB t1 = r.Parent_ZeroToOne_OneToOne.ObjB();
-    ASSERT_TRUE( ( ( mega::reference )t1 ).valid() );
-
-    r.Parent_ZeroToOne_OneToOne( WriteOperation::REMOVE, t1.Child_ZeroToOne_OneToOne.Get() );
-    ObjB t2 = r.Parent_ZeroToOne_OneToOne();
-    ASSERT_TRUE( !( ( mega::reference )t2 ).valid() );
-}
-
-TEST( BasicTests, Reset )
-{
-    mega::Cycle cycle;
-
-    Root r = mega::Context::get()->getThisRoot();
-
-    std::vector< ObjA::Child_ZeroToMany_OneToOne > added;
-    for( int i = 0; i != 10; ++i )
+    Root        r = mega::Context::get()->getThisRoot();
+    mega::Cycle cycle1;
     {
-        ObjA result = r.Parent_ZeroToMany_OneToOne.ObjA();
-        added.push_back( result.Child_ZeroToMany_OneToOne.Get() );
-    }
-    ASSERT_EQ( 10, added.size() );
-    ASSERT_EQ( r.Parent_ZeroToMany_OneToOne(), added );
+        auto b1 = mega_new< Brick >();
+        r.Brick( b1 );
 
-    r.Parent_ZeroToMany_OneToOne( WriteOperation::RESET );
-    ASSERT_TRUE( r.Parent_ZeroToMany_OneToOne().empty() );
+        auto b2 = mega_new< Brick >();
+        b1.connect( b2 );
+
+        auto b3 = mega_new< Brick >();
+        b2.connect( b3 );
+
+        ASSERT_TRUE( r.Brick() );
+        ASSERT_FALSE( b1.OwnedBricks().empty() );
+        ASSERT_FALSE( b2.OwnedBricks().empty() );
+        ASSERT_TRUE( b3.OwnedBricks().empty() );
+
+        ASSERT_TRUE( b1.Socket.AttachedPlug() == b2.Plug.GET() );
+        ASSERT_TRUE( b2.Socket.AttachedPlug() == b3.Plug.GET() );
+
+        ASSERT_TRUE( b2.Plug.AttachedSocket() == b1.Socket.GET() );
+        ASSERT_TRUE( b3.Plug.AttachedSocket() == b2.Socket.GET() );
+
+        {
+            const auto& bricks = b2.OwnedBricks();
+            LOG( Info, "Bricks size: " << bricks.size() );
+            for( auto b : b2.OwnedBricks() )
+            {
+                LOG( Info, b );
+            }
+        }
+
+        mega_delete( b2 );
+
+        ASSERT_TRUE( b1.OwnedBricks().empty() );
+        ASSERT_FALSE( b2.Socket.AttachedPlug() );
+        ASSERT_FALSE( b3.Plug.AttachedSocket() );
+
+        mega_delete( b1 );
+    }
 }
-*/
+
+TEST( BasicTests, ManyLegos )
+{
+    Root        r = mega::Context::get()->getThisRoot();
+    mega::Cycle cycle1;
+    {
+        auto b = mega_new< Brick >();
+        r.Brick( b );
+
+        for( int i = 0; i != 4; ++i )
+        {
+            auto b1 = mega_new< SmallBrick >();
+            b.connect( b1 );
+
+            for( int j = 0; j != 4; ++j )
+            {
+                auto b2 = mega_new< LargeBrick >();
+                b1.connect( b2 );
+
+                for( int k = 0; k != 4; ++k )
+                {
+                    auto b3 = mega_new< Brick >();
+                    b2.connect( b3 );
+                }
+            }
+        }
+
+        r.Brick().print( 0 );
+
+        mega_delete( b );
+    }
+
+}
