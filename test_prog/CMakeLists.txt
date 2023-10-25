@@ -40,7 +40,6 @@ target_include_directories( test_prog PUBLIC ${CMAKE_SOURCE_DIR} )
 
 link_boost( test_prog program_options )
 link_boost( test_prog filesystem )
-link_boost( test_prog atomic )
 link_orc( test_prog )
 link_fmt( test_prog )
 link_spdlog( test_prog )

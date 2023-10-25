@@ -58,7 +58,6 @@ target_link_libraries( editor Qt6::Widgets)
 
 link_boost( editor program_options )
 link_boost( editor filesystem )
-link_boost( editor atomic )
 link_orc( editor )
 link_fmt( editor )
 link_spdlog( editor )

@@ -71,7 +71,7 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>5</fileType>
+			<fileType>4</fileType>
 			<fileID>1</fileID>
 			<filePath>
 				<compilation_file_path>
@@ -85,7 +85,7 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>6</fileType>
+			<fileType>5</fileType>
 			<fileID>2</fileID>
 			<filePath>
 				<compilation_file_path>
@@ -141,11 +141,11 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>17</fileType>
+			<fileType>16</fileType>
 			<fileID>6</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>project.manifest.GlobalMemoryStage.GlobalMemoryLayout.db</filepath>
+					<filepath>project.manifest.ConcreteTypeAnalysis.ConcreteTable.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -159,7 +159,7 @@
 			<fileID>7</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>project.manifest.ConcreteTypeAnalysis.ConcreteTable.db</filepath>
+					<filepath>project.manifest.GlobalMemoryStage.GlobalMemoryLayout.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -239,11 +239,11 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>4</fileType>
+			<fileType>6</fileType>
 			<fileID>13</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/meta.mega.MetaStage.MetaAnalysis.db</filepath>
+					<filepath>mega/meta.mega.SymbolRollout.PerSourceSymbols.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -257,7 +257,7 @@
 			<fileID>14</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/meta.mega.SymbolRollout.PerSourceSymbols.db</filepath>
+					<filepath>mega/meta.mega.MetaStage.MetaAnalysis.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -337,11 +337,11 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>16</fileType>
+			<fileType>17</fileType>
 			<fileID>20</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/meta.mega.MemoryStage.MemoryLayout.db</filepath>
+					<filepath>mega/meta.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -355,7 +355,7 @@
 			<fileID>21</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/meta.mega.GlobalMemoryStageRollout.GlobalMemoryRollout.db</filepath>
+					<filepath>mega/meta.mega.MemoryStage.MemoryLayout.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -369,7 +369,7 @@
 			<fileID>22</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/meta.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
+					<filepath>mega/meta.mega.GlobalMemoryStageRollout.GlobalMemoryRollout.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -477,11 +477,11 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>4</fileType>
+			<fileType>6</fileType>
 			<fileID>30</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/root.mega.MetaStage.MetaAnalysis.db</filepath>
+					<filepath>mega/root.mega.SymbolRollout.PerSourceSymbols.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -495,7 +495,7 @@
 			<fileID>31</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/root.mega.SymbolRollout.PerSourceSymbols.db</filepath>
+					<filepath>mega/root.mega.MetaStage.MetaAnalysis.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -575,11 +575,11 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>16</fileType>
+			<fileType>17</fileType>
 			<fileID>37</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/root.mega.MemoryStage.MemoryLayout.db</filepath>
+					<filepath>mega/root.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -593,7 +593,7 @@
 			<fileID>38</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/root.mega.GlobalMemoryStageRollout.GlobalMemoryRollout.db</filepath>
+					<filepath>mega/root.mega.MemoryStage.MemoryLayout.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -607,7 +607,7 @@
 			<fileID>39</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/root.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
+					<filepath>mega/root.mega.GlobalMemoryStageRollout.GlobalMemoryRollout.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -715,11 +715,11 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>4</fileType>
+			<fileType>6</fileType>
 			<fileID>47</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/toaster.mega.MetaStage.MetaAnalysis.db</filepath>
+					<filepath>mega/toaster.mega.SymbolRollout.PerSourceSymbols.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -733,7 +733,7 @@
 			<fileID>48</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/toaster.mega.SymbolRollout.PerSourceSymbols.db</filepath>
+					<filepath>mega/toaster.mega.MetaStage.MetaAnalysis.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -813,11 +813,11 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>16</fileType>
+			<fileType>17</fileType>
 			<fileID>54</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/toaster.mega.MemoryStage.MemoryLayout.db</filepath>
+					<filepath>mega/toaster.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -831,7 +831,7 @@
 			<fileID>55</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/toaster.mega.GlobalMemoryStageRollout.GlobalMemoryRollout.db</filepath>
+					<filepath>mega/toaster.mega.MemoryStage.MemoryLayout.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -845,7 +845,7 @@
 			<fileID>56</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/toaster.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
+					<filepath>mega/toaster.mega.GlobalMemoryStageRollout.GlobalMemoryRollout.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -953,11 +953,11 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>4</fileType>
+			<fileType>6</fileType>
 			<fileID>64</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/lego.mega.MetaStage.MetaAnalysis.db</filepath>
+					<filepath>mega/lego.mega.SymbolRollout.PerSourceSymbols.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -971,7 +971,7 @@
 			<fileID>65</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/lego.mega.SymbolRollout.PerSourceSymbols.db</filepath>
+					<filepath>mega/lego.mega.MetaStage.MetaAnalysis.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -1051,11 +1051,11 @@
 			</objectSourceFilePath>
 		</item>
 		<item>
-			<fileType>16</fileType>
+			<fileType>17</fileType>
 			<fileID>71</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/lego.mega.MemoryStage.MemoryLayout.db</filepath>
+					<filepath>mega/lego.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -1069,7 +1069,7 @@
 			<fileID>72</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/lego.mega.GlobalMemoryStageRollout.GlobalMemoryRollout.db</filepath>
+					<filepath>mega/lego.mega.MemoryStage.MemoryLayout.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>
@@ -1083,7 +1083,7 @@
 			<fileID>73</fileID>
 			<filePath>
 				<compilation_file_path>
-					<filepath>mega/lego.mega.ConcreteTypeRollout.PerSourceConcreteTable.db</filepath>
+					<filepath>mega/lego.mega.GlobalMemoryStageRollout.GlobalMemoryRollout.db</filepath>
 				</compilation_file_path>
 			</filePath>
 			<objectSourceFilePath>

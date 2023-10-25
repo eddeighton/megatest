@@ -36,16 +36,9 @@ sys.path.append( MEGA_BIN )
 import megastructure
 mega = megastructure
 
-def run():
-    megastructure.run_one()
+megastructure.run_one()
 
-def test_basic():
-    megastructure.run_one()
-    mega.cycle()
-
-
-def test_basic2():
-    megastructure.run_one()
-    mega.cycle()
-
-
+def dump( ref ):
+    print( ref.dump() )
+    
+dump( mega.getMPO().getRoot() )

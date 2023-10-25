@@ -1,6 +1,8 @@
 
 object Brick
 {
+    dependency( meta.mega );
+    
     include( <sstream> );
     include( mega/macros.hpp );
 
@@ -9,11 +11,36 @@ object Brick
     component Plug
     {
         link AttachedSocket = Brick.Socket;
+
+        component SubSystem1[ 3 ]
+        {
+            action Sub1 : OR
+            {
+                action A1
+                {
+                    
+                }
+                action A2
+                {
+                    
+                }
+            }
+        }
     }
 
-    component Socket
+    component Socket : OR
     {
         link AttachedPlug = Brick.Plug;
+
+        action Idle
+        {
+
+        }
+
+        action DoStuff
+        {
+
+        }
     }
 
     function connect( Brick brick )
@@ -21,6 +48,17 @@ object Brick
     {
         OwnedBricks( brick );
         Socket.AttachedPlug( brick.Plug.GET() );
+    }
+
+    function testRefParam( Brick brick ) : Brick::Socket 
+    {
+        return brick.Socket.GET();
+    }
+
+    function test( Brick brick ) : int
+    {
+        //LOG( Info, "From test: " << i );
+        return 123;
     }
 
     function print( int indent ) : void

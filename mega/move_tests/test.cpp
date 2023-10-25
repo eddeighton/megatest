@@ -1,7 +1,7 @@
 
-#include "mega/reference_io.hpp"
+
+#include "mega/values/runtime/reference_io.hpp"
 #include "mega/macros.hpp"
-#include "mega/reference_io.hpp"
 
 #include "jit/jit_exception.hpp"
 
@@ -20,17 +20,6 @@
 
 #ifndef MEGA_CLANG_COMPILATION
 
-template < typename T >
-void print( const T& dur, std::ostream& os )
-{
-    using DurationType = std::chrono::duration< mega::I64, std::ratio< 1, 1'000'000'000 > >;
-    auto c             = std::chrono::duration_cast< DurationType >( dur ).count();
-    auto sec           = ( c % 1'000'000'000'000 ) / 1'000'000'000;
-    auto ms            = ( c % 1'000'000'000 ) / 1'000'000;
-    auto us            = ( c % 1'000'000 ) / 1'000;
-    os << sec << "." << std::setw( 3 ) << std::setfill( '0' ) << ms << "ms." << std::setw( 3 ) << std::setfill( '0' )
-       << us << "us";
-}
 static_assert( false, "This code should NOT be compiled" );
 
 #endif

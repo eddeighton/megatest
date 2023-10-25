@@ -35,8 +35,6 @@ sys.path.append( MEGA_BIN )
 # load the megastructure python component
 import megastructure
 mega = megastructure
-megastructure.run_one()
-megastructure.run_one()
 
 # setup command line arguments handling
 parser = argparse.ArgumentParser(
@@ -67,10 +65,6 @@ if args.toasters:
 
 if args.dump:
     print( root.dump() )
-
-mega.cycle()
-megastructure.run_one()
-
 
 #def main( *args ):
 #    print( "Got arguments: ", args )#

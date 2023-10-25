@@ -106,7 +106,7 @@ object Root
     function AllTypesAreRef()
         : void
     {
-        include( mega / reference_io.hpp );
+        include( mega/values/runtime/reference_io.hpp );
         mega::MPO mpo = getMPO();
         std::cout << "MPO is: " << mpo << std::endl;
     }

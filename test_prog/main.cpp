@@ -20,11 +20,10 @@
 #include <iostream>
 #include <string>
 
-
-mega::U64 runTestGroup( const std::string& strTest )
+mega::U64 runTestGroup( mega::network::Log& log, const std::string& strTest )
 {
-    mega::U64 szResult = 0U;
-    mega::service::Tool tool( mega::network::MegaDaemonPort() );
+    mega::U64           szResult = 0U;
+    mega::service::Tool tool( mega::network::MegaDaemonPort(), log );
     try
     {
         mega::service::Tool::Functor functor = [ &szResult, strTest ]( boost::asio::yield_context& yield_ctx )
@@ -34,7 +33,7 @@ mega::U64 runTestGroup( const std::string& strTest )
             {
                 TestProg::UnitTestWrapper test( TestProg::UnitTestOptions( false, false, 1, strTest.c_str(), "" ) );
                 szResult = test.run();
-                results = test.getResult();
+                results  = test.getResult();
             }
             catch( std::runtime_error& e )
             {
@@ -48,7 +47,6 @@ mega::U64 runTestGroup( const std::string& strTest )
             {
                 std::cout << "Encountered unknown exception" << std::endl;
             }
-
         };
         tool.run( functor );
     }
@@ -99,18 +97,18 @@ int main( int argc, const char* argv[] )
         }
     }
 
-
-    mega::network::configureLog( logFolder, "test_prog", mega::network::fromStr( strConsoleLogLevel ),
-                                 mega::network::fromStr( strLogFileLevel ) );
+    auto log = mega::network::configureLog( mega::network::Log::Config{ logFolder, "test_prog",
+                                                             mega::network::fromStr( strConsoleLogLevel ),
+                                                             mega::network::fromStr( strLogFileLevel ) } );
 
     if( !strTest.empty() )
     {
-        return runTestGroup( strTest );
+        return runTestGroup( log, strTest );
     }
     else
     {
-        runTestGroup( "BasicTests.*" );
-        runTestGroup( "MoveTests.*" );
+        runTestGroup( log, "BasicTests.*" );
+        runTestGroup( log, "MoveTests.*" );
     }
 
     return 0;
