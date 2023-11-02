@@ -14,15 +14,15 @@ object Brick
 
         component SubSystem1[ 3 ]
         {
-            action Sub1 : OR
+            state Sub1
             {
                 action A1
                 {
-                    
+                    requirement( Socket.Idle );
                 }
+
                 action A2
                 {
-                    
                 }
             }
         }
@@ -34,12 +34,10 @@ object Brick
 
         action Idle
         {
-
         }
 
         action DoStuff
         {
-
         }
     }
 

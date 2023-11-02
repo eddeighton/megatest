@@ -1,4 +1,4 @@
-
+#line 2 "/workspace/root/src/basic/src/mega/move_tests/test.cpp"
 
 #include "mega/values/runtime/reference_io.hpp"
 #include "mega/macros.hpp"
@@ -25,6 +25,41 @@ static_assert( false, "This code should NOT be compiled" );
 #endif
 
 #pragma mega
+
+TEST( MoveTests, Basic )
+{
+    auto ctx = mega::Context::get();
+
+    Root     r = ctx->getThisRoot();
+    Root     remoteRoot;
+    mega::MP remoteExecutor;
+
+    {
+        mega::Cycle cycle;
+        remoteExecutor = ctx->constructExecutor( ctx->getThisMPO().getMachineID() );
+
+        mega::MPO newMPO = ctx->constructMPO( remoteExecutor );
+        remoteRoot = ctx->getRoot( newMPO );
+
+        // allocate an object on the remote
+        Brick b = mega_remote_new< Brick >( newMPO );
+        ASSERT_TRUE( b );
+
+        // parent it to the remote root
+        remoteRoot.Brick( b );
+    }
+
+    {
+        mega::Cycle cycle;
+        // check it is still there
+        Brick b = remoteRoot.Brick();
+        ASSERT_TRUE( b );
+    }
+    {
+        // shutdown the remote executor
+        ctx->destroyExecutor( remoteExecutor );
+    }
+}
 /*
 TEST( MoveTests, LocalMove )
 {

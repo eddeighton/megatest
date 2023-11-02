@@ -50,6 +50,12 @@ object Root
 
     include( < iostream > );
 
+
+    action TestRoot
+    {
+        LOG( Info, "TestRoot: " << this->getNetworkAddress() );
+    }
+
     /*action TestAction[ 4 ] > TestB
     {
         action TestB[ 3 ] > TestC

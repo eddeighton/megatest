@@ -1,3 +1,4 @@
+#line 2 "/workspace/root/src/basic/src/mega/basic_tests/test.cpp"
 
 #include "mega/values/runtime/reference_io.hpp"
 #include "mega/macros.hpp"

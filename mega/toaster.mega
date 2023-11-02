@@ -9,17 +9,39 @@ object Slice
 
     component Toastable : OR
     {
+        decider( Toasting, Toasted ) : bool
+        {
+            return true;
+        }
+        decider( PatternBurn ) : bool
+        {
+            return true;
+        }
+        decider( Complete ) : bool
+        {
+            return true;
+        }
+
         dim float m_toastedness;
 
-        action Toasted
+        state Toasted : OR
         {
+            action PatternBurn > Complete
+            {
+
+            }
+
+            action Complete
+            {
+
+            }
         }
 
         action Toasting > Toasted
         {
         }
 
-        action Idle > Toasting
+        action Idle > Toasting, Toasted
         {
         }
     }
@@ -31,6 +53,25 @@ object Toaster
     dependency( meta.mega );
     
     dim std::string m_version;
+
+    component Power : OR
+    {
+        action D > E
+        {
+        }
+        action E
+        {
+        }
+        action F : OR
+        {
+            action G > H
+            {
+            }
+            action H > D
+            {
+            }
+        }
+    }
 
     component Slot[ 4 ]
     {
@@ -44,11 +85,26 @@ object Toaster
 
             action Toasting
             {
-                requirement( Slice.Toastable );
+                //requirement( Slice.Toastable );
 
             }
-            action Idle
+
+            state Idle[ 2 ]
             {
+                action Thing : OR
+                {
+                    action A
+                    {
+                    }
+
+                    action B
+                    {
+                    }
+                }
+
+                action C > Toasting
+                {
+                }
             }
         }
     }
