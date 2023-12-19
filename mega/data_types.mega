@@ -1,0 +1,98 @@
+
+
+object DataTypes
+{
+    include( <iostream> );
+
+
+    // all types defined in native_types.hpp
+    component Integers
+    {
+        dim U16       m_U16;
+        dim I16       m_I16;
+        dim U32       m_U32;
+        dim I32       m_I32;
+        dim U64       m_U64;
+        dim I64       m_I64;
+        dim F32       m_F32;
+        dim F64       m_F64;
+        dim TimeStamp m_TimeStamp;
+
+        function test() : void
+        {
+            LOG( Info, "Integers test" );
+        }
+    }
+
+    component References
+    {
+        // all user defined supported types
+        dim mega::reference m_reference;
+        dim std::vector< mega::reference > m_vector_reference;
+
+        function test() : void
+        {
+            LOG( Info, "References test" );
+        }
+    }
+
+    component STL
+    {
+        dim std::string m_string;
+        dim std::vector< I32 > m_vector_I32;
+
+        function test() : void
+        {
+            LOG( Info, "STL test" );
+        }
+    }
+
+    component Maths
+    {
+        // math types
+        dim F2   m_F2;
+        dim F3   m_F3;
+        dim F4   m_F4;
+        dim Quat m_Quat;
+        dim F33  m_F33;
+
+        // maths
+        function test()
+            : void
+        {
+            LOG( Info, "MathBasic" );
+            using namespace qvm;
+
+            F3 v1{ 1, 2, 3 };
+            F3 v2{ 1, 0, 2 };
+
+            F3 v3 = v1 + v2;
+            m_F3( v3 );
+
+            LOG( Info, m_F3() );
+
+            v3 *= 2;
+            m_F3( v3 );
+            LOG( Info, m_F3() );
+
+            normalize( v3 );
+            LOG( Info, v3 );
+
+            v3 += v3;
+            LOG( Info, v3 );
+
+            v3 *= 3;
+            LOG( Info, v3 );
+
+            v3 += F3{ 3, 3, 3 };
+            LOG( Info, v3 );
+
+            float f = qvm::dot( v1, v3 );
+            LOG( Info, f );
+
+            F3 v4 = qvm::cross( v1, v3 );
+            LOG( Info, v4 );
+        }
+    }
+
+}

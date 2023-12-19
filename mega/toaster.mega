@@ -1,51 +1,46 @@
 
+interface Spread
+{
+    event SuperTasty;
+}
+
+object Butter : Spread
+{
+}
+
+object PeanutButter : Butter
+{
+}
+
+object Marmite : Spread
+{
+    interupt( Owner.SliceExplosion );
+
+    //interupt( Owner.Slice.Owner.Toaster.StartToasting );
+}
 
 object Slice
 {
+    include( mega/values/runtime/reference_io.hpp );
+
     dependency( meta.mega );
 
-    dim bool  m_bIsBrownBread;
-    dim float m_toastedness = 0.0f;
+    owns Spread;
 
-    component Toastable : OR
-    {
-        decider( Toasting, Toasted ) : bool
-        {
-            return true;
-        }
-        decider( PatternBurn ) : bool
-        {
-            return true;
-        }
-        decider( Complete ) : bool
-        {
-            return true;
-        }
+    dim float m_toastedness = 0.1f;
 
-        dim float m_toastedness;
+    event SliceExplosion;
 
-        state Toasted : OR
-        {
-            action PatternBurn > Complete
-            {
+    interupt( Owner.StartToasting );
+    interupt( Owner.Toaster.StartToasting );
+}
 
-            }
+object WhiteSlice : Slice
+{
+}
 
-            action Complete
-            {
-
-            }
-        }
-
-        action Toasting > Toasted
-        {
-        }
-
-        action Idle > Toasting, Toasted
-        {
-        }
-    }
-
+object BrownSlice : Slice
+{
 }
 
 object Toaster
@@ -54,58 +49,91 @@ object Toaster
     
     dim std::string m_version;
 
-    component Power : OR
+    component Slot : OR
     {
-        action D > E
-        {
-        }
-        action E
-        {
-        }
-        action F : OR
-        {
-            action G > H
-            {
-            }
-            action H > D
-            {
-            }
-        }
-    }
-
-    component Slot[ 4 ]
-    {
-        part( One, Two, Three, Four );
-
         owns Slice;
 
-        component ToastingSystem : OR
-        {
-            dim float m_temp;
+        interupt test( Slice.Spread.SuperTasty );
 
-            action Toasting
+        dim I32 m_timer;
+        dim I32 m_toastingTime;
+        dim I32 m_toastingRate;
+
+        decider( ToastingComplete, Idle )
+        {
+            return ToastingComplete::ID;
+        }
+
+        function testFnc() : void
+        {
+            LOG( Info, "test" );
+        }
+
+        event StartToasting;
+        event StopToasting;
+
+        action Idle : OR
+        {
+            interupt( StartToasting ) > Toasting
             {
-                //requirement( Slice.Toastable );
+                m_timer( 0 );
+            }
+
+            decider( DoNothing )
+            {
+                return DoNothing::ID;
+            }
+
+            action DoNothing
+            {
 
             }
 
-            state Idle[ 2 ]
+            action StartToastingA > Toasting
             {
-                action Thing : OR
-                {
-                    action A
-                    {
-                    }
+                co_return mega::complete();
+            }
 
-                    action B
-                    {
-                    }
-                }
-
-                action C > Toasting
-                {
-                }
+            if( m_timer() == 0 )
+            {
+                m_timer( 1 );
+                LOG( Info, "Idle " );
             }
         }
+
+        action Toasting > ToastingComplete, Idle
+        {
+            interupt( StopToasting ) > Idle
+            {
+                LOG( Info, "StopToasting" );
+            }
+
+            if( m_timer() == 0 || m_timer() == 1 )
+            {
+                LOG( Info, "Toasting Started" );
+                m_timer( 2 );
+            }
+            else
+            {
+                m_timer( m_timer() + 1 );
+            }
+
+            if( m_timer() > m_toastingTime() )
+            {
+                co_return mega::complete();
+            }
+        }
+
+        action ToastingComplete > Idle
+        {
+            LOG( Info, "ToastingComplete" );
+            m_timer( 0 );
+            co_return mega::complete();
+        }
     }
+}
+
+object TestObject
+{
+
 }

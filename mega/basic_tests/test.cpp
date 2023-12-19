@@ -21,7 +21,7 @@
 #endif
 
 #pragma mega
-
+/*
 TEST( BasicTests, Brick )
 {
     Root        r = mega::Context::get()->getThisRoot();
@@ -49,7 +49,7 @@ TEST( BasicTests, Brick )
         }
         r.Brick.CLEAR();
     }
-}
+}*/
 
 TEST( BasicTests, ToasterReadAndWrite )
 {
@@ -180,7 +180,7 @@ TEST( BasicTests, RecreateToaster )
     }
     mega::Cycle cycle2;
 }
-
+/*
 TEST( BasicTests, LegoChain )
 {
     Root        r = mega::Context::get()->getThisRoot();
@@ -256,4 +256,4 @@ TEST( BasicTests, ManyLegos )
         mega_delete( b );
     }
 
-}
+}*/

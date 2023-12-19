@@ -13,8 +13,6 @@
 #include "boost/filesystem/path.hpp"
 #include "boost/filesystem/operations.hpp"
 
-#include <spdlog/stopwatch.h>
-
 #include <gtest/gtest.h>
 
 #include <iostream>

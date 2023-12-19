@@ -18,7 +18,6 @@ object Brick
             {
                 action A1
                 {
-                    requirement( Socket.Idle );
                 }
 
                 action A2
@@ -41,48 +40,11 @@ object Brick
         }
     }
 
-    function connect( Brick brick )
-        : void
-    {
-        OwnedBricks( brick );
-        Socket.AttachedPlug( brick.Plug.GET() );
-    }
-
-    function testRefParam( Brick brick ) : Brick::Socket 
-    {
-        return brick.Socket.GET();
-    }
-
-    function test( Brick brick ) : int
-    {
-        //LOG( Info, "From test: " << i );
-        return 123;
-    }
-
-    function print( int indent ) : void
-    {
-        std::ostringstream os;
-        for( int i = 0; i != indent; ++i )
-            os << ' ';
-        if( Socket.AttachedPlug() )
-        {
-            os << getName() << " -> " << Socket.AttachedPlug.getName();
-        }
-        else
-        {
-            os << getName();
-        }
-        LOG( Info, os.str() );
-        for( auto b : OwnedBricks() )
-        {
-            b.print( indent + 2 );
-        }
-    }
-
-    function getName() : std::string
-    {
-        return "Brick";
-    }
+    // function connect( @Brick brick )        : void;
+    // function testRefParam( @Brick brick )   : @Brick.Socket;
+    // function test( @Brick brick )           : int;
+    // function print( int indent )            : void;
+    // function getName()                      : std::string;
 }
 
 object SmallBrick : Brick

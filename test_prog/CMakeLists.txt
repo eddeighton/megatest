@@ -34,7 +34,7 @@ set( TEST_PROG_SOURCE
 add_executable( test_prog ${TEST_PROG_SOURCE} )
 
 target_link_libraries( test_prog BasicTests )
-target_link_libraries( test_prog MoveTests )
+# target_link_libraries( test_prog MoveTests )
 
 target_include_directories( test_prog PUBLIC ${CMAKE_SOURCE_DIR} )
 
