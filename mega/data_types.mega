@@ -2,23 +2,22 @@
 
 object DataTypes
 {
-    include( <iostream> );
-
+    include( < iostream > );
 
     // all types defined in native_types.hpp
     component Integers
     {
-        dim U16       m_U16;
-        dim I16       m_I16;
-        dim U32       m_U32;
-        dim I32       m_I32;
-        dim U64       m_U64;
-        dim I64       m_I64;
-        dim F32       m_F32;
-        dim F64       m_F64;
-        dim TimeStamp m_TimeStamp;
+        dim m_U16       U16;
+        dim m_I16       I16;
+        dim m_U32       U32;
+        dim m_I32       I32;
+        dim m_U64       U64;
+        dim m_I64       I64;
+        dim m_F32       F32;
+        dim m_F64       F64;
+        dim m_TimeStamp mega::runtime::TimeStamp;
 
-        function test() : void
+        function test()->void
         {
             LOG( Info, "Integers test" );
         }
@@ -26,11 +25,7 @@ object DataTypes
 
     component References
     {
-        // all user defined supported types
-        dim mega::reference m_reference;
-        dim std::vector< mega::reference > m_vector_reference;
-
-        function test() : void
+        function test()->void
         {
             LOG( Info, "References test" );
         }
@@ -38,10 +33,10 @@ object DataTypes
 
     component STL
     {
-        dim std::string m_string;
-        dim std::vector< I32 > m_vector_I32;
+        dim m_string     std::string;
+        dim m_vector_I32 std::vector< I32 >;
 
-        function test() : void
+        function test()->void
         {
             LOG( Info, "STL test" );
         }
@@ -50,15 +45,14 @@ object DataTypes
     component Maths
     {
         // math types
-        dim F2   m_F2;
-        dim F3   m_F3;
-        dim F4   m_F4;
-        dim Quat m_Quat;
-        dim F33  m_F33;
+        dim m_F2   F2;
+        dim m_F3   F3;
+        dim m_F4   F4;
+        dim m_Quat Quat;
+        dim m_F33  F33;
 
         // maths
-        function test()
-            : void
+        function test()->void
         {
             LOG( Info, "MathBasic" );
             using namespace qvm;
@@ -94,5 +88,4 @@ object DataTypes
             LOG( Info, v4 );
         }
     }
-
 }

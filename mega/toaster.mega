@@ -1,139 +1,109 @@
 
-interface Spread
+namespace Utilities
+{
+    cpp TestCPPAlias int;
+
+    interface UsefulFunctions
+    {
+        function TestFunction( TestCPPAlias value ) -> void;
+    }
+}
+
+object Spread
 {
     event SuperTasty;
 }
 
-object Butter : Spread
+object Butter : ^Spread
 {
+    component SpreadStuff : ^Utilities.UsefulFunctions
+    {
+        cpp TestCPPAlias float;
+    }
 }
 
-object PeanutButter : Butter
+object PeanutButter : ^Butter
 {
+    cpp SpreadStuff::TestCPPAlias double;
 }
 
-object Marmite : Spread
+object Marmite : ^Spread
 {
-    interupt( Owner.SliceExplosion );
+    // interupt( @Slice.SliceExplosion );
+}
 
-    //interupt( Owner.Slice.Owner.Toaster.StartToasting );
+object Jam : ^Spread
+{
+    // interupt( @Slice.SliceExplosion );
+}
+
+object Honey : ^Spread
+{
+    // interupt( @Slice.SliceExplosion );
 }
 
 object Slice
 {
-    include( mega/values/runtime/reference_io.hpp );
+    owns Spread ^ Spread;
 
-    dependency( meta.mega );
-
-    owns Spread;
-
-    dim float m_toastedness = 0.1f;
+    dim m_toastedness float = 0.1f;
 
     event SliceExplosion;
 
-    interupt( Owner.StartToasting );
-    interupt( Owner.Toaster.StartToasting );
+    // interupt( @Owner.StartToasting );
+    // interupt( @Owner.Toaster.StartToasting );
+    component SliceComponent
+    {
+        event SliceEvent;
+    }
+    component CrumblesComponent
+    {
+        event CrumbleEvent;
+    }
 }
 
-object WhiteSlice : Slice
+object WhiteSlice : ^Slice
 {
 }
 
-object BrownSlice : Slice
+object BrownSlice : ^Slice
 {
 }
 
 object Toaster
 {
-    dependency( meta.mega );
-    
-    dim std::string m_version;
+    dim m_version std::string;
 
-    component Slot : OR
+    component Slot : ^OR 
     {
-        owns Slice;
+        owns Slice ^ Slice;
 
-        interupt test( Slice.Spread.SuperTasty );
+        interupt( @Slice.Spread.SuperTasty );
 
-        dim I32 m_timer;
-        dim I32 m_toastingTime;
-        dim I32 m_toastingRate;
+        dim m_timer        I32;
+        dim m_toastingTime I32;
+        dim m_toastingRate I32;
 
-        decider( ToastingComplete, Idle )
-        {
-            return ToastingComplete::ID;
-        }
+        decider( @ToastingComplete, @Idle );
 
-        function testFnc() : void
-        {
-            LOG( Info, "test" );
-        }
+        function testFnc()->void;
 
         event StartToasting;
         event StopToasting;
 
-        action Idle : OR
+        action Idle : ^OR
         {
-            interupt( StartToasting ) > Toasting
-            {
-                m_timer( 0 );
-            }
+            interupt( @StartToasting ) > @Toasting;
 
-            decider( DoNothing )
-            {
-                return DoNothing::ID;
-            }
+            decider( @DoNothing, @DoNothing2, @StartToastingA );
 
-            action DoNothing
-            {
-
-            }
-
-            action StartToastingA > Toasting
-            {
-                co_return mega::complete();
-            }
-
-            if( m_timer() == 0 )
-            {
-                m_timer( 1 );
-                LOG( Info, "Idle " );
-            }
+            action DoNothing;
+            action DoNothing2;
+            action StartToastingA > @Toasting;
         }
 
-        action Toasting > ToastingComplete, Idle
-        {
-            interupt( StopToasting ) > Idle
-            {
-                LOG( Info, "StopToasting" );
-            }
+        action Toasting > @ToastingComplete, @Idle;
 
-            if( m_timer() == 0 || m_timer() == 1 )
-            {
-                LOG( Info, "Toasting Started" );
-                m_timer( 2 );
-            }
-            else
-            {
-                m_timer( m_timer() + 1 );
-            }
-
-            if( m_timer() > m_toastingTime() )
-            {
-                co_return mega::complete();
-            }
-        }
-
-        action ToastingComplete > Idle
-        {
-            LOG( Info, "ToastingComplete" );
-            m_timer( 0 );
-            co_return mega::complete();
-        }
+        action ToastingComplete > @Idle;
     }
-}
-
-object TestObject
-{
-
 }

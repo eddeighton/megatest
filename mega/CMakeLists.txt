@@ -8,19 +8,23 @@ include( ${WORKSPACE_ROOT_PATH}/src/common/common_include.cmake )
 
 MegaProject( Basic )
 
-MegaComponent( INTERFACE TestInterface MEGA 
+MegaComponent( INTERFACE RuntimeSupport 
 
-    meta.mega 
-    root.mega 
-    toaster.mega 
-    lego.mega 
-    data_types.mega 
+    MEGA
+        root.mega
+        lego.mega
+        toaster.mega
+        data_types.mega
 
+    CPP
+        test.cpp
 )
 
-link_boost( TestInterface filesystem )
-link_boost( TestInterface serialization )
-link_common( TestInterface )
+target_include_directories( RuntimeSupport PUBLIC ${MEGA_PROJECT_SRC_ROOT} )
+
+link_boost( RuntimeSupport filesystem )
+link_boost( RuntimeSupport serialization )
+link_common( RuntimeSupport )
 
 add_subdirectory(basic_tests)
 # add_subdirectory(move_tests)

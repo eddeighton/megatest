@@ -1,13 +1,8 @@
 
 object Root
 {
-    dependency( meta.mega );
-    dependency( toaster.mega );
-    dependency( lego.mega );
-    dependency( data_types.mega );
-
-    owns Toaster;
-    owns Brick;
-    owns DataTypes;
+    owns ^Toaster;
+    owns ^Brick;
+    owns ^DataTypes;
 
 }

@@ -1,8 +1,8 @@
 
-#include "service/network/log.hpp"
+#include "log/log.hpp"
 #include "service/network/network.hpp"
 
-#include "jit/jit_exception.hpp"
+// #include "jit/jit_exception.hpp"
 
 #include "service/tool.hpp"
 
@@ -37,10 +37,10 @@ mega::U64 runTestGroup( mega::network::Log& log, const std::string& strTest )
             {
                 std::cout << "Encountered exception: " << e.what() << std::endl;
             }
-            catch( mega::runtime::JITException& ex )
+            /*catch( mega::runtime::JITException& ex )
             {
                 std::cout << "Encountered JIT exception: " << ex.what() << std::endl;
-            }
+            }*/
             catch( ... )
             {
                 std::cout << "Encountered unknown exception" << std::endl;
@@ -48,11 +48,11 @@ mega::U64 runTestGroup( mega::network::Log& log, const std::string& strTest )
         };
         tool.run( functor );
     }
-    catch( mega::runtime::JITException& ex )
+    /*catch( mega::runtime::JITException& ex )
     {
         std::cout << "Encountered JIT exception: " << ex.what() << std::endl;
         tool.shutdown();
-    }
+    }*/
     catch( std::exception& ex )
     {
         std::cout << "TestProg Exception: " << ex.what() << std::endl;

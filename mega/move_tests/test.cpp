@@ -5,7 +5,7 @@
 
 #include "jit/jit_exception.hpp"
 
-#include "service/protocol/common/context.hpp"
+#include "runtime/context.hpp"
 #include "service/cycle.hpp"
 
 #include <gtest/gtest.h>
@@ -28,17 +28,17 @@ static_assert( false, "This code should NOT be compiled" );
 
 TEST( MoveTests, Basic )
 {
-    auto ctx = mega::Context::get();
+    auto ctx = mega::runtime::Context::get();
 
     Root     r = ctx->getThisRoot();
     Root     remoteRoot;
-    mega::MP remoteExecutor;
+    mega::runtime::MP remoteExecutor;
 
     {
         mega::Cycle cycle;
         remoteExecutor = ctx->constructExecutor( ctx->getThisMPO().getMachineID() );
 
-        mega::MPO newMPO = ctx->constructMPO( remoteExecutor );
+        mega::runtime::MPO newMPO = ctx->constructMPO( remoteExecutor );
         remoteRoot = ctx->getRoot( newMPO );
 
         // allocate an object on the remote

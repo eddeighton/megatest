@@ -1,64 +1,46 @@
 
 object Brick
 {
-    dependency( meta.mega );
-    
-    include( <sstream> );
-    include( mega/macros.hpp );
+    include( < sstream > );
+    include( < string > );
+    include( mega / macros.hpp );
 
-    owns OwnedBricks = Brick [0:*];
+    owns OwnedBricks ^ Brick [0:*];
 
     component Plug
     {
-        link AttachedSocket = Brick.Socket;
+        link AttachedSocket ^ Brick.Socket;
 
         component SubSystem1[ 3 ]
         {
             state Sub1
             {
-                action A1
-                {
-                }
-
-                action A2
-                {
-                }
+                action A1;
+                action A2;
             }
+            dim m_value int;
         }
     }
 
-    component Socket : OR
+    component Socket : ^OR
     {
-        link AttachedPlug = Brick.Plug;
+        link AttachedPlug ^Brick.Plug;
 
-        action Idle
-        {
-        }
+        action Idle;
+        action DoStuff;
 
-        action DoStuff
-        {
-        }
+        function AFunctionWithArgsAndReturnType( ^Brick brick )->std::string;
     }
 
-    // function connect( @Brick brick )        : void;
-    // function testRefParam( @Brick brick )   : @Brick.Socket;
-    // function test( @Brick brick )           : int;
-    // function print( int indent )            : void;
-    // function getName()                      : std::string;
+    dim m_name std::string;
 }
 
-object SmallBrick : Brick
+object SmallBrick : ^Brick
 {
-    function getName() : std::string
-    {
-        return "SmallBrick";
-    }
+    function getName() -> std::string;
 }
 
-object LargeBrick : Brick
+object LargeBrick : ^Brick
 {
-    function getName() : std::string
-    {
-        return "LargeBrick";
-    }
+    function getName() -> std::string;
 }
